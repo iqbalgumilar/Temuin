@@ -1,4 +1,9 @@
-[![Build Status](https://travis-ci.org/alfigusman0/Temuin.svg?branch=master)](https://travis-ci.org/alfigusman0/Temuin)
+|   Branch      |   Travis      |
+| ------------- | ------------- |
+| Master        | [![Build Status](https://travis-ci.org/alfigusman0/Temuin.svg?branch=master)](https://travis-ci.org/alfigusman0/Temuin)       |
+| Development   | [![Build Status](https://travis-ci.org/alfigusman0/Temuin.svg?branch=development)](https://travis-ci.org/alfigusman0/Temuin)  |
+
+
 # Temuin
 Clone use ssh  
 ~~~~

@@ -1,7 +1,7 @@
 @extends('admin.template.base')
 
 @section('css')
-    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -56,10 +56,11 @@
 @endsection
 
 @section('javascript')
-    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
     $(function() {
         var oTable = $('#table').DataTable({
+            pageLength: 10,
             processing: true,
             serverSide: true,
             ajax: {
@@ -69,9 +70,9 @@
             {data: 'id', name: 'id'},
             {data: 'skill', name: 'skill'},
             {data: 'status', name: 'status'},
-            {data: 'created_by', name: 'created_by'},
+            {data: 'created_by', name: 'created_by', orderable: false},
             {data: 'updated_by', name: 'updated_by', orderable: false},
-            {data: 'action', name: 'action'},
+            {data: 'action', name: 'action', orderable: false},
         ],
         });
     });

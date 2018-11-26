@@ -12,10 +12,8 @@
 */
 
 /* ADMIN */
-Route::get('/admin', function () {
-    return view('admin.index');
-});
+Route::get('/auth', 'Auth@auth');
+Route::post('/login', 'Auth@login');
+Route::get('/logout', 'Auth@logout');
 
-Route::get('/login', function () {
-    return view('admin.login');
-});
+Route::get('/admin', 'Auth@index');

@@ -12,8 +12,11 @@
 */
 
 /* ADMIN */
+
 Route::get('/auth', 'Auth@auth');
 Route::post('/login', 'Auth@login');
 Route::get('/logout', 'Auth@logout');
 
 Route::get('/admin', 'Auth@index');
+
+Route::get('/admin/skills', 'Skills@index');

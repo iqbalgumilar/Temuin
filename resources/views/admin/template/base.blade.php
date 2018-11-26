@@ -33,6 +33,9 @@
     <!-- Main CSS-->
     <link href="{{ url('/assets/admin/css/theme.css') }}" rel="stylesheet" media="all">
 
+    <!-- Extra CSS -->
+    @yield('css')
+
 </head>
 
 <body class="animsition">
@@ -94,6 +97,8 @@
     <!-- Main JS-->
     <script src="{{ url('/assets/admin/js/main.js') }}"></script>
 
+    <!-- Extra JS -->
+    @yield('javascript')
 </body>
 
 </html>

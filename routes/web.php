@@ -19,7 +19,8 @@ Route::get('/logout', 'Auth@logout');
 
 Route::get('/admin', 'Auth@index');
 
-Route::get('/admin/skills', 'Skills@index');
-Route::get('/admin/skills/create', 'Skills@create');
-Route::post('/admin/skills/store', 'Skills@store');
 Route::get('/admin/skills/data', 'Skills@data');
+Route::resource('admin/skills', 'Skills');
+
+Route::get('/admin/works/data', 'Works@data');
+Route::resource('admin/works', 'Works');

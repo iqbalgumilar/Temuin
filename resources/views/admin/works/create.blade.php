@@ -6,17 +6,17 @@
                 <div class="card-header">Master</div>
                 <div class="card-body">
                     <div class="card-title">
-                        <h3 class="text-center title-2">Tambah Skills</h3>
+                        <h3 class="text-center title-2">Tambah Works</h3>
                     </div>
                     <hr>
-                    <form action="{{ route('skills.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <form action="{{ route('works.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                         {{ csrf_field() }}
                         <div class="row form-group">
                             <div class="col col-md-3">
-                                <label for="text-input" class=" form-control-label">Skill</label>
+                                <label for="text-input" class=" form-control-label">Work</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="text" id="text-input" name="skill" placeholder="Skill" class="form-control">
+                                <input type="text" id="text-input" name="work" placeholder="Work" class="form-control">
                                 <small class="form-text text-muted">This is a help text</small>
                             </div>
                         </div>

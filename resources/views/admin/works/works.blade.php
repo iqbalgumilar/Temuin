@@ -30,14 +30,14 @@
                         </div>
                     @endif
                     <div class="card-title">
-                        <h3 class="text-center title-2">Skills</h3>
+                        <h3 class="text-center title-2">Works</h3>
                     </div>
                     <hr>
                     <table id="table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Skill</th>
+                                <th>Work</th>
                                 <th>Status</th>
                                 <th>Created By</th>
                                 <th>Updated By</th>
@@ -50,7 +50,7 @@
                         <tfoot>
                             <tr>
                                 <th>No.</th>
-                                <th>Skill</th>
+                                <th>Work</th>
                                 <th>Status</th>
                                 <th>Created By</th>
                                 <th>Updated By</th>
@@ -73,11 +73,11 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: '{{ url("/admin/skills/data") }}'
+                url: '{{ url("/admin/works/data") }}'
             },
             columns: [
             {data: 'id', name: 'id'},
-            {data: 'skill', name: 'skill'},
+            {data: 'work', name: 'work'},
             {data: 'status', name: 'status'},
             {data: 'created_by', name: 'created_by', orderable: false},
             {data: 'updated_by', name: 'updated_by', orderable: false},

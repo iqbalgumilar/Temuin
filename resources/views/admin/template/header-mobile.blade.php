@@ -30,6 +30,9 @@
                         <li>
                             <a href="{{ url('/admin/works') }}">Works</a>
                         </li>
+                        <li>
+                            <a href="{{ url('/admin/services') }}">Services</a>
+                        </li>
                     </ul>
                 </li>
             </ul>

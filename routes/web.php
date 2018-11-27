@@ -24,3 +24,6 @@ Route::resource('admin/skills', 'Skills');
 
 Route::get('/admin/works/data', 'Works@data');
 Route::resource('admin/works', 'Works');
+
+Route::get('/admin/services/data', 'Services@data');
+Route::resource('admin/services', 'Services');

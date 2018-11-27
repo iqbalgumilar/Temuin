@@ -27,6 +27,10 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="{{ url('/admin/admin') }}">
+                        <i class="fas fa-users"></i>Admin</a>
+                </li>
+                <li>
                     <a href="{{ url('/logout') }}">
                         <i class="fa fa-arrow-left"></i>Logout</a>
                 </li>

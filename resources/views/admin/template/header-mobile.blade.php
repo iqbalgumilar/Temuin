@@ -35,6 +35,10 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a href="{{ url('/admin/admin') }}">
+                        <i class="fas fa-users"></i>Admin</a>
+                </li>
             </ul>
         </div>
     </nav>

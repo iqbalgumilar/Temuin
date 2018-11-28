@@ -46,11 +46,22 @@
                                 <img src="{{ url('/assets/admin/images/icon/logo.png') }}" alt="CoolAdmin">
                             </a>
                         </div>
+                        @if(\Session::has('alert'))
+                            <div class="alert alert-danger">
+                                <div>{{ Session::get('alert') }}</div>
+                            </div>
+                        @endif
+                        @if(\Session::has('alert-success'))
+                            <div class="alert alert-success">
+                                <div>{{ Session::get('alert-success') }}</div>
+                            </div>
+                        @endif
                         <div class="login-form">
-                            <form action="" method="post">
+                            <form action="{{ url('/login') }}" method="post">
+                                {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label>Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
+                                    <label>Username</label>
+                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Username">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>

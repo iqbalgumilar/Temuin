@@ -11,6 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/* ADMIN */
+
+Route::get('/auth', 'Auth@auth');
+Route::post('/login', 'Auth@login');
+Route::get('/logout', 'Auth@logout');
+
+Route::get('/admin', 'Auth@index');
+
+Route::get('/admin/skills/data', 'Skills@data');
+Route::resource('admin/skills', 'Skills');
+
+Route::get('/admin/works/data', 'Works@data');
+Route::resource('admin/works', 'Works');
+
+Route::get('/admin/services/data', 'Services@data');
+Route::resource('admin/services', 'Services');
+
+Route::get('/admin/admin/data', 'AdminController@data');
+Route::resource('admin/admin', 'AdminController');

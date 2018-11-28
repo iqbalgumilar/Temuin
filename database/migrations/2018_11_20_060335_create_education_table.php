@@ -15,6 +15,10 @@ class CreateEducationTable extends Migration
     {
         Schema::create('education', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('id_profile');
+            $table->string('education');
+            $table->string('from_education');
+            $table->foreign('id_profile')->references('id')->on('profiles')->onUpdate('cascade');
             $table->timestamps();
         });
     }

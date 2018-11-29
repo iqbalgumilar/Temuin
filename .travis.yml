@@ -12,6 +12,9 @@ branches:
     - master # QA/Staging server
     - development # DevServer
 
+services:
+  - docker
+
 # install Environment di OS
 before_install:
   - curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
@@ -22,11 +25,14 @@ before_install:
   - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
   - chmod +x ./kubectl
   - sudo mv ./kubectl /usr/local/bin/kubectl
-
+  - composer install --no-interaction
+  - cp .env.travis .env
+  - php artisan key:generate
+  - php artisan migrate
 
 # Precompile
 before_script:
-  -
+  - vendor/bin/phpunit
 
 # Main Execution (Build)
 script:

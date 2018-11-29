@@ -15,6 +15,15 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('id_user');
+            $table->string('nama_profile');
+            $table->string('tempat_lhr_profile');
+            $table->date('tgl_lhr_profile');
+            $table->string('tlp_profile');
+            $table->unsignedInteger('uid_work');
+            $table->text('alamat');
+            $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade');
+            $table->foreign('uid_work')->references('id')->on('master_works')->onUpdate('cascade');
             $table->timestamps();
         });
     }

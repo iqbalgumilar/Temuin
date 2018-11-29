@@ -15,6 +15,11 @@ class CreatePortofoliosTable extends Migration
     {
         Schema::create('portofolios', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('id_profile');
+            $table->string('portofolio');
+            $table->string('image_portofolio');
+            $table->text('link_portofolio');
+            $table->foreign('id_profile')->references('id')->on('profiles')->onUpdate('cascade');
             $table->timestamps();
         });
     }

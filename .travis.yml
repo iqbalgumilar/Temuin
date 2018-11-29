@@ -32,7 +32,7 @@ before_install:
 
 # Precompile
 before_script:
-  - vendor/bin/phpunit
+  - 
 
 # Main Execution (Build)
 script:

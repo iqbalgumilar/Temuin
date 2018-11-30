@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\MasterWorks;
+use App\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Hash;
 
-class Works extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,16 +23,16 @@ class Works extends Controller
             return redirect('auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/works/works');
+            return view('admin/admin/admin');
         }
     }
 
     public function data()
     {
-        $works = MasterWorks::select(['id', 'work', 'status', 'created_at', 'updated_at']);
+        $admin = Admin::select(['id', 'name', 'username', 'password', 'level', 'created_at', 'updated_at']);
         $no = 1;
-        return Datatables::of(MasterWorks::query())
-        ->addColumn('action', function ($works) {
+        return Datatables::of(Admin::query())
+        ->addColumn('action', function ($admin) {
             return '
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                     <button type="button" class="btn btn-secondary">Aksi</button>
@@ -39,8 +40,8 @@ class Works extends Controller
                     <div class="btn-group" role="group">
                     <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="'.url("admin/works/").'/'.$works->id.'/edit">Edit</a>
-                        <form action="'.route("works.destroy", $works->id).'" method="post">
+                        <a class="dropdown-item" href="'.url("admin/admin/").'/'.$admin->id.'/edit">Edit</a>
+                        <form action="'.route("admin.destroy", $admin->id).'" method="post">
                         '.csrf_field().'
                         '.method_field("DELETE").'
                         <button class="dropdown-item" type="submit" onclick="return confirm(\'Yakin ingin menghapus data?\')">Hapus</button>
@@ -66,7 +67,7 @@ class Works extends Controller
             return redirect('auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/works/create');
+            return view('admin/admin/create');
         }
     }
 
@@ -79,17 +80,17 @@ class Works extends Controller
     public function store(Request $request)
     {
         //
-        $data =  new MasterWorks();
-        $data->work = $request->get('work');
-        $data->status = $request->get('status');
-        $data->created_by = Session::get('id');
-        $data->updated_by = Session::get('id');
+        $data =  new Admin();
+        $data->name = $request->get('name');
+        $data->username = $request->get('username');
+        $data->password = Hash::make($request->get('password'));
+        $data->level = $request->get('level');
 
         if($data->save()){
-            return redirect('/admin/works')->with('alert-success', 'Berhasil menambahkan data!');
+            return redirect('/admin/admin')->with('alert-success', 'Berhasil menambahkan data!');
         }
         else{
-            return redirect('/admin/works')->with('alert', 'Gagal menambahkan data!');
+            return redirect('/admin/admin')->with('alert', 'Gagal menambahkan data!');
         }
     }
 
@@ -113,8 +114,8 @@ class Works extends Controller
     public function edit($id)
     {
         //
-        $data = MasterWorks::find($id);
-        return view('admin/works/edit', compact('data'));
+        $data = Admin::find($id);
+        return view('admin/admin/edit', compact('data'));
     }
 
     /**
@@ -127,16 +128,25 @@ class Works extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data =  MasterWorks::where('id',$id)->first();
-        $data->work = $request->get('work');
-        $data->status = $request->get('status');
-        $data->updated_by = Session::get('id');
+        $data =  Admin::where('id',$id)->first();
 
-        if($data->save()){
-            return redirect('/admin/works')->with('alert-success', 'Berhasil ubah data!');
+        if(!empty($request->get('password'))){
+            $data->name = $request->get('name');
+            $data->username = $request->get('username');
+            $data->password = Hash::make($request->get('password'));
+            $data->level = $request->get('level');
         }
         else{
-            return redirect('/admin/works')->with('alert', 'Gagal ubah data!');
+            $data->name = $request->get('name');
+            $data->username = $request->get('username');
+            $data->level = $request->get('level');
+        }
+
+        if($data->save()){
+            return redirect('/admin/admin')->with('alert-success', 'Berhasil ubah data!');
+        }
+        else{
+            return redirect('/admin/admin')->with('alert', 'Gagal ubah data!');
         }
     }
 
@@ -149,13 +159,13 @@ class Works extends Controller
     public function destroy($id)
     {
         //
-        $data =  MasterWorks::where('id',$id)->first();
+        $data =  Admin::where('id',$id)->first();
 
         if($data->delete()){
-            return redirect('/admin/works')->with('alert-success', 'Berhasil hapus data!');
+            return redirect('/admin/admin')->with('alert-success', 'Berhasil hapus data!');
         }
         else{
-            return redirect('/admin/works')->with('alert', 'Gagal hapus data!');
+            return redirect('/admin/admin')->with('alert', 'Gagal hapus data!');
         }
     }
 }

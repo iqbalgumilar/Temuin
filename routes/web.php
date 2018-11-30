@@ -13,20 +13,20 @@
 
 /* ADMIN */
 
-Route::get('/auth', 'Auth@auth');
-Route::post('/login', 'Auth@login');
-Route::get('/logout', 'Auth@logout');
+Route::get('/auth', 'Admin\Auth@auth');
+Route::post('/login', 'Admin\Auth@login');
+Route::get('/logout', 'Admin\Auth@logout');
 
-Route::get('/admin', 'Auth@index');
+Route::get('/admin', 'Admin\Auth@index');
 
-Route::get('/admin/skills/data', 'Skills@data');
-Route::resource('admin/skills', 'Skills');
+Route::get('/admin/skills/data', 'Admin\Skills@data');
+Route::resource('admin/skills', 'Admin\Skills');
 
-Route::get('/admin/works/data', 'Works@data');
-Route::resource('admin/works', 'Works');
+Route::get('/admin/works/data', 'Admin\Works@data');
+Route::resource('admin/works', 'Admin\Works');
 
-Route::get('/admin/services/data', 'Services@data');
-Route::resource('admin/services', 'Services');
+Route::get('/admin/services/data', 'Admin\Services@data');
+Route::resource('admin/services', 'Admin\Services');
 
-Route::get('/admin/admin/data', 'AdminController@data');
-Route::resource('admin/admin', 'AdminController');
+Route::get('/admin/admin/data', 'Admin\AdminController@data');
+Route::resource('admin/admin', 'Admin\AdminController');

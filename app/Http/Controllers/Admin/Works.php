@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\MasterServices;
+use App\MasterWorks;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Yajra\Datatables\Datatables;
 
-class Services extends Controller
+class Works extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,16 +22,16 @@ class Services extends Controller
             return redirect('auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/services/services');
+            return view('admin/works/works');
         }
     }
 
     public function data()
     {
-        $services = MasterServices::select(['id', 'service', 'status', 'created_at', 'updated_at']);
+        $works = MasterWorks::select(['id', 'work', 'status', 'created_at', 'updated_at']);
         $no = 1;
-        return Datatables::of(MasterServices::query())
-        ->addColumn('action', function ($services) {
+        return Datatables::of(MasterWorks::query())
+        ->addColumn('action', function ($works) {
             return '
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                     <button type="button" class="btn btn-secondary">Aksi</button>
@@ -39,8 +39,8 @@ class Services extends Controller
                     <div class="btn-group" role="group">
                     <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="'.url("admin/services/").'/'.$services->id.'/edit">Edit</a>
-                        <form action="'.route("services.destroy", $services->id).'" method="post">
+                        <a class="dropdown-item" href="'.url("admin/works/").'/'.$works->id.'/edit">Edit</a>
+                        <form action="'.route("works.destroy", $works->id).'" method="post">
                         '.csrf_field().'
                         '.method_field("DELETE").'
                         <button class="dropdown-item" type="submit" onclick="return confirm(\'Yakin ingin menghapus data?\')">Hapus</button>
@@ -66,7 +66,7 @@ class Services extends Controller
             return redirect('auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/services/create');
+            return view('admin/works/create');
         }
     }
 
@@ -79,17 +79,17 @@ class Services extends Controller
     public function store(Request $request)
     {
         //
-        $data =  new MasterServices();
-        $data->service = $request->get('service');
+        $data =  new MasterWorks();
+        $data->work = $request->get('work');
         $data->status = $request->get('status');
         $data->created_by = Session::get('id');
         $data->updated_by = Session::get('id');
 
         if($data->save()){
-            return redirect('/admin/services')->with('alert-success', 'Berhasil menambahkan data!');
+            return redirect('/admin/works')->with('alert-success', 'Berhasil menambahkan data!');
         }
         else{
-            return redirect('/admin/services')->with('alert', 'Gagal menambahkan data!');
+            return redirect('/admin/works')->with('alert', 'Gagal menambahkan data!');
         }
     }
 
@@ -113,8 +113,8 @@ class Services extends Controller
     public function edit($id)
     {
         //
-        $data = MasterServices::find($id);
-        return view('admin/services/edit', compact('data'));
+        $data = MasterWorks::find($id);
+        return view('admin/works/edit', compact('data'));
     }
 
     /**
@@ -127,16 +127,16 @@ class Services extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data =  MasterServices::where('id',$id)->first();
-        $data->service = $request->get('service');
+        $data =  MasterWorks::where('id',$id)->first();
+        $data->work = $request->get('work');
         $data->status = $request->get('status');
         $data->updated_by = Session::get('id');
 
         if($data->save()){
-            return redirect('/admin/services')->with('alert-success', 'Berhasil ubah data!');
+            return redirect('/admin/works')->with('alert-success', 'Berhasil ubah data!');
         }
         else{
-            return redirect('/admin/services')->with('alert', 'Gagal ubah data!');
+            return redirect('/admin/works')->with('alert', 'Gagal ubah data!');
         }
     }
 
@@ -149,13 +149,13 @@ class Services extends Controller
     public function destroy($id)
     {
         //
-        $data =  MasterServices::where('id',$id)->first();
+        $data =  MasterWorks::where('id',$id)->first();
 
         if($data->delete()){
-            return redirect('/admin/services')->with('alert-success', 'Berhasil hapus data!');
+            return redirect('/admin/works')->with('alert-success', 'Berhasil hapus data!');
         }
         else{
-            return redirect('/admin/services')->with('alert', 'Gagal hapus data!');
+            return redirect('/admin/works')->with('alert', 'Gagal hapus data!');
         }
     }
 }

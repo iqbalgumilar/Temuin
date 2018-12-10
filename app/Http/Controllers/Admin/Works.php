@@ -6,7 +6,7 @@ use App\MasterWorks;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use Yajra\Datatables\Datatables;
+use Datatables;
 
 class Works extends Controller
 {

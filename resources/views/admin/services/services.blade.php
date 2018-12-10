@@ -30,7 +30,7 @@
                         </div>
                     @endif
                     <div class="card-title">
-                        <h3 class="text-center title-2">Works</h3>
+                        <h3 class="text-center title-2">Services</h3>
                     </div>
                     <hr>
                     <table id="table" class="table table-striped table-bordered" style="width:100%">

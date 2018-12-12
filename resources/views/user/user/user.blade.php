@@ -1,44 +1,34 @@
 @extends('user.template.base')
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <strong>Saldo</strong> Rp. ____ <button class="btn btn-primary">Tambah</button>
-    </div>
-    <div class="card-body card-block">
-        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-            <div class="row form-group">
-                <div class="col col-md-3">
-                    <label for="username-input" class=" form-control-label">Username</label>
-                </div>
-                <div class="col-12 col-md-9">
-                    <input type="text" id="username-input" name="username-input" placeholder="Username" class="form-control">
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col col-md-3">
-                    <label for="email-input" class=" form-control-label">Email</label>
-                </div>
-                <div class="col-12 col-md-9">
-                    <input type="email" id="email-input" name="email-input" placeholder="Enter Email" class="form-control">
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col col-md-3">
-                    <label for="password-input" class=" form-control-label">Password</label>
-                </div>
-                <div class="col-12 col-md-9">
-                    <input type="password" id="password-input" name="password-input" placeholder="Enter Your Password" class="form-control">
-                </div>
-            </div>
+<table>
+<thead>
+  <tr>
+    <th>No.</th>
+    <th>Nama</th>
+    <th>Email</th>
+    <th>Alamat</th>
+  </tr>
+</thead>
+<tbody>
+  @php
+    $no = 1;
+  @endphp
+  @foreach($data as $items)
+  <tr>
+    <td>{{ $no++ }}</td>
+    <td>{{ $items->email }}</td>
+    <td>{{ $items->username }}</td>
+    <td>{{ $items->password }}</td>
+    <td>
+        <form action="{{ route('user.destroy', $items->id) }}" method="post">
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+            <a type="submit" href="{{ route('user.edit',$items->id) }}">Edit</a>
+            <button type="submit" onclick="return confirm('Yakin ingin menghapus data?')">Delete</button>
         </form>
-    </div>
-    <div class="card-footer">
-        <button type="submit" class="btn btn-primary btn-sm">
-            <i class="fa fa-dot-circle-o"></i> Submit
-        </button>
-        <button type="reset" class="btn btn-danger btn-sm">
-            <i class="fa fa-ban"></i> Reset
-        </button>
-    </div>
-</div>
+    </td>
+  </tr>
+  @endforeach
+</tbody>
+</table>
 @endsection

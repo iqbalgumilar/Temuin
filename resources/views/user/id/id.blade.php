@@ -13,7 +13,7 @@
                     <label for="name-input" class=" form-control-label">Nama</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="name-input" name="name-input" value="{{ $datas->nama_profile }}" placeholder="Nama" class="form-control">
+                    <input type="text" id="name-input" name="name-input" value="{{ $items->nama_profile }}" placeholder="Nama" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -21,7 +21,7 @@
                     <label for="tlp-input" class=" form-control-label">No.Tlp</label>
                  </div>
                  <div class="col-12 col-md-9">
-                    <input type="text" id="tlp-input" name="tlp-input" value="{{ $datas->tlp_profile }}" placeholder="Enter Phone Number" class="form-control">
+                    <input type="text" id="tlp-input" name="tlp-input" value="{{ $items->tlp_profile }}" placeholder="Enter Phone Number" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -29,7 +29,7 @@
                     <label for="work-input" class=" form-control-label">Pekerjaan</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="work-input" name="work-input" value="{{ $datas->uid_work }}" placeholder="Pekerjaan" class="form-control">
+                    <input type="text" id="work-input" name="work-input" value="{{ $items->uid_work }}" placeholder="Pekerjaan" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -37,7 +37,7 @@
                     <label for="alamat-input" class=" form-control-label">Alamat</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <textarea name="alamat" id="alamat-input" rows="5" placeholder="Masukkan Alamat" value="{{ $datas->alamat }}" class="form-control"></textarea>
+                    <textarea name="alamat" id="alamat-input" rows="5" placeholder="Masukkan Alamat" value="{{ $items->alamat }}" class="form-control"></textarea>
                 </div>
             </div>
         </form>

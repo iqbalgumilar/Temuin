@@ -1,3 +1,5 @@
+@extends('user.template.base')
+@section('content')
 <div class="card">
     <div class="card-header text-center">
         <strong>SKILLS</strong>
@@ -17,7 +19,7 @@
                     <label for="skills-input" class=" form-control-label">Skills</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="skills-input" name="skills-input" placeholder="Skills" class="form-control">
+                    <input type="text" id="skills-input" name="skills" placeholder="Skills" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -25,7 +27,7 @@
                     <label for="persentase-input" class=" form-control-label">Persentase</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="persentase-input" name="persentase-input" placeholder="Persentase" class="form-control">
+                    <input type="text" id="persentase-input" name="persentase" placeholder="Persentase" class="form-control">
                 </div>
             </div>
         </form>
@@ -39,3 +41,4 @@
         </button>
     </div>
 </div>
+@endsection

@@ -1,3 +1,5 @@
+@extends('user.template.base')
+@section('content')
 <div class="card">
     <div class="card-header text-center">
         <strong>EXPERIENCES</strong>
@@ -14,10 +16,10 @@
         <form action="" method="post" id="form-experience" enctype="multipart/form-data" class="form-horizontal">
             <div class="row form-group">
                 <div class="col col-md-3">
-                    <label for="experiences-input" class=" form-control-label">Experiences</label>
+                    <label for="work-input" class=" form-control-label">Pekerjaan</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="experiences-input" name="experiences-input" placeholder="Experiences" class="form-control">
+                    <input type="text" id="work-input" name="work" placeholder="work" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -25,7 +27,7 @@
                     <label for="from-input" class=" form-control-label">From</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="from-input" name="from-input" placeholder="From Experiences" class="form-control">
+                    <input type="text" id="from-input" name="fromexperiences" placeholder="From Experiences" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -33,7 +35,7 @@
                     <label for="date-first-input" class=" form-control-label">Date First</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="date" id="date-first-input" name="date-frist-input" placeholder="Enter Date First" class="form-control">
+                    <input type="date" id="date-first-input" name="datefrist" placeholder="Enter Date First" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -41,7 +43,7 @@
                     <label for="date-last-input" class=" form-control-label">Date Last</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="date" id="date-last-input" name="date-last-input" placeholder="Enter Date Last" class="form-control">
+                    <input type="date" id="date-last-input" name="datelast" placeholder="Enter Date Last" class="form-control">
                 </div>
             </div>
         </form>
@@ -55,3 +57,4 @@
         </button>
     </div>
 </div>
+@endsection

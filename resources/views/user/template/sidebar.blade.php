@@ -18,22 +18,59 @@
             </li>
             <li class="has-sub">
                 <a class="js-arrow" href="#">
-                    <i class="fas fa-trophy"></i>Features
-                    <span class="arrow">
-                        <i class="fas fa-angle-down"></i>
-                    </span>
+                    <i class="fas fa-globe"></i>Web Profile
+                        <span class="arrow">
+                            <i class="fas fa-angle-down"></i>
+                        </span>
                 </a>
                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                     <li>
-                        <a href="{{ url('/user/web') }}">Web Profile</a>
+                        <a href="{{ url('/user/cv/about') }}">About</a>
                     </li>
                     <li>
-                        <a href="{{ url('/user/cv') }}">Curriculum Vitae</a>
+                        <a href="{{ url('/user/cv/experience') }}">Experiences</a>
                     </li>
                     <li>
-                        <a href="{{ url('/user/id') }}">ID Card</a>
+                        <a href="{{ url('/user/cv/education') }}">Education</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/user/cv/skill') }}">Skills</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/user/portfolio') }}">Awards</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/user/cv/awards') }}">Awards</a>
                     </li>
                 </ul>
+            </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-user-circle"></i>CV Online
+                        <span class="arrow">
+                            <i class="fas fa-angle-down"></i>
+                        </span>
+                </a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="{{ url('/user/cv/about') }}">About</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/user/cv/experience') }}">Experiences</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/user/cv/education') }}">Education</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/user/cv/skill') }}">Skills</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/user/cv/awards') }}">Awards</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="{{ url('/user/id') }}"><i class="fas fa-id-card"></i>ID Card</a>
             </li>
             <li>
                 <a href="#">

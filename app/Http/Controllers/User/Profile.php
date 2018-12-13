@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
-use App\User;
+use App\Profile;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class Profile extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class UserController extends Controller
     public function index()
     {
         //
-        $data = User::all();
-        return view('user/user/user',compact('data'));
+        $data = Profile::all();
+        return view('user/profile/profile',compact('data'));
     }
 
     /**
@@ -27,7 +27,7 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('user/user/create');
+        return view('user/profile/create');
     }
 
     /**
@@ -39,12 +39,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        $data = new User();
-        $data->email = $request->email;
-        $data->username = $request->username;
-        $data->password = $request->password;
+        $data = new Profile();
+        $data->nama_profile = $request->name;
+        $data->tempat_lhr_profile = $request->tempatlhr;
+        $data->tgl_lhr_profile = $request->datelhr;
+        $data->tlp_profile = $request->tlp;
+        $data->uid_work = $request->work;
+        $data->alamat = $request->alamat;
         $data->save();
-        return redirect()->route('user/user/user');
+        return redirect()->route('user/profile/profile');
     }
 
     /**
@@ -67,8 +70,8 @@ class UserController extends Controller
     public function edit($id)
     {
         //
-        $data = User::where('id', $id)->get();
-        return view('user/user/edit', compact('data'));
+        $data = Profile::where('id', $id)->get();
+        return view('user/profile/edit', compact('data'));
     }
 
     /**
@@ -81,12 +84,15 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data = User::where('id', $id)->first();
-        $data->email = $request->email;
-        $data->username = $request->username;
-        $data->password = $request->password;
+        $data = Profile::where('id', $id)->first();
+        $data->nama_profile = $request->name;
+        $data->tempat_lhr_profile = $request->tempatlhr;
+        $data->tgl_lhr_profile = $request->datelhr;
+        $data->tlp_profile = $request->tlp;
+        $data->uid_work = $request->work;
+        $data->alamat = $request->alamat;
         $data->save();
-        return redirect()->route('user/user/user')->with('alert-success', 'Data berhasil diubah!');
+        return redirect()->route('user/profile/profile')->with('alert-success', 'Data berhasil diubah!');
     }
 
     /**
@@ -98,8 +104,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-        $data = User::where('id', $id)->first();
+        $data = Profile::where('id', $id)->first();
         $data->delete();
-        return redirect()->route('user/user/user');
+        return redirect()->route('user/profile/profile');
     }
 }

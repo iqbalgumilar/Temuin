@@ -31,4 +31,6 @@ Route::resource('admin/services', 'Admin\Services');
 Route::get('/admin/admin/data', 'Admin\AdminController@data');
 Route::resource('admin/admin', 'Admin\AdminController');
 
-Route::resource('user','user/UserController');
+Route::resource('user/user','User\UserController');
+Route::resource('user/profile','User\Profile');
+Route::resource('user/id','User\CardId');

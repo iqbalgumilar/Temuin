@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
-use App\User;
+use App\Profile;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class CardId extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class UserController extends Controller
     public function index()
     {
         //
-        $data = User::all();
-        return view('user/user/user',compact('data'));
+        $data = Profile::select(['id','id_user','nama_profile','tlp_profile','uid_work','alamat']);
+        return view('user/id/id',compact('data'));
     }
 
     /**
@@ -27,7 +27,6 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('user/user/create');
     }
 
     /**
@@ -39,12 +38,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        $data = new User();
-        $data->email = $request->email;
-        $data->username = $request->username;
-        $data->password = $request->password;
-        $data->save();
-        return redirect()->route('user/user/user');
     }
 
     /**
@@ -67,8 +60,6 @@ class UserController extends Controller
     public function edit($id)
     {
         //
-        $data = User::where('id', $id)->get();
-        return view('user/user/edit', compact('data'));
     }
 
     /**
@@ -81,12 +72,6 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data = User::where('id', $id)->first();
-        $data->email = $request->email;
-        $data->username = $request->username;
-        $data->password = $request->password;
-        $data->save();
-        return redirect()->route('user/user/user')->with('alert-success', 'Data berhasil diubah!');
     }
 
     /**
@@ -98,8 +83,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-        $data = User::where('id', $id)->first();
-        $data->delete();
-        return redirect()->route('user/user/user');
     }
 }

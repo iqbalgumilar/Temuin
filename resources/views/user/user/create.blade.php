@@ -1,11 +1,12 @@
 @extends('user.template.base')
 @section('content')
+ <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header">
         <strong>Saldo</strong> Rp. ____ <button class="btn btn-primary">Tambah</button>
     </div>
     <div class="card-body card-block">
-        <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+       
         	{{ csrf_field() }}
             <div class="row form-group">
                 <div class="col col-md-3">
@@ -31,7 +32,7 @@
                     <input type="password" id="password-input" name="password" placeholder="Enter Your Password" class="form-control">
                 </div>
             </div>
-        </form>
+        
     </div>
     <div class="card-footer">
         <button type="submit" class="btn btn-primary btn-sm">
@@ -42,4 +43,5 @@
         </button>
     </div>
 </div>
+</form>
 @endsection

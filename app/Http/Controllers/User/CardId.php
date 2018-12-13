@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Profile;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CardId extends Controller
 {

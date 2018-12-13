@@ -4,8 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Profile;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class Profile extends Controller
+class Profiles extends Controller
 {
     /**
      * Display a listing of the resource.

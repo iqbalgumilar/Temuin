@@ -1,12 +1,13 @@
 @extends('user.template.base')
 @section('content')
 @foreach($data as $datas)
+<form action="{{ route('user.update', $datas->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header">
         <strong>Saldo</strong> Rp. ____ <button class="btn btn-primary">Tambah</button>
     </div>
     <div class="card-body card-block">
-        <form action="{{ route('user.update', datas->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+        
         	{{ csrf_field() }}
             {{ method_field('PUT') }}
             <div class="row form-group">
@@ -33,7 +34,7 @@
                     <input type="password" id="password-input" name="password" placeholder="Enter Your Password"  value="{{ $datas->password }}" class="form-control">
                 </div>
             </div>
-        </form>
+        
     </div>
     <div class="card-footer">
         <button type="submit" class="btn btn-primary btn-sm">
@@ -44,5 +45,6 @@
         </button>
     </div>
 </div>
+</form>
 @endforeach
 @endsection

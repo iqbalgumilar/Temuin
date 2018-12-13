@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\User;
 
-use App\User;
+use App\Users;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -15,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        $data = User::all();
+        $data = Users::all();
         return view('user/user/user',compact('data'));
     }
 
@@ -39,12 +40,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        $data = new User();
+        $data = new Users();
         $data->email = $request->email;
         $data->username = $request->username;
         $data->password = $request->password;
         $data->save();
-        return redirect()->route('user/user/user');
+        return redirect('user/user');
     }
 
     /**
@@ -67,7 +68,7 @@ class UserController extends Controller
     public function edit($id)
     {
         //
-        $data = User::where('id', $id)->get();
+        $data = Users::where('id', $id)->get();
         return view('user/user/edit', compact('data'));
     }
 
@@ -81,12 +82,12 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data = User::where('id', $id)->first();
+        $data = Users::where('id', $id)->first();
         $data->email = $request->email;
         $data->username = $request->username;
         $data->password = $request->password;
         $data->save();
-        return redirect()->route('user/user/user')->with('alert-success', 'Data berhasil diubah!');
+        return redirect('user/user')->with('alert-success', 'Data berhasil diubah!');
     }
 
     /**
@@ -98,8 +99,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-        $data = User::where('id', $id)->first();
+        $data = Users::where('id', $id)->first();
         $data->delete();
-        return redirect()->route('user/user/user');
+        return redirect('user/user');
     }
 }

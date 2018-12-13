@@ -1,34 +1,46 @@
 @extends('user.template.base')
 @section('content')
-<table>
-<thead>
-  <tr>
-    <th>No.</th>
-    <th>Email</th>
-    <th>Username</th>
-    <th>Password</th>
-  </tr>
-</thead>
-<tbody>
-  @php
-    $no = 1;
-  @endphp
-  @foreach($data as $items)
-  <tr>
-    <td>{{ $no++ }}</td>
-    <td>{{ $items->email }}</td>
-    <td>{{ $items->username }}</td>
-    <td>{{ $items->password }}</td>
-    <td>
-        <form action="{{ route('user.destroy', $items->id) }}" method="post">
-            {{ csrf_field() }}
-            {{ method_field('DELETE') }}
-            <a type="submit" href="{{ route('user.edit',$items->id) }}">Edit</a>
-            <button type="submit" onclick="return confirm('Yakin ingin menghapus data?')">Delete</button>
-        </form>
-    </td>
-  </tr>
-  @endforeach
-</tbody>
-</table>
+@foreach($data as $items)
+ <form action="{{ route('user.destroy', $items->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+    {{ csrf_field() }}
+    {{ method_field('DELETE') }}
+<div class="card">
+    <div class="card-header">
+        <strong>Saldo</strong> Rp. ____ <button class="btn btn-primary">Tambah</button>
+    </div>
+    <div class="card-body card-block">    
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    <label for="username-input" class=" form-control-label">Username</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <input type="text" id="username-input" value="{{ $items->username }}" placeholder="Username" class="form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    <label for="email-input" class=" form-control-label">Email</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <input type="email" id="email-input" value="{{ $items->email }}" placeholder="Enter Email" class="form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    <label for="password-input" class=" form-control-label">Password</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <input type="password" id="password-input" value="{{ $items->password }}" placeholder="Enter Your Password" class="form-control">
+                </div>
+            </div>
+    </div>
+    <div class="card-footer">
+        <a class="btn btn-info btn-sm" href="{{ route('user.edit',$items->id) }}">Edit</a>
+        <button type="submit" class="btn btn-danger btn-sm">
+            <i class="fa fa-ban"></i> Reset
+        </button>
+    </div>
+</div>
+</form>
+@endforeach
 @endsection

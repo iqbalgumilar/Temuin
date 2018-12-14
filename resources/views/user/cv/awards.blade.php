@@ -1,3 +1,5 @@
+@extends('user.template.base')
+@section('content')
 <div class="card">
     <div class="card-header text-center">
         <strong>AWARDS</strong>
@@ -17,7 +19,7 @@
                     <label for="awards-input" class=" form-control-label">Awards</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="awards-input" name="awards-input" placeholder="Awards" class="form-control">
+                    <input type="text" id="awards-input" name="awards" placeholder="Awards" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -25,7 +27,7 @@
                     <label for="descr-input" class=" form-control-label">Description</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <textarea name="descr-input" id="descr-input" rows="3" placeholder="Content..." class="form-control"></textarea>
+                    <textarea name="descr-input" id="descr" rows="3" placeholder="Content..." class="form-control"></textarea>
                 </div>
             </div>
             <div class="row form-group">
@@ -33,7 +35,7 @@
                     <label for="icon-input" class=" form-control-label">Icon</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="file" id="icon-input" name="icon-input" class="form-control-file">
+                    <input type="text" id="icon-input" name="icon" class="form-control-file">
                 </div>
             </div>
             <div class="row form-group">
@@ -41,7 +43,7 @@
                     <label for="image-input" class=" form-control-label">Image</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="file" id="image-input" name="image-input" class="form-control-file">
+                    <input type="text" id="image-input" name="image" class="form-control-file">
                 </div>
             </div>
         </form>
@@ -55,3 +57,4 @@
         </button>
     </div>
 </div>
+@endsection

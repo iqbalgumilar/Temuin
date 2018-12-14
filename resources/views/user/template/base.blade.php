@@ -10,7 +10,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard 4</title>
+    <title>User</title>
 
     <!-- Fontfaces CSS-->
     <link href="{{ url('/assets/admin/css/font-face.css') }}" rel="stylesheet" media="all">
@@ -19,7 +19,7 @@
     <link href="{{ url('/assets/admin/vendor/mdi-font/css/material-design-iconic-font.min.css') }}" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
-    <link href="{{ url('/assets/admin/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet') }}" media="all">
+    <link href="{{ url('/assets/admin/vendor/bootstrap-4.1/bootstrap.min.css') }}" rel="stylesheet" media="all">
 
     <!-- Vendor CSS-->
     <link href="{{ url('/assets/admin/vendor/animsition/animsition.min.css') }}" rel="stylesheet" media="all">
@@ -32,6 +32,7 @@
 
     <!-- Main CSS-->
     <link href="{{ url('/assets/admin/css/theme.css') }}" rel="stylesheet" media="all">
+
 
 </head>
 

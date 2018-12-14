@@ -1,20 +1,19 @@
 @extends('user.template.base')
 @section('content')
-@foreach($data as $items)
- <form action="{{ route('user.destroy', $items->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-    {{ csrf_field() }}
-    {{ method_field('DELETE') }}
+ <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header">
         <strong>Saldo</strong> Rp. ____ <button class="btn btn-primary">Tambah</button>
     </div>
-    <div class="card-body card-block">    
+    <div class="card-body card-block">
+       
+        	{{ csrf_field() }}
             <div class="row form-group">
                 <div class="col col-md-3">
                     <label for="username-input" class=" form-control-label">Username</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="username-input" value="{{ $items->username }}" placeholder="Username" class="form-control">
+                    <input type="text" id="username-input" name="username" placeholder="Username" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -22,7 +21,7 @@
                     <label for="email-input" class=" form-control-label">Email</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="email" id="email-input" value="{{ $items->email }}" placeholder="Enter Email" class="form-control">
+                    <input type="email" id="email-input" name="email" placeholder="Enter Email" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -30,17 +29,19 @@
                     <label for="password-input" class=" form-control-label">Password</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="password" id="password-input" value="{{ $items->password }}" placeholder="Enter Your Password" class="form-control">
+                    <input type="password" id="password-input" name="password" placeholder="Enter Your Password" class="form-control">
                 </div>
             </div>
+        
     </div>
     <div class="card-footer">
-        <a class="btn btn-info btn-sm" href="{{ route('user.edit',$items->id) }}">Edit</a>
-        <button type="submit" class="btn btn-danger btn-sm">
+        <button type="submit" class="btn btn-primary btn-sm">
+            <i class="fa fa-dot-circle-o"></i> Submit
+        </button>
+        <button type="reset" class="btn btn-danger btn-sm">
             <i class="fa fa-ban"></i> Reset
         </button>
     </div>
 </div>
 </form>
-@endforeach
 @endsection

@@ -1,7 +1,7 @@
 @extends('admin.template.base')
 
 @section('css')
-    <link href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-md-6">Master</div>
                         <div class="col-md-6 text-right">
-                            <a href={{ route('skills.create') }} class="btn btn-primary btn-sm">
+                            <a href={{ route('works.create') }} class="btn btn-primary btn-sm">
                                 <i class="fa fa-plus"></i> Tambah
                             </a>
                         </div>
@@ -65,7 +65,8 @@
 @endsection
 
 @section('javascript')
-    <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript">
     $(function() {
         var oTable = $('#table').DataTable({

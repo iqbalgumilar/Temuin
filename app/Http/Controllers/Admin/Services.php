@@ -19,10 +19,13 @@ class Services extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('auth')->with('alert', 'You are not loged in!');
+            return redirect('admin/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/services/services');
+            $data = array(
+                'title' => "Services | Temuin"
+            );
+            return view('admin/services/services')->with($data);
         }
     }
 
@@ -63,10 +66,13 @@ class Services extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('auth')->with('alert', 'You are not loged in!');
+            return redirect('admin/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/services/create');
+            $data = array(
+                'title' => "Tambah Service | Temuin"
+            );
+            return view('admin/services/create')->with($data);
         }
     }
 
@@ -113,8 +119,11 @@ class Services extends Controller
     public function edit($id)
     {
         //
-        $data = MasterServices::find($id);
-        return view('admin/services/edit', compact('data'));
+        $data = array(
+            'title' => "Edit Service | Temuin",
+            'services' => MasterServices::find($id),
+        );
+        return view('admin/services/edit')->with($data);
     }
 
     /**

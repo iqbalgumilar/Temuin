@@ -19,10 +19,13 @@ class Works extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('auth')->with('alert', 'You are not loged in!');
+            return redirect('admin/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/works/works');
+            $data = array(
+                'title' => "Works | Temuin"
+            );
+            return view('admin/works/works')->with($data);
         }
     }
 
@@ -63,10 +66,13 @@ class Works extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('auth')->with('alert', 'You are not loged in!');
+            return redirect('admin/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/works/create');
+            $data = array(
+                'title' => "Tambah Work | Temuin"
+            );
+            return view('admin/works/create')->with($data);
         }
     }
 
@@ -113,8 +119,11 @@ class Works extends Controller
     public function edit($id)
     {
         //
-        $data = MasterWorks::find($id);
-        return view('admin/works/edit', compact('data'));
+        $data = array(
+            'title' => "Edit Work | Temuin",
+            'works' => MasterWorks::find($id),
+        );
+        return view('admin/works/edit')->with($data);
     }
 
     /**

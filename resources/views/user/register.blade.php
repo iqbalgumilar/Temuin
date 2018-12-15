@@ -10,11 +10,7 @@
     <meta name="keywords" content="temuin">
 
     <!-- Title Page-->
-<<<<<<< HEAD
     <title>Register | Temuin</title>
-=======
-    <title>Dashboard</title>
->>>>>>> 9cd7e7200c6fd431b1e0b6fe52fe7315e8b8733e
 
     <!-- Fontfaces CSS-->
     <link href="{{ url('/assets/admin/css/font-face.css') }}" rel="stylesheet" media="all">
@@ -40,11 +36,7 @@
 </head>
 
 <body class="animsition">
-<<<<<<< HEAD
 <div class="page-wrapper">
-=======
-    <div class="page-wrapper">
->>>>>>> 9cd7e7200c6fd431b1e0b6fe52fe7315e8b8733e
         <div class="page-content--bge5">
             <div class="container">
                 <div class="login-wrap">
@@ -54,7 +46,16 @@
                                 <img src="{{ url('/assets/admin/images/icon/logo.png') }}" alt="CoolAdmin">
                             </a>
                         </div>
-<<<<<<< HEAD
+                        @if(\Session::has('alert'))
+                            <div class="alert alert-danger">
+                                <div>{{ Session::get('alert') }}</div>
+                            </div>
+                        @endif
+                        @if(\Session::has('alert-success'))
+                            <div class="alert alert-success">
+                                <div>{{ Session::get('alert-success') }}</div>
+                            </div>
+                        @endif
                         <div class="login-form">
                             <form action="{{ url('user/actRegister') }}" method="post">
                                 {{ csrf_field() }}
@@ -65,33 +66,11 @@
                                 <div class="form-group">
                                     <label>Email</label>
                                     <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
-=======
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <div class="login-form">
-                            <form action="{{ url('/register') }}" method="post">
-                                {{ csrf_field() }}
-                                <div class="form-group">
-                                    <label>Username</label>
-                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Username">
-                                </div>
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Username">
->>>>>>> 9cd7e7200c6fd431b1e0b6fe52fe7315e8b8733e
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
                                     <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
                                 </div>
-<<<<<<< HEAD
                                 <div class="login-checkbox">
                                     <label>
                                         <input type="checkbox" name="aggree">Agree the terms and policy
@@ -103,26 +82,6 @@
                                 <p>
                                     Already have account?
                                     <a href="#">Sign In</a>
-=======
-                                <div class="form-group">
-                                    <label>Confirm Password</label>
-                                    <input class="au-input au-input--full" type="password" name="confirmation" placeholder="Username">
-                                </div>
-                                <div class="login-checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember">Remember Me
-                                    </label>
-                                    <label>
-                                        <a href="#">Forgotten Password?</a>
-                                    </label>
-                                </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign up</button>
-                            </form>
-                            <div class="register-link">
-                                <p>
-                                    You have account?
-                                    <a href="{{ url('/user/authUser') }}">Sign Up Here</a>
->>>>>>> 9cd7e7200c6fd431b1e0b6fe52fe7315e8b8733e
                                 </p>
                             </div>
                         </div>

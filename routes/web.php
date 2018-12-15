@@ -46,7 +46,6 @@ Route::resource('admin/JenisProduk', 'Admin\JenisProduk');
 Route::get('/admin/admin/data', 'Admin\AdminController@data');
 Route::resource('admin/admin', 'Admin\AdminController');
 
-<<<<<<< HEAD
 /* USER */
 
 Route::get('/user/auth', 'User\Auth@auth');
@@ -57,16 +56,6 @@ Route::get('/user/logout', 'User\Auth@logout');
 Route::get('/user/verifikasi/{id}', 'User\Auth@verifikasi');
 
 Route::get('/user', 'User\Auth@index');
-=======
-//User
-Route::get('/authUser', 'User\UserAuth@authUser');
-Route::post('/login', 'User\UserAuth@login');
-Route::get('/registerAuth', 'User\UserAuth@registerAuth');
-Route::post('/register', 'User\UserAuth@register');
-Route::get('/logout', 'User\UserAuth@logout');
-
-Route::get('/user', 'User\UserAuth@index');
->>>>>>> 9cd7e7200c6fd431b1e0b6fe52fe7315e8b8733e
 
 Route::resource('user/user','User\UserController');
 

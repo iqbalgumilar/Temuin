@@ -1,6 +1,15 @@
 @extends('user.template.base')
 @section('content')
- <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<form action="{{erl('/register') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header">
         <strong>Saldo</strong> Rp. ____ <button class="btn btn-primary">Tambah</button>

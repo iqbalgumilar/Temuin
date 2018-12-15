@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
+use App\MasterWorks;
 use App\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 
 class CardId extends Controller
 {
@@ -16,8 +19,14 @@ class CardId extends Controller
     public function index()
     {
         //
-        $data = Profile::select(['id','id_user','nama_profile','tlp_profile','uid_work','alamat']);
-        return view('user/id/id',compact('data'));
+        if(!session::get('login')){
+            return redirect('authUser')->with('alert', 'You are not loged in!');
+        }
+        else{
+            $works = MasterWorks::all();
+            $data = Profile::where('id_user', Session::get('id'))->first();
+            return view('user/id/id', compact('data','works'));
+        }
     }
 
     /**

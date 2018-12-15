@@ -37,7 +37,7 @@
                         <a href="{{ url('/user/cv/skill') }}">Skills</a>
                     </li>
                     <li>
-                        <a href="{{ url('/user/portfolio') }}">Awards</a>
+                        <a href="{{ url('/user/portfolio') }}">Portofolio</a>
                     </li>
                     <li>
                         <a href="{{ url('/user/cv/awards') }}">Awards</a>
@@ -73,7 +73,7 @@
                 <a href="{{ url('/user/id') }}"><i class="fas fa-id-card"></i>ID Card</a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ url('/logout') }}">
                     <i class="zmdi zmdi-power"></i>Logout
                 </a>
             </li>

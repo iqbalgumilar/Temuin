@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -16,8 +18,13 @@ class UserController extends Controller
     public function index()
     {
         //
-        $data = Users::all();
-        return view('user/user/user',compact('data'));
+        if(!session::get('login')){
+            return redirect('authUser')->with('alert', 'You are not loged in!');
+        }
+        else{
+            $data = Users::find(Session::get('id'))->first();
+            return view('user/user/user',compact('data'));
+        }
     }
 
     /**
@@ -28,7 +35,7 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('user/user/create');
+        
     }
 
     /**
@@ -40,12 +47,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        $data = new Users();
-        $data->email = $request->email;
-        $data->username = $request->username;
-        $data->password = $request->password;
-        $data->save();
-        return redirect('user/user');
+
     }
 
     /**
@@ -68,7 +70,7 @@ class UserController extends Controller
     public function edit($id)
     {
         //
-        $data = Users::where('id', $id)->get();
+        $data = Users::find(Session::get('id'))->first();
         return view('user/user/edit', compact('data'));
     }
 
@@ -83,11 +85,17 @@ class UserController extends Controller
     {
         //
         $data = Users::where('id', $id)->first();
+
         $data->email = $request->email;
         $data->username = $request->username;
         $data->password = $request->password;
-        $data->save();
-        return redirect('user/user')->with('alert-success', 'Data berhasil diubah!');
+
+        if($data->save()){
+            return redirect('/user/user')->with('alert-success', 'Berhasil ubah data!');
+        }
+        else{
+            return redirect('/user/user')->with('alert', 'Gagal ubah data!');
+        }
     }
 
     /**
@@ -100,7 +108,11 @@ class UserController extends Controller
     {
         //
         $data = Users::where('id', $id)->first();
-        $data->delete();
-        return redirect('user/user');
+        if($data->delete()){
+            return redirect('/user/user')->with('alert-success', 'Berhasil hapus data!');
+        }
+        else{
+            return redirect('/user/user')->with('alert', 'Gagal hapus data!');
+        }
     }
 }

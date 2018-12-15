@@ -10,7 +10,11 @@
     <meta name="keywords" content="temuin">
 
     <!-- Title Page-->
+<<<<<<< HEAD
     <title>Login | Temuin</title>
+=======
+    <title>Dashboard</title>
+>>>>>>> 9cd7e7200c6fd431b1e0b6fe52fe7315e8b8733e
 
     <!-- Fontfaces CSS-->
     <link href="{{ url('/assets/admin/css/font-face.css') }}" rel="stylesheet" media="all">
@@ -57,7 +61,11 @@
                             </div>
                         @endif
                         <div class="login-form">
+<<<<<<< HEAD
                             <form action="{{ url('user/login') }}" method="post">
+=======
+                            <form action="{{ url('/login') }}" method="post">
+>>>>>>> 9cd7e7200c6fd431b1e0b6fe52fe7315e8b8733e
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label>Username</label>
@@ -86,7 +94,11 @@
                             <div class="register-link">
                                 <p>
                                     Don't you have account?
+<<<<<<< HEAD
                                     <a href="{{ url('user/register') }}">Sign Up Here</a>
+=======
+                                    <a href="{{ url('/registerAuth') }}">Sign Up Here</a>
+>>>>>>> 9cd7e7200c6fd431b1e0b6fe52fe7315e8b8733e
                                 </p>
                             </div>
                         </div>

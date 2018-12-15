@@ -1,52 +1,58 @@
 @extends('user.template.base')
 @section('content')
+<form action="{{ route('experience.store') }}" method="post" id="form-experience" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header text-center">
-        <strong>AWARDS</strong>
+        <strong>EXPERIENCES</strong>
         <div class="float-right">
-            <span class="" style="cursor: pointer" id="tambahAwards">
+            <span class="" style="cursor: pointer" id="tambahExperience">
                 <i class="fa fa-plus-circle text-success"></i>
             </span>
-            <span class="" style="cursor: pointer" id="hapusAwards">
+            <span class="" style="cursor: pointer" id="hapusExperience">
                 <i class="fa fa-minus-circle text-danger"></i>
             </span>
         </div>
     </div>
     <div class="card-body card-block">
-        <form action="" method="post" id="form-awards" enctype="multipart/form-data" class="form-horizontal">
+        {{ csrf_field() }}
             <div class="row form-group">
                 <div class="col col-md-3">
-                    <label for="awards-input" class=" form-control-label">Awards</label>
+                    <label for="work-input" class=" form-control-label">Pekerjaan</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="awards-input" name="awards" placeholder="Awards" class="form-control">
+                    <select name="uid_work" id="" class="form-control">
+                    <option value="">-</option>
+                        @foreach($works as $work)
+                        <option value="{{ $work->id }}">{{ $work->work }}</option>
+                        @endforeach
+                        </select>
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3">
-                    <label for="descr-input" class=" form-control-label">Description</label>
+                    <label for="from-input" class=" form-control-label">From</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <textarea name="descr-input" id="descr" rows="3" placeholder="Content..." class="form-control"></textarea>
+                    <input type="text" id="from-input" name="from_experience" placeholder="From Experiences" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3">
-                    <label for="icon-input" class=" form-control-label">Icon</label>
+                    <label for="date-first-input" class=" form-control-label">Date First</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="icon-input" name="icon" class="form-control-file">
+                    <input type="date" id="date-first-input" name="date_first_experience" placeholder="Enter Date First" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3">
-                    <label for="image-input" class=" form-control-label">Image</label>
+                    <label for="date-last-input" class=" form-control-label">Date Last</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="image-input" name="image" class="form-control-file">
+                    <input type="date" id="date-last-input" name="date_last_experience" placeholder="Enter Date Last" class="form-control">
                 </div>
             </div>
-        </form>
+       
     </div>
     <div class="card-footer">
         <button type="submit" class="btn btn-primary btn-sm">
@@ -57,4 +63,5 @@
         </button>
     </div>
 </div>
+</form>
 @endsection

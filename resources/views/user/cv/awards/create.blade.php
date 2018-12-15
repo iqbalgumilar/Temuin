@@ -1,52 +1,54 @@
 @extends('user.template.base')
 @section('content')
+<form action="{{ route('awards.store') }}" method="post" id="form-awards" enctype="multipart/form-data" class="form-horizontal">
+
 <div class="card">
     <div class="card-header text-center">
-        <strong>EXPERIENCES</strong>
+        <strong>AWARDS</strong>
         <div class="float-right">
-            <span class="" style="cursor: pointer" id="tambahExperience">
+            <span class="" style="cursor: pointer" id="tambahAwards">
                 <i class="fa fa-plus-circle text-success"></i>
             </span>
-            <span class="" style="cursor: pointer" id="hapusExperience">
+            <span class="" style="cursor: pointer" id="hapusAwards">
                 <i class="fa fa-minus-circle text-danger"></i>
             </span>
         </div>
     </div>
     <div class="card-body card-block">
-        <form action="" method="post" id="form-experience" enctype="multipart/form-data" class="form-horizontal">
+    {{ csrf_field() }}
             <div class="row form-group">
                 <div class="col col-md-3">
-                    <label for="work-input" class=" form-control-label">Pekerjaan</label>
+                    <label for="awards-input" class=" form-control-label">Awards</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="work-input" name="work" placeholder="work" class="form-control">
+                    <input type="text" id="awards-input" name="award" placeholder="Awards" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3">
-                    <label for="from-input" class=" form-control-label">From</label>
+                    <label for="descr-input" class=" form-control-label">Description</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="from-input" name="fromexperiences" placeholder="From Experiences" class="form-control">
+                    <textarea name="description_award" id="descr" rows="3" placeholder="Content..." class="form-control"></textarea>
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3">
-                    <label for="date-first-input" class=" form-control-label">Date First</label>
+                    <label for="icon-input" class=" form-control-label">Icon</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="date" id="date-first-input" name="datefrist" placeholder="Enter Date First" class="form-control">
+                    <input type="text" id="icon-input" name="icon_award" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3">
-                    <label for="date-last-input" class=" form-control-label">Date Last</label>
+                    <label for="image-input" class=" form-control-label">Image</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="date" id="date-last-input" name="datelast" placeholder="Enter Date Last" class="form-control">
+                    <input type="text" id="image-input" name="image_award" class="form-control">
                 </div>
             </div>
-        </form>
+        
     </div>
     <div class="card-footer">
         <button type="submit" class="btn btn-primary btn-sm">
@@ -57,4 +59,5 @@
         </button>
     </div>
 </div>
+</form>
 @endsection

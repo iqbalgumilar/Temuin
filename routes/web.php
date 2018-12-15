@@ -28,8 +28,22 @@ Route::resource('admin/works', 'Admin\Works');
 Route::get('/admin/services/data', 'Admin\Services@data');
 Route::resource('admin/services', 'Admin\Services');
 
+Route::get('/admin/JenisProduk/data', 'Admin\JenisProduk@data');
+Route::resource('admin/JenisProduk', 'Admin\JenisProduk');
+
 Route::get('/admin/admin/data', 'Admin\AdminController@data');
 Route::resource('admin/admin', 'Admin\AdminController');
+
+/* USER */
+
+Route::get('/user/auth', 'User\Auth@auth');
+Route::get('/user/register', 'User\Auth@register');
+Route::post('/user/login', 'User\Auth@login');
+Route::post('/user/actRegister', 'User\Auth@actRegister');
+Route::get('/user/logout', 'User\Auth@logout');
+Route::get('/user/verifikasi/{id}', 'User\Auth@verifikasi');
+
+Route::get('/user', 'User\Auth@index');
 
 Route::resource('user/user','User\UserController');
 Route::resource('user/profile','User\Profiles');

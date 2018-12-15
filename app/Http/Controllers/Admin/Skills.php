@@ -19,10 +19,13 @@ class Skills extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('auth')->with('alert', 'You are not loged in!');
+            return redirect('admin/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/skills/skills');
+            $data = array(
+                'title' => "Skills | Temuin"
+            );
+            return view('admin/skills/skills')->with($data);
         }
     }
 
@@ -63,10 +66,13 @@ class Skills extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('auth')->with('alert', 'You are not loged in!');
+            return redirect('admin/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/skills/create');
+            $data = array(
+                'title' => "Tambah Skill | Temuin"
+            );
+            return view('admin/skills/create')->with($data);
         }
     }
 
@@ -113,8 +119,11 @@ class Skills extends Controller
     public function edit($id)
     {
         //
-        $data = MasterSkills::find($id);
-        return view('admin/skills/edit', compact('data'));
+        $data = array(
+            'title' => "Edit Skill | Temuin",
+            'skills' => MasterSkills::find($id),
+        );
+        return view('admin/skills/edit')->with($data);
     }
 
     /**

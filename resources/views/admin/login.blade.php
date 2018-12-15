@@ -57,7 +57,7 @@
                             </div>
                         @endif
                         <div class="login-form">
-                            <form action="{{ url('/login') }}" method="post">
+                            <form action="{{ url('admin/login') }}" method="post">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label>Username</label>

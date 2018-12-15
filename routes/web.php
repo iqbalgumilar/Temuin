@@ -13,9 +13,9 @@
 
 /* ADMIN */
 
-Route::get('/auth', 'Admin\Auth@auth');
-Route::post('/login', 'Admin\Auth@login');
-Route::get('/logout', 'Admin\Auth@logout');
+Route::get('/admin/auth', 'Admin\Auth@auth');
+Route::post('/admin/login', 'Admin\Auth@login');
+Route::get('/admin/logout', 'Admin\Auth@logout');
 
 Route::get('/admin', 'Admin\Auth@index');
 

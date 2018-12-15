@@ -20,10 +20,13 @@ class AdminController extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('auth')->with('alert', 'You are not loged in!');
+            return redirect('admin/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/admin/admin');
+            $data = array(
+                'title' => 'Admin | Temuin'
+            );
+            return view('admin/admin/admin')->with($data);
         }
     }
 
@@ -64,10 +67,13 @@ class AdminController extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('auth')->with('alert', 'You are not loged in!');
+            return redirect('admin/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/admin/create');
+            $data = array(
+                'title' => 'Tambah Admin | Temuin'
+            );
+            return view('admin/admin/create')->with($data);
         }
     }
 
@@ -114,8 +120,11 @@ class AdminController extends Controller
     public function edit($id)
     {
         //
-        $data = Admin::find($id);
-        return view('admin/admin/edit', compact('data'));
+        $data = array(
+            'title' => 'Edit Admin | Temuin',
+            'data' => Admin::find($id),
+        );
+        return view('admin/admin/edit')->with($data);
     }
 
     /**

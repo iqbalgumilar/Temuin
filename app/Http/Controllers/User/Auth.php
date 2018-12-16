@@ -33,7 +33,7 @@ class Auth extends Controller
         $username = $request->username;
         $password = $request->password;
 
-        $data = Users::where('username', $username)->where('is_verification', "1");
+        $data = Users::where('username', $username)->orWhere('email', $username)->where('is_verification', "1");
         if(count($data->get()) > 0){
             $data = $data->first();
             if(Hash::check($password, $data->password)){
@@ -127,6 +127,6 @@ class Auth extends Controller
 
     public function logout(){
         Session::flush();
-        return redirect('user/auth')->with('alert', 'Berhasil Logout.');
+        return redirect('user/auth')->with('alert-success', 'Berhasil Logout.');
     }
 }

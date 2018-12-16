@@ -66,7 +66,7 @@ class Auth extends Controller
         $data->is_verification = "0";
 
         if($data->save()){
-            Mail::send('user/email', ['id' => $data->id, 'nama' => $request->get('username')], function ($message) use ($request)
+            Mail::send('user/email', ['id' => $data->id, 'nama' => $username[0]], function ($message) use ($request)
             {
                 $message->subject('Verifikasi Akun Temuin');
                 $message->from('donotreply@temuin.com', 'Temuin');

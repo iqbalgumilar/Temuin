@@ -62,12 +62,15 @@ class UserExperience extends Controller
     public function store(Request $request)
     {
         //
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+        
         $data = new Experience();
         $data->id_profile = Session::get('id');
         $data->uid_work = $request->get('uid_work');
-        $data->from_experience = $request->from_experience;
-        $data->date_first_experience = $request->date_first_experience;
-        $data->date_last_experience = $request->date_last_experience;
+        $data->from_experience = $request->get('from_experience');
+        $data->date_first_experience = $request->get('date_first_experience');
+        $data->date_last_experience = $request->get('date_last_experience');
+        $data->id_profile = $profile->id;
 
         if($data->save()){
             return redirect('/user/cv/experience')->with('alert-success', 'Berhasil menambahkan data!');

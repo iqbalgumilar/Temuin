@@ -50,10 +50,12 @@ Route::resource('admin/admin', 'Admin\AdminController');
 
 Route::get('/user/auth', 'User\Auth@auth');
 Route::get('/user/register', 'User\Auth@register');
-Route::post('/user/login', 'User\Auth@login');
-Route::post('/user/actRegister', 'User\Auth@actRegister');
 Route::get('/user/logout', 'User\Auth@logout');
+Route::get('/user/emailverifikasi', 'User\Auth@emailVerifikasi');
 Route::get('/user/verifikasi/{id}', 'User\Auth@verifikasi');
+Route::post('/user/sendEmail', 'User\Auth@sendEmail');
+Route::post('/user/actLogin', 'User\Auth@login');
+Route::post('/user/actRegister', 'User\Auth@actRegister');
 
 Route::get('/user', 'User\Auth@index');
 

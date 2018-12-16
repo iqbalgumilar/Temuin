@@ -66,26 +66,13 @@ class Auth extends Controller
         $data->is_verification = "0";
 
         if($data->save()){
-            $data2 = new Profile();
-            $data2->id_user = $data->id;
-            $data2->nama_profile = $request->get('nama');
-            $data2->tempat_lhr_profile = "";
-            $data2->tgl_lhr_profile = date('d-m-y H:i:s');
-            $data2->tlp_profile = "";
-            $data2->uid_work = "1";
-            $data2->alamat = "";
-            if($data2->save()){
-                Mail::send('user/email', ['id' => $data->id, 'nama' => $request->get('nama')], function ($message) use ($request)
-                {
-                    $message->subject('Verifikasi Akun Temuin');
-                    $message->from('donotreply@temuin.com', 'Temuin');
-                    $message->to($request->get('email'));
-                });
-                return redirect('/user/register')->with('alert-success','Berhasil daftar. Silahkan cek email untuk verifikasi.');
-            }
-            else{
-                return redirect('/user/register')->with('alert', 'Gagal');
-            }
+            Mail::send('user/email', ['id' => $data->id, 'nama' => $request->get('username')], function ($message) use ($request)
+            {
+                $message->subject('Verifikasi Akun Temuin');
+                $message->from('donotreply@temuin.com', 'Temuin');
+                $message->to($request->get('email'));
+            });
+            return redirect('/user/register')->with('alert-success','Berhasil daftar. Silahkan cek email untuk verifikasi.');
         }
         else{
             return redirect('/user/register')->with('alert', 'Gagal');

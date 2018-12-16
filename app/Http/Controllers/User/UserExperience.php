@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Profile;
+use App\Experience;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
-class CardId extends Controller
+
+class UserExperience extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +23,7 @@ class CardId extends Controller
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/id/id');
+            return view('user/cv/experience/experience');
         }
     }
 
@@ -34,6 +35,12 @@ class CardId extends Controller
     public function create()
     {
         //
+        if(!session::get('login')){
+            return redirect('authUser')->with('alert', 'You are not loged in!');
+        }
+        else{
+            return view('user/cv/education/create');
+        }
     }
 
     /**
@@ -45,6 +52,18 @@ class CardId extends Controller
     public function store(Request $request)
     {
         //
+        $data = new Experience();
+        $data->uid_work = $request->uid_work;
+        $data->from_experience = $request->from_experience;
+        $data->date_first_experience = $request->date_first_experience;
+        $data->date_last_experience = $request->date_last_experience;
+
+        if($data->save()){
+            return redirect('/user/cv/experience')->with('alert-success', 'Berhasil menambahkan data!');
+        }
+        else{
+            return redirect('/user/cv/experience')->with('alert', 'Gagal menambahkan data!');
+        }
     }
 
     /**

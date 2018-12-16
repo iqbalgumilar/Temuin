@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        if(!session::get('authUser')){
+        if(!session::get('login')){
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{

@@ -1,36 +1,37 @@
 @extends('user.template.base')
 @section('content')
+<form action="{{ route('skill.store') }}" method="post" id="form-skill" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header text-center">
-        <strong>EDUCATION</strong>
+        <strong>SKILLS</strong>
         <div class="float-right">
-            <span class="" style="cursor: pointer" id="tambahEducation">
+            <span class="" style="cursor: pointer" id="tambahSkill">
                 <i class="fa fa-plus-circle text-success"></i>
             </span>
-            <span class="" style="cursor: pointer" id="hapusEducation">
+            <span class="" style="cursor: pointer" id="hapusSkill">
                 <i class="fa fa-minus-circle text-danger"></i>
             </span>
         </div>
     </div>
     <div class="card-body card-block">
-        <form action="" method="post" id="form-education" enctype="multipart/form-data" class="form-horizontal">
+        {{ csrf_field() }}       
             <div class="row form-group">
                 <div class="col col-md-3">
-                    <label for="education-input" class=" form-control-label">Education</label>
+                    <label for="skills-input" class=" form-control-label">Skills</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="education-input" name="education" placeholder="Education" class="form-control">
+                    <input type="text" id="skills-input" name="uid_Skill" placeholder="Skills" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3">
-                    <label for="from-education-input" class=" form-control-label">From</label>
+                    <label for="persentase-input" class=" form-control-label">Persentase</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="from-education-input" name="fromeducation" placeholder="From Education" class="form-control">
+                    <input type="text" id="persentase-input" name="persentase_skill" placeholder="Persentase" class="form-control">
                 </div>
             </div>
-        </form>
+        
     </div>
     <div class="card-footer">
         <button type="submit" class="btn btn-primary btn-sm">
@@ -41,4 +42,5 @@
         </button>
     </div>
 </div>
+</form>
 @endsection

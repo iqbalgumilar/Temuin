@@ -33,8 +33,8 @@ class UserAuth extends Controller
             $data = $data->first();
             if(Hash::check($password, $data->password)){
                 Session::put('id', $data->id);
-                Session::put('username', $data->username);
                 Session::put('email', $data->email);
+                Session::put('username', $data->username);
                 Session::put('login', TRUE);
                 return redirect('/user');
             }
@@ -70,4 +70,5 @@ class UserAuth extends Controller
         $data->password = bcrypt($request->password);
         $data->save();
         return redirect('authUser')->with('alert-success','Kamu berhasil Register');
+}
 }

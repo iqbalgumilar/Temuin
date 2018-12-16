@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Profile;
+use App\Education;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
-class CardId extends Controller
+class UserEducation extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class CardId extends Controller
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/id/id');
+            return view('user/cv/education/education');
         }
     }
 
@@ -34,6 +34,12 @@ class CardId extends Controller
     public function create()
     {
         //
+        if(!session::get('login')){
+            return redirect('authUser')->with('alert', 'You are not loged in!');
+        }
+        else{
+            return view('user/cv/education/create');
+        }
     }
 
     /**
@@ -45,6 +51,16 @@ class CardId extends Controller
     public function store(Request $request)
     {
         //
+        $data = new Education();
+        $data->education = $request->education;
+        $data->from_education = $request->from_education;
+
+        if($data->save()){
+            return redirect('/user/cv/education')->with('alert-success', 'Berhasil menambahkan data!');
+        }
+        else{
+            return redirect('/user/cv/education')->with('alert', 'Gagal menambahkan data!');
+        }
     }
 
     /**
@@ -67,6 +83,8 @@ class CardId extends Controller
     public function edit($id)
     {
         //
+         $data = Education::find($id);
+        return view('user/cv/education/edit', compact('data'));
     }
 
     /**
@@ -79,6 +97,17 @@ class CardId extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data = Education::where('id', $id)->first();
+
+        $data->education = $request->education;
+        $data->from_education = $request->from_education;
+
+        if($data->save()){
+            return redirect('/user/cv/education')->with('alert-success', 'Berhasil ubah data!');
+        }
+        else{
+            return redirect('/user/cv/education')->with('alert', 'Gagal ubah data!');
+        }
     }
 
     /**
@@ -90,5 +119,12 @@ class CardId extends Controller
     public function destroy($id)
     {
         //
+        $data = Education::where('id', $id)->first();
+        if($data->delete()){
+            return redirect('/user/cv/education')->with('alert-success', 'Berhasil hapus data!');
+        }
+        else{
+            return redirect('/user/cv/education')->with('alert', 'Gagal hapus data!');
+        }
     }
 }

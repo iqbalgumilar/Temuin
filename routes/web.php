@@ -31,14 +31,29 @@ Route::resource('admin/services', 'Admin\Services');
 Route::get('/admin/admin/data', 'Admin\AdminController@data');
 Route::resource('admin/admin', 'Admin\AdminController');
 
+//User
 Route::get('/authUser', 'User\UserAuth@authUser');
 Route::post('/login', 'User\UserAuth@login');
-Route::get('/registerAuth', 'User@registerAuth');
-Route::post('/register', 'User@register');
+Route::get('/registerAuth', 'User\UserAuth@registerAuth');
+Route::post('/register', 'User\UserAuth@register');
 Route::get('/logout', 'User\UserAuth@logout');
 
 Route::get('/user', 'User\UserAuth@index');
 
 Route::resource('user/user','User\UserController');
+
 Route::resource('user/profile','User\Profiles');
+
 Route::resource('user/id','User\CardId');
+
+Route::resource('user/cv/about','User\UserAbout');
+
+Route::resource('user/cv/awards','User\UserAwards');
+
+Route::resource('user/cv/education','User\UserEducation');
+
+Route::resource('user/cv/experience','User\UserExperience');
+
+Route::resource('user/cv/skill','User\UserSkills');
+
+Route::resource('user/portfolio','User\UserPortfolio');

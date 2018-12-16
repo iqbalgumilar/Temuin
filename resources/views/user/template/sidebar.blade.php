@@ -73,7 +73,7 @@
                 <a href="{{ url('/user/id') }}"><i class="fas fa-id-card"></i>ID Card</a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ url('/logout') }}">
                     <i class="zmdi zmdi-power"></i>Logout
                 </a>
             </li>

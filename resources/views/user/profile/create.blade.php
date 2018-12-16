@@ -40,14 +40,12 @@
                     <input type="text" id="tlp-input" name="tlp" placeholder="Enter Phone Number" class="form-control">
                 </div>
             </div>
-
-            
-            <div class="row form-group">
+          <div class="row form-group">
                 <div class="col col-md-3">
                     <label for="work-input" class=" form-control-label">Pekerjaan</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="work-input" name="work" placeholder="Pekerjaan" class="form-control">
+                    <input type="text" id="work-input" name="{{Session::get('uid_work')}}" placeholder="Pekerjaan" class="form-control">
                 </div>
             </div>
             <div class="row form-group">

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Profile;
+use App\Portofolio;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
-class CardId extends Controller
+class UserPortfolio extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class CardId extends Controller
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/id/id');
+            return view('user/portfolio/portfolio');
         }
     }
 
@@ -34,6 +34,12 @@ class CardId extends Controller
     public function create()
     {
         //
+        if(!session::get('login')){
+            return redirect('authUser')->with('alert', 'You are not loged in!');
+        }
+        else{
+            return view('user/portfolio/create');
+        }
     }
 
     /**
@@ -45,6 +51,17 @@ class CardId extends Controller
     public function store(Request $request)
     {
         //
+        $data = new Portofolio();
+        $data->portofolio = $request->portofolio;
+        $data->image_portofolio = $request->image_portofolio;
+        $data->link_portofolio = $request->link_portofolio;
+
+        if($data->save()){
+            return redirect('/user/portfolio')->with('alert-success', 'Berhasil menambahkan data!');
+        }
+        else{
+            return redirect('/user/portfolio')->with('alert', 'Gagal menambahkan data!');
+        }
     }
 
     /**

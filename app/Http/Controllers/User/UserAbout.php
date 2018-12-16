@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
-class CardId extends Controller
+class UserAbout extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class CardId extends Controller
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/id/id');
+            return view('user/cv/about/about');
         }
     }
 

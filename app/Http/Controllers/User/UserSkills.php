@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Profile;
+use App\Skill;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Hash;
 
-class CardId extends Controller
+class UserSkills extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +19,7 @@ class CardId extends Controller
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/id/id');
+            return view('user/cv/skill/skill');
         }
     }
 
@@ -34,6 +31,12 @@ class CardId extends Controller
     public function create()
     {
         //
+        if(!session::get('login')){
+            return redirect('authUser')->with('alert', 'You are not loged in!');
+        }
+        else{
+            return view('user/cv/skill/create');
+        }
     }
 
     /**
@@ -45,6 +48,16 @@ class CardId extends Controller
     public function store(Request $request)
     {
         //
+        $data = new Skill();
+        $data->uid_skill = $request->uid_skill;
+        $data->persentase_skill = $request->persentase_skill;
+
+        if($data->save()){
+            return redirect('/user/cv/skill')->with('alert-success', 'Berhasil menambahkan data!');
+        }
+        else{
+            return redirect('/user/cv/skill')->with('alert', 'Gagal menambahkan data!');
+        }
     }
 
     /**

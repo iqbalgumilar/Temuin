@@ -6,7 +6,7 @@
                 <div class="card-header">Master</div>
                 <div class="card-body">
                     <div class="card-title">
-                        <h3 class="text-center title-2">Tambah Skills</h3>
+                        <h3 class="text-center title-2">Tambah Skill</h3>
                     </div>
                     <hr>
                     <form action="{{ route('skills.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">

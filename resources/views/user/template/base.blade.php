@@ -5,12 +5,12 @@
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="temuin">
-    <meta name="author" content="piscal">
-    <meta name="keywords" content="temuin">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>User</title>
 
     <!-- Fontfaces CSS-->
     <link href="{{ url('/assets/admin/css/font-face.css') }}" rel="stylesheet" media="all">
@@ -33,72 +33,48 @@
     <!-- Main CSS-->
     <link href="{{ url('/assets/admin/css/theme.css') }}" rel="stylesheet" media="all">
 
+
 </head>
 
 <body class="animsition">
     <div class="page-wrapper">
-        <div class="page-content--bge5">
-            <div class="container">
-                <div class="login-wrap">
-                    <div class="login-content">
-                        <div class="login-logo">
-                            <a href="#">
-                                <img src="{{ url('/assets/admin/images/icon/logo.png') }}" alt="CoolAdmin">
-                            </a>
+        <!-- HEADER DESKTOP-->
+        @include('user.template.header-desktop')
+        <!-- END HEADER DESKTOP -->
+
+        <!-- WELCOME-->
+        @include('user.template.welcome')
+        <!-- END WELCOME-->
+
+        <!-- PAGE CONTENT-->
+        <div class="page-container3  p-t-40">
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <!-- MENU SIDEBAR-->
+                            @include('user.template.sidebar')
+                            <!-- END MENU SIDEBAR-->
                         </div>
-                        @if(\Session::has('alert'))
-                            <div class="alert alert-danger">
-                                <div>{{ Session::get('alert') }}</div>
-                            </div>
-                        @endif
-                        @if(\Session::has('alert-success'))
-                            <div class="alert alert-success">
-                                <div>{{ Session::get('alert-success') }}</div>
-                            </div>
-                        @endif
-                        <div class="login-form">
-                            <form action="{{ url('admin/login') }}" method="post">
-                                {{ csrf_field() }}
-                                <div class="form-group">
-                                    <label>Username</label>
-                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Username">
-                                </div>
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
-                                </div>
-                                <div class="login-checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember">Remember Me
-                                    </label>
-                                    <label>
-                                        <a href="#">Forgotten Password?</a>
-                                    </label>
-                                </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
-                                <div class="social-login-content">
-                                    <div class="social-button">
-                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">sign in with facebook</button>
-                                        <button class="au-btn au-btn--block au-btn--blue2">sign in with twitter</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="register-link">
-                                <p>
-                                    Don't you have account?
-                                    <a href="#">Sign Up Here</a>
-                                </p>
-                            </div>
-                        </div>
+                        <div class="col-xl-9">
+                            <!-- CONTENT -->
+                            @yield('content')
+                            <!-- END CONTENT -->
+                        <!-- footer -->
+                        @include('user.template.footer')
+                        <!-- end footer -->
+                        </div> 
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
+        <!-- END PAGE CONTENT  -->
 
     </div>
 
     <!-- Jquery JS-->
     <script src="{{ url('/assets/admin/vendor/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ url('/assets/admin/vendor/style.js') }}"></script>
     <!-- Bootstrap JS-->
     <script src="{{ url('/assets/admin/vendor/bootstrap-4.1/popper.min.js') }}"></script>
     <script src="{{ url('/assets/admin/vendor/bootstrap-4.1/bootstrap.min.js') }}"></script>

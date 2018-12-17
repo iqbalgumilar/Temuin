@@ -46,26 +46,33 @@
                                 <img src="{{ url('/assets/admin/images/icon/logo.png') }}" alt="CoolAdmin">
                             </a>
                         </div>
-                        @if(\Session::has('alert'))
+                        @if ($errors->any())
                             <div class="alert alert-danger">
-                                <div>{{ Session::get('alert') }}</div>
-                            </div>
-                        @endif
-                        @if(\Session::has('alert-success'))
-                            <div class="alert alert-success">
-                                <div>{{ Session::get('alert-success') }}</div>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
                         @endif
                         <div class="login-form">
-                            <form action="{{ url('admin/login') }}" method="post">
+                            <form action="{{ url('/register') }}" method="post">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label>Username</label>
                                     <input class="au-input au-input--full" type="text" name="username" placeholder="Username">
                                 </div>
                                 <div class="form-group">
+                                    <label>Email</label>
+                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Username">
+                                </div>
+                                <div class="form-group">
                                     <label>Password</label>
                                     <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input class="au-input au-input--full" type="text" name="confirmation" placeholder="Username">
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
@@ -75,18 +82,12 @@
                                         <a href="#">Forgotten Password?</a>
                                     </label>
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
-                                <div class="social-login-content">
-                                    <div class="social-button">
-                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">sign in with facebook</button>
-                                        <button class="au-btn au-btn--block au-btn--blue2">sign in with twitter</button>
-                                    </div>
-                                </div>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign up</button>
                             </form>
                             <div class="register-link">
                                 <p>
-                                    Don't you have account?
-                                    <a href="#">Sign Up Here</a>
+                                    You have account?
+                                    <a href="{{ url('/user/authUser') }}">Sign Up Here</a>
                                 </p>
                             </div>
                         </div>

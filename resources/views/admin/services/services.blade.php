@@ -1,7 +1,7 @@
 @extends('admin.template.base')
 
 @section('css')
-    <link href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -30,7 +30,7 @@
                         </div>
                     @endif
                     <div class="card-title">
-                        <h3 class="text-center title-2">Works</h3>
+                        <h3 class="text-center title-2">Services</h3>
                     </div>
                     <hr>
                     <table id="table" class="table table-striped table-bordered" style="width:100%">
@@ -65,7 +65,8 @@
 @endsection
 
 @section('javascript')
-    <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript">
     $(function() {
         var oTable = $('#table').DataTable({

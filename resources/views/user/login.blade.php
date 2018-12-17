@@ -57,7 +57,7 @@
                             </div>
                         @endif
                         <div class="login-form">
-                            <form action="{{ url('admin/login') }}" method="post">
+                            <form action="{{ url('/login') }}" method="post">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label>Username</label>
@@ -86,7 +86,7 @@
                             <div class="register-link">
                                 <p>
                                     Don't you have account?
-                                    <a href="#">Sign Up Here</a>
+                                    <a href="{{ url('/registerAuth') }}">Sign Up Here</a>
                                 </p>
                             </div>
                         </div>

@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Admin;
+use App\MasterServices;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Yajra\Datatables\Datatables;
-use Illuminate\Support\Facades\Hash;
 
-class AdminController extends Controller
+class Services extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,19 +19,22 @@ class AdminController extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('auth')->with('alert', 'You are not loged in!');
+            return redirect('admin/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/admin/admin');
+            $data = array(
+                'title' => "Services | Temuin"
+            );
+            return view('admin/services/services')->with($data);
         }
     }
 
     public function data()
     {
-        $admin = Admin::select(['id', 'name', 'username', 'password', 'level', 'created_at', 'updated_at']);
+        $services = MasterServices::select(['id', 'service', 'status', 'created_at', 'updated_at']);
         $no = 1;
-        return Datatables::of(Admin::query())
-        ->addColumn('action', function ($admin) {
+        return Datatables::of(MasterServices::query())
+        ->addColumn('action', function ($services) {
             return '
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                     <button type="button" class="btn btn-secondary">Aksi</button>
@@ -40,8 +42,8 @@ class AdminController extends Controller
                     <div class="btn-group" role="group">
                     <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="'.url("admin/admin/").'/'.$admin->id.'/edit">Edit</a>
-                        <form action="'.route("admin.destroy", $admin->id).'" method="post">
+                        <a class="dropdown-item" href="'.url("admin/services/").'/'.$services->id.'/edit">Edit</a>
+                        <form action="'.route("services.destroy", $services->id).'" method="post">
                         '.csrf_field().'
                         '.method_field("DELETE").'
                         <button class="dropdown-item" type="submit" onclick="return confirm(\'Yakin ingin menghapus data?\')">Hapus</button>
@@ -64,10 +66,13 @@ class AdminController extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('auth')->with('alert', 'You are not loged in!');
+            return redirect('admin/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/admin/create');
+            $data = array(
+                'title' => "Tambah Service | Temuin"
+            );
+            return view('admin/services/create')->with($data);
         }
     }
 
@@ -80,17 +85,17 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         //
-        $data =  new Admin();
-        $data->name = $request->get('name');
-        $data->username = $request->get('username');
-        $data->password = Hash::make($request->get('password'));
-        $data->level = $request->get('level');
+        $data =  new MasterServices();
+        $data->service = $request->get('service');
+        $data->status = $request->get('status');
+        $data->created_by = Session::get('id');
+        $data->updated_by = Session::get('id');
 
         if($data->save()){
-            return redirect('/admin/admin')->with('alert-success', 'Berhasil menambahkan data!');
+            return redirect('/admin/services')->with('alert-success', 'Berhasil menambahkan data!');
         }
         else{
-            return redirect('/admin/admin')->with('alert', 'Gagal menambahkan data!');
+            return redirect('/admin/services')->with('alert', 'Gagal menambahkan data!');
         }
     }
 
@@ -114,8 +119,11 @@ class AdminController extends Controller
     public function edit($id)
     {
         //
-        $data = Admin::find($id);
-        return view('admin/admin/edit', compact('data'));
+        $data = array(
+            'title' => "Edit Service | Temuin",
+            'services' => MasterServices::find($id),
+        );
+        return view('admin/services/edit')->with($data);
     }
 
     /**
@@ -128,25 +136,16 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data =  Admin::where('id',$id)->first();
-
-        if(!empty($request->get('password'))){
-            $data->name = $request->get('name');
-            $data->username = $request->get('username');
-            $data->password = Hash::make($request->get('password'));
-            $data->level = $request->get('level');
-        }
-        else{
-            $data->name = $request->get('name');
-            $data->username = $request->get('username');
-            $data->level = $request->get('level');
-        }
+        $data =  MasterServices::where('id',$id)->first();
+        $data->service = $request->get('service');
+        $data->status = $request->get('status');
+        $data->updated_by = Session::get('id');
 
         if($data->save()){
-            return redirect('/admin/admin')->with('alert-success', 'Berhasil ubah data!');
+            return redirect('/admin/services')->with('alert-success', 'Berhasil ubah data!');
         }
         else{
-            return redirect('/admin/admin')->with('alert', 'Gagal ubah data!');
+            return redirect('/admin/services')->with('alert', 'Gagal ubah data!');
         }
     }
 
@@ -159,13 +158,13 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
-        $data =  Admin::where('id',$id)->first();
+        $data =  MasterServices::where('id',$id)->first();
 
         if($data->delete()){
-            return redirect('/admin/admin')->with('alert-success', 'Berhasil hapus data!');
+            return redirect('/admin/services')->with('alert-success', 'Berhasil hapus data!');
         }
         else{
-            return redirect('/admin/admin')->with('alert', 'Gagal hapus data!');
+            return redirect('/admin/services')->with('alert', 'Gagal hapus data!');
         }
     }
 }

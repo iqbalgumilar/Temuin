@@ -9,7 +9,7 @@
                         <h3 class="text-center title-2">Edit Works</h3>
                     </div>
                     <hr>
-                    <form action="{{ route('works.update', $data->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <form action="{{ route('works.update', $works->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="row form-group">
@@ -17,7 +17,7 @@
                                 <label for="text-input" class=" form-control-label">Work</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="text" id="text-input" name="work" placeholder="Work" value="{{ $data->work }}" class="form-control">
+                                <input type="text" id="text-input" name="work" placeholder="Work" value="{{ $works->work }}" class="form-control">
                                 <small class="form-text text-muted">This is a help text</small>
                             </div>
                         </div>
@@ -28,8 +28,8 @@
                             <div class="col-12 col-md-9">
                                 <select name="status" id="select" class="form-control" required="">
                                     <option>--Pilih--</option>
-                                    <option value="0" <?php if($data->status=="0"){ echo 'selected'; } ?>>False</option>
-                                    <option value="1" <?php if($data->status=="1"){ echo 'selected'; } ?>>True</option>
+                                    <option value="0" <?php if($works->status=="0"){ echo 'selected'; } ?>>False</option>
+                                    <option value="1" <?php if($works->status=="1"){ echo 'selected'; } ?>>True</option>
                                 </select>
                             </div>
                         </div>

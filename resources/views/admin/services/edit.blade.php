@@ -6,10 +6,10 @@
                 <div class="card-header">Master</div>
                 <div class="card-body">
                     <div class="card-title">
-                        <h3 class="text-center title-2">Edit Services</h3>
+                        <h3 class="text-center title-2">Edit Service</h3>
                     </div>
                     <hr>
-                    <form action="{{ route('services.update', $data->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <form action="{{ route('services.update', $services->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="row form-group">
@@ -17,7 +17,7 @@
                                 <label for="text-input" class=" form-control-label">Service</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="text" id="text-input" name="service" placeholder="Service" value="{{ $data->service }}" class="form-control">
+                                <input type="text" id="text-input" name="service" placeholder="Service" value="{{ $services->service }}" class="form-control">
                                 <small class="form-text text-muted">This is a help text</small>
                             </div>
                         </div>
@@ -28,8 +28,8 @@
                             <div class="col-12 col-md-9">
                                 <select name="status" id="select" class="form-control" required="">
                                     <option>--Pilih--</option>
-                                    <option value="0" <?php if($data->status=="0"){ echo 'selected'; } ?>>False</option>
-                                    <option value="1" <?php if($data->status=="1"){ echo 'selected'; } ?>>True</option>
+                                    <option value="0" <?php if($services->status=="0"){ echo 'selected'; } ?>>False</option>
+                                    <option value="1" <?php if($services->status=="1"){ echo 'selected'; } ?>>True</option>
                                 </select>
                             </div>
                         </div>

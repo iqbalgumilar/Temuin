@@ -31,7 +31,7 @@
                         <i class="fas fa-users"></i>Admin</a>
                 </li>
                 <li>
-                    <a href="{{ url('/logout') }}">
+                    <a href="{{ url('admin/logout') }}">
                         <i class="fa fa-arrow-left"></i>Logout</a>
                 </li>
             </ul>

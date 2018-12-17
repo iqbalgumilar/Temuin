@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\MasterServices;
+use App\MasterSkills;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Yajra\Datatables\Datatables;
 
-class Services extends Controller
+class Skills extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,19 +19,22 @@ class Services extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('auth')->with('alert', 'You are not loged in!');
+            return redirect('admin/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/services/services');
+            $data = array(
+                'title' => "Skills | Temuin"
+            );
+            return view('admin/skills/skills')->with($data);
         }
     }
 
     public function data()
     {
-        $services = MasterServices::select(['id', 'service', 'status', 'created_at', 'updated_at']);
+        $skills = MasterSkills::select(['id', 'skill', 'status', 'created_at', 'updated_at']);
         $no = 1;
-        return Datatables::of(MasterServices::query())
-        ->addColumn('action', function ($services) {
+        return Datatables::of(MasterSkills::query())
+        ->addColumn('action', function ($skills) {
             return '
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                     <button type="button" class="btn btn-secondary">Aksi</button>
@@ -39,8 +42,8 @@ class Services extends Controller
                     <div class="btn-group" role="group">
                     <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="'.url("admin/services/").'/'.$services->id.'/edit">Edit</a>
-                        <form action="'.route("services.destroy", $services->id).'" method="post">
+                        <a class="dropdown-item" href="'.url("admin/skills/").'/'.$skills->id.'/edit">Edit</a>
+                        <form action="'.route("skills.destroy", $skills->id).'" method="post">
                         '.csrf_field().'
                         '.method_field("DELETE").'
                         <button class="dropdown-item" type="submit" onclick="return confirm(\'Yakin ingin menghapus data?\')">Hapus</button>
@@ -63,10 +66,13 @@ class Services extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('auth')->with('alert', 'You are not loged in!');
+            return redirect('admin/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('admin/services/create');
+            $data = array(
+                'title' => "Tambah Skill | Temuin"
+            );
+            return view('admin/skills/create')->with($data);
         }
     }
 
@@ -79,17 +85,17 @@ class Services extends Controller
     public function store(Request $request)
     {
         //
-        $data =  new MasterServices();
-        $data->service = $request->get('service');
+        $data =  new MasterSkills();
+        $data->skill = $request->get('skill');
         $data->status = $request->get('status');
         $data->created_by = Session::get('id');
         $data->updated_by = Session::get('id');
 
         if($data->save()){
-            return redirect('/admin/services')->with('alert-success', 'Berhasil menambahkan data!');
+            return redirect('/admin/skills')->with('alert-success', 'Berhasil menambahkan data!');
         }
         else{
-            return redirect('/admin/services')->with('alert', 'Gagal menambahkan data!');
+            return redirect('/admin/skills')->with('alert', 'Gagal menambahkan data!');
         }
     }
 
@@ -113,8 +119,11 @@ class Services extends Controller
     public function edit($id)
     {
         //
-        $data = MasterServices::find($id);
-        return view('admin/services/edit', compact('data'));
+        $data = array(
+            'title' => "Edit Skill | Temuin",
+            'skills' => MasterSkills::find($id),
+        );
+        return view('admin/skills/edit')->with($data);
     }
 
     /**
@@ -127,16 +136,16 @@ class Services extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data =  MasterServices::where('id',$id)->first();
-        $data->service = $request->get('service');
+        $data =  MasterSkills::where('id',$id)->first();
+        $data->skill = $request->get('skill');
         $data->status = $request->get('status');
         $data->updated_by = Session::get('id');
 
         if($data->save()){
-            return redirect('/admin/services')->with('alert-success', 'Berhasil ubah data!');
+            return redirect('/admin/skills')->with('alert-success', 'Berhasil ubah data!');
         }
         else{
-            return redirect('/admin/services')->with('alert', 'Gagal ubah data!');
+            return redirect('/admin/skills')->with('alert', 'Gagal ubah data!');
         }
     }
 
@@ -149,13 +158,13 @@ class Services extends Controller
     public function destroy($id)
     {
         //
-        $data =  MasterServices::where('id',$id)->first();
+        $data =  MasterSkills::where('id',$id)->first();
 
         if($data->delete()){
-            return redirect('/admin/services')->with('alert-success', 'Berhasil hapus data!');
+            return redirect('/admin/skills')->with('alert-success', 'Berhasil hapus data!');
         }
         else{
-            return redirect('/admin/services')->with('alert', 'Gagal hapus data!');
+            return redirect('/admin/skills')->with('alert', 'Gagal hapus data!');
         }
     }
 }

@@ -11,6 +11,18 @@
 |
 */
 
+/* Company */
+Route::get('/', function () {
+    return view('company.index');
+})->name('index');
+
+
+/* Personal Blog */
+
+/* Curriculum Vitae */
+
+/* Kartu */
+
 /* ADMIN */
 
 Route::get('/admin/auth', 'Admin\Auth@auth');

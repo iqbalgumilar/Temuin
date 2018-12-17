@@ -22,7 +22,8 @@ class UserAwards extends Controller
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/cv/awards/awards');
+            $data = Award::where('id_profile', Session::get('id'))->first();
+            return view('user/cv/awards/awards',compact('data'));
         }
     }
 
@@ -52,6 +53,7 @@ class UserAwards extends Controller
     {
         //
         $data = new Award();
+        $data->id_profile = Session::get('id');
         $data->award = $request->award;
         $data->description_award = $request->description_award;
         $data->icon_award = $request->icon_award;

@@ -1,5 +1,6 @@
 @extends('user.template.base')
 @section('content')
+
 @if(\Session::has('alert'))
     <div class="alert alert-danger">
         <div>{{ Session::get('alert') }}</div>
@@ -10,36 +11,42 @@
         <div>{{ Session::get('alert-success') }}</div>
     </div>
 @endif
-<form action="{{ route('education.update',Session::get('id')) }}" method="post" id="form-education" enctype="multipart/form-data" class="form-horizontal">
+
+<form action="{{ route('skill.update', Session::get('id')) }}" method="post" id="form-skill" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header text-center">
-        <strong>EDUCATION</strong>
+        <strong>SKILLS</strong>
         <div class="float-right">
-            <span class="" style="cursor: pointer" id="tambahEducation">
+            <span class="" style="cursor: pointer" id="tambahSkill">
                 <i class="fa fa-plus-circle text-success"></i>
             </span>
-            <span class="" style="cursor: pointer" id="hapusEducation">
+            <span class="" style="cursor: pointer" id="hapusSkill">
                 <i class="fa fa-minus-circle text-danger"></i>
             </span>
         </div>
     </div>
     <div class="card-body card-block">
-        {{ csrf_field() }}
-            {{ method_field('PUT') }}
+        {{ csrf_field() }} 
+        {{ method_field('PUT') }}      
             <div class="row form-group">
                 <div class="col col-md-3">
-                    <label for="education-input" class=" form-control-label">Education</label>
+                    <label for="skills-input" class=" form-control-label">Skills</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="education-input" name="education" value="{{ $data->education }}" placeholder="Education" class="form-control">
+                    <select name="uid_skill" id="" class="form-control">
+                    <option value="">-</option>
+                        @foreach($skills as $skill)
+                        <option value="{{ $skill->id }}">{{ $skill->skill }}</option>
+                        @endforeach
+                        </select>
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3">
-                    <label for="from-education-input" class=" form-control-label">From</label>
+                    <label for="persentase-input" class=" form-control-label">Persentase</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="from-education-input" name="from_education" value="{{ $data->from_education }}" placeholder="From Education" class="form-control">
+                    <input type="text" id="persentase-input" name="persentase_skill" value="{{ $data->persentase_skill }}" placeholder="Persentase" class="form-control">
                 </div>
             </div>
         
@@ -54,5 +61,4 @@
     </div>
 </div>
 </form>
-
 @endsection

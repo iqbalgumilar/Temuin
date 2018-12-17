@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Confirm Password</label>
-                                    <input class="au-input au-input--full" type="text" name="confirmation" placeholder="Username">
+                                    <input class="au-input au-input--full" type="password" name="confirmation" placeholder="Username">
                                 </div>
                                 <div class="login-checkbox">
                                     <label>

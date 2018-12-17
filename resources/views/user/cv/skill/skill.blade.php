@@ -1,6 +1,20 @@
 @extends('user.template.base')
 @section('content')
+
+@if(\Session::has('alert'))
+    <div class="alert alert-danger">
+        <div>{{ Session::get('alert') }}</div>
+    </div>
+@endif
+@if(\Session::has('alert-success'))
+    <div class="alert alert-success">
+        <div>{{ Session::get('alert-success') }}</div>
+    </div>
+@endif
+<form action="{{ route('skill.destroy', Session::get('id')) }}" method="post" id="form-skill" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
+    {{ method_field('DELETE') }}
+  {{ csrf_field() }}
     <div class="card-header text-center">
         <strong>SKILLS</strong>
         <div class="float-right">
@@ -13,13 +27,15 @@
         </div>
     </div>
     <div class="card-body card-block">
-        <form action="" method="post" id="form-skill" enctype="multipart/form-data" class="form-horizontal">
+        
             <div class="row form-group">
                 <div class="col col-md-3">
                     <label for="skills-input" class=" form-control-label">Skills</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="skills-input" name="skills" placeholder="Skills" class="form-control">
+                    @foreach($skills as $skill)
+                    <input type="text" id="skills-input" value="{{ $skill->skill }}" placeholder="Skills" class="form-control">
+                    @endforeach
                 </div>
             </div>
             <div class="row form-group">
@@ -27,18 +43,15 @@
                     <label for="persentase-input" class=" form-control-label">Persentase</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="persentase-input" name="persentase" placeholder="Persentase" class="form-control">
+                    <input type="text" id="persentase-input" value="{{ $data->persentase_skill }}" placeholder="Persentase" class="form-control">
                 </div>
             </div>
-        </form>
+        
     </div>
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary btn-sm">
-            <i class="fa fa-dot-circle-o"></i> Submit
-        </button>
-        <button type="reset" class="btn btn-danger btn-sm">
-            <i class="fa fa-ban"></i> Reset
-        </button>
+        <a class="btn btn-info btn-sm" href="{{ route('skill.edit', Session::get('id')) }}">Edit</a>
+        <a class="btn btn-success btn-sm" href="{{ url('/user/portfolio') }}">Next</a>
     </div>
 </div>
+</form>
 @endsection

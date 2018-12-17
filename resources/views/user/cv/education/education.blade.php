@@ -13,8 +13,7 @@
 @endif
 
 <form action="{{ route('education.destroy',Session::get('id')) }}" method="post" id="form-education" enctype="multipart/form-data" class="form-horizontal">
-     {{ csrf_field() }}
-  {{ method_field('DELETE') }}
+   
 <div class="card">
     <div class="card-header text-center">
         <strong>EDUCATION</strong>
@@ -28,13 +27,14 @@
         </div>
     </div>
     <div class="card-body card-block">
-        
+          {{ csrf_field() }}
+  {{ method_field('DELETE') }}
             <div class="row form-group">
                 <div class="col col-md-3">
                     <label for="education-input" class=" form-control-label">Education</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="education-input" value="{{ Session::get('education') }}" placeholder="Education" class="form-control">
+                    <input type="text" id="education-input" value="{{ $data->education }}" placeholder="Education" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -42,16 +42,14 @@
                     <label for="from-education-input" class=" form-control-label">From</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="from-education-input" value="{{ Session::get('from_education') }}" placeholder="From Education" class="form-control">
+                    <input type="text" id="from-education-input" value="{{ $data->from_education }}" placeholder="From Education" class="form-control">
                 </div>
             </div>
         
     </div>
     <div class="card-footer">
         <a class="btn btn-info btn-sm" href="{{ route('education.edit',Session::get('id')) }}">Edit</a>
-        <button type="reset" class="btn btn-danger btn-sm">
-            <i class="fa fa-ban"></i> Reset
-        </button>
+        <a class="btn btn-success btn-sm" href="{{ url('/user/cv/skill') }}">Next</a>
     </div>
 </div>
 </form>

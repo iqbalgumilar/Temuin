@@ -17,10 +17,10 @@
         {{ csrf_field() }}
             <div class="row form-group">
                 <div class="col col-md-3">
-                    <label for="portfolio-input" class=" form-control-label">Portfolio</label>
+                    <label for="portfolio-input" class=" form-control-label">Portofolio</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="portfolio-input" name="portofolio" placeholder="Portfolio" class="form-control">
+                    <input type="text" id="portfolio-input" name="portofolio" placeholder="Portofolio" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -28,7 +28,7 @@
                     <label for="img-portfolio-input" class=" form-control-label">Image</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="file" id="img-portfolio-input" name="image_portofolio" placeholder="Image" class="form-control">
+                    <input type="text" id="img-portfolio-input" name="image_portofolio" placeholder="Image" class="form-control">
                 </div>
             </div>
              <div class="row form-group">

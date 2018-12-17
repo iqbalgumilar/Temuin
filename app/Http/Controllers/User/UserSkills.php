@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\MasterSkills;
 use App\Skill;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;

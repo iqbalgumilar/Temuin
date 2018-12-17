@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Skill;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class UserSkills extends Controller

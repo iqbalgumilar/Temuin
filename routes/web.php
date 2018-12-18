@@ -40,17 +40,24 @@ Route::resource('admin/works', 'Admin\Works');
 Route::get('/admin/services/data', 'Admin\Services@data');
 Route::resource('admin/services', 'Admin\Services');
 
+Route::get('/admin/JenisProduk/data', 'Admin\JenisProduk@data');
+Route::resource('admin/JenisProduk', 'Admin\JenisProduk');
+
 Route::get('/admin/admin/data', 'Admin\AdminController@data');
 Route::resource('admin/admin', 'Admin\AdminController');
 
-//User
-Route::get('/authUser', 'User\UserAuth@authUser');
-Route::post('/login', 'User\UserAuth@login');
-Route::get('/registerAuth', 'User\UserAuth@registerAuth');
-Route::post('/register', 'User\UserAuth@register');
-Route::get('/logout', 'User\UserAuth@logout');
+/* USER */
 
-Route::get('/user', 'User\UserAuth@index');
+Route::get('/user/auth', 'User\Auth@auth');
+Route::get('/user/register', 'User\Auth@register');
+Route::get('/user/logout', 'User\Auth@logout');
+Route::get('/user/emailverifikasi', 'User\Auth@emailVerifikasi');
+Route::get('/user/verifikasi/{id}', 'User\Auth@verifikasi');
+Route::post('/user/sendEmail', 'User\Auth@sendEmail');
+Route::post('/user/actLogin', 'User\Auth@actLogin');
+Route::post('/user/actRegister', 'User\Auth@actRegister');
+
+Route::get('/user', 'User\Auth@index');
 
 Route::resource('user/user','User\UserController');
 

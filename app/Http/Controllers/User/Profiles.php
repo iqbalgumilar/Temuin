@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\MasterWorks;
 use App\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,7 +23,9 @@ class Profiles extends Controller
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/profile/profile');
+            $works = MasterWorks::all();
+            $data = Profile::where('id_user', Session::get('id'))->first();
+            return view('user/profile/profile', compact('data','works'));
         }
     }
 
@@ -38,7 +41,8 @@ class Profiles extends Controller
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/profile/create');
+            $works = MasterWorks::all();
+            return view('user/profile/create',compact('works'));
         }
     }
 
@@ -57,7 +61,7 @@ class Profiles extends Controller
         $data->tempat_lhr_profile = $request->tempatlhr;
         $data->tgl_lhr_profile = $request->datelhr;
         $data->tlp_profile = $request->tlp;
-        $data->uid_work = Session::get('id');
+        $data->uid_work = $request->uid_work;
         $data->alamat = $request->alamat;
 
         if($data->save()){
@@ -88,8 +92,9 @@ class Profiles extends Controller
     public function edit($id)
     {
         //
-        $data = Profile::find($id);
-        return view('user/profile/edit', compact('data'));
+        $works = MasterWorks::all();
+        $data = Profile::where('id_user', Session::get('id'))->first();
+        return view('user/profile/edit', compact('data','works'));
     }
 
     /**
@@ -102,13 +107,13 @@ class Profiles extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data = Profile::where('id', $id)->first();
+        $data = Profile::where('id_user', $id)->first();
 
         $data->nama_profile = $request->name;
         $data->tempat_lhr_profile = $request->tempatlhr;
         $data->tgl_lhr_profile = $request->datelhr;
         $data->tlp_profile = $request->tlp;
-        $data->uid_work = $request->work;
+        $data->uid_work = $request->uid_work;
         $data->alamat = $request->alamat;
 
         if($data->save()){

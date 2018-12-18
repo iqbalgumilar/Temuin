@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\MasterWorks;
 use App\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,7 +23,9 @@ class CardId extends Controller
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/id/id');
+            $works = MasterWorks::all();
+            $data = Profile::where('id_user', Session::get('id'))->first();
+            return view('user/id/id', compact('data','works'));
         }
     }
 

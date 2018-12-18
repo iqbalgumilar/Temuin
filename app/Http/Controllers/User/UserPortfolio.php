@@ -22,7 +22,8 @@ class UserPortfolio extends Controller
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/portfolio/portfolio');
+            $data = Portofolio::where('id_profile', Session::get('id'))->first(); 
+            return view('user/portfolio/portfolio',compact('data'));
         }
     }
 
@@ -52,6 +53,7 @@ class UserPortfolio extends Controller
     {
         //
         $data = new Portofolio();
+        $data->id_profile = Session::get('id');
         $data->portofolio = $request->portofolio;
         $data->image_portofolio = $request->image_portofolio;
         $data->link_portofolio = $request->link_portofolio;
@@ -84,6 +86,8 @@ class UserPortfolio extends Controller
     public function edit($id)
     {
         //
+        $data = Portofolio::where('id_profile', Session::get('id'))->first();
+        return view('user/portfolio/edit', compact('data'));
     }
 
     /**
@@ -96,6 +100,19 @@ class UserPortfolio extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data = Portofolio::where('id_profile', $id)->first();
+
+        $data->id_profile = Session::get('id');
+        $data->portofolio = $request->portofolio;
+        $data->image_portofolio = $request->image_portofolio;
+        $data->link_portofolio = $request->link_portofolio;
+
+        if($data->save()){
+            return redirect('/user/portfolio')->with('alert-success', 'Berhasil ubah data!');
+        }
+        else{
+            return redirect('/user/portfolio')->with('alert', 'Gagal ubah data!');
+        }
     }
 
     /**

@@ -25,7 +25,7 @@
                     <label for="name-input" class=" form-control-label">Nama</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="name-input" name="name" placeholder="Nama" value="{{ Session::get('nama_profile') }}" class="form-control">
+                    <input type="text" id="name-input" name="name" placeholder="Nama" value="{{ $data->nama_profile }}" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -33,7 +33,7 @@
                     <label for="tlp-input" class=" form-control-label">No.Tlp</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="tlp-input" name="tlp" placeholder="Enter Phone Number" value="{{ Session::get('tlp_profile') }}" class="form-control">
+                    <input type="text" id="tlp-input" name="tlp" placeholder="Enter Phone Number" value="{{ $data->tlp_profile }}" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -41,7 +41,7 @@
                     <label for="tempat-input" class=" form-control-label">Tempat Lahir</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="tempat-input" name="tempatlhr" placeholder="Tempat Lahir" value="{{ Session::get('tempat_lhr_profile') }}" class="form-control">
+                    <input type="text" id="tempat-input" name="tempatlhr" placeholder="Tempat Lahir" value="{{ $data->tempat_lhr_profile }}" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -49,7 +49,7 @@
                     <label for="date-input" class=" form-control-label">Tanggal Lahir</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="date" id="date-input" name="datelhr" placeholder="Enter Tanggal Lahir" value="{{ Session::get('tgl_lhr_profile') }}" class="form-control">
+                    <input type="date" id="date-input" name="datelhr" placeholder="Enter Tanggal Lahir" value="{{ $data->tgl_lhr_profile }}" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -57,7 +57,12 @@
                     <label for="work-input" class=" form-control-label">Pekerjaan</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="work-input" name="work" value="{{ Session::get('uid_work') }}" placeholder="Pekerjaan" class="form-control">
+                    <select name="uid_work" id="" class="form-control">
+                        <option value="">-</option>
+                        @foreach($works as $work)
+                        <option value="{{ $work->id }}">{{ $work->work }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="row form-group">
@@ -65,7 +70,7 @@
                     <label for="alamat-input" class=" form-control-label">Alamat</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <textarea name="alamat" id="alamat" rows="5" placeholder="Masukkan Alamat" value="{{ Session::get('alamat') }}" class="form-control"></textarea>
+                    <textarea name="alamat" id="alamat" rows="5" placeholder="Masukkan Alamat" class="form-control">{{ $data->alamat }}</textarea>
                 </div>
             </div>
         

@@ -22,7 +22,8 @@ class UserEducation extends Controller
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/cv/education/education');
+            $data = Education::where('id_profile',Session::get('id'))->first();
+            return view('user/cv/education/education',compact('data'));
         }
     }
 
@@ -52,6 +53,7 @@ class UserEducation extends Controller
     {
         //
         $data = new Education();
+        $data->id_profile = Session::get('id');
         $data->education = $request->education;
         $data->from_education = $request->from_education;
 

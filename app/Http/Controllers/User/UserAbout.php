@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\MasterWorks;
 use App\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,7 +23,9 @@ class UserAbout extends Controller
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/cv/about/about');
+            $works = MasterWorks::all();
+            $data = Profile::where('id_user', Session::get('id'))->first();
+            return view('user/cv/about/about',compact('data','works'));
         }
     }
 

@@ -37,7 +37,7 @@
                         <a href="{{ url('/user/cv/skill') }}">Skills</a>
                     </li>
                     <li>
-                        <a href="{{ url('/user/portfolio') }}">Awards</a>
+                        <a href="{{ url('/user/portfolio') }}">Portofolio</a>
                     </li>
                     <li>
                         <a href="{{ url('/user/cv/awards') }}">Awards</a>

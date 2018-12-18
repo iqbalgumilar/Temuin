@@ -10,7 +10,7 @@
     <meta name="keywords" content="temuin">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>Register | Temuin</title>
 
     <!-- Fontfaces CSS-->
     <link href="{{ url('/assets/admin/css/font-face.css') }}" rel="stylesheet" media="all">
@@ -36,7 +36,7 @@
 </head>
 
 <body class="animsition">
-    <div class="page-wrapper">
+<div class="page-wrapper">
         <div class="page-content--bge5">
             <div class="container">
                 <div class="login-wrap">
@@ -46,48 +46,42 @@
                                 <img src="{{ url('/assets/admin/images/icon/logo.png') }}" alt="CoolAdmin">
                             </a>
                         </div>
-                        @if ($errors->any())
+                        @if(\Session::has('alert'))
                             <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
+                                <div>{{ Session::get('alert') }}</div>
+                            </div>
+                        @endif
+                        @if(\Session::has('alert-success'))
+                            <div class="alert alert-success">
+                                <div>{{ Session::get('alert-success') }}</div>
                             </div>
                         @endif
                         <div class="login-form">
-                            <form action="{{ url('/register') }}" method="post">
+                            <form action="{{ url('user/actRegister') }}" method="post">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label>Username</label>
-                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Username">
+                                    <label>Nama</label>
+                                    <input class="au-input au-input--full" type="text" name="nama" placeholder="Nama">
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Username">
+                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
                                     <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
                                 </div>
-                                <div class="form-group">
-                                    <label>Confirm Password</label>
-                                    <input class="au-input au-input--full" type="text" name="confirmation" placeholder="Username">
-                                </div>
                                 <div class="login-checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember">Remember Me
-                                    </label>
-                                    <label>
-                                        <a href="#">Forgotten Password?</a>
+                                        <input type="checkbox" name="aggree">Agree the terms and policy
                                     </label>
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign up</button>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
                             </form>
                             <div class="register-link">
                                 <p>
-                                    You have account?
-                                    <a href="{{ url('/user/authUser') }}">Sign Up Here</a>
+                                    Already have account?
+                                    <a href="#">Sign In</a>
                                 </p>
                             </div>
                         </div>

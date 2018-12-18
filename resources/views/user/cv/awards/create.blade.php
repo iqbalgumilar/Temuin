@@ -37,7 +37,7 @@
                     <label for="icon-input" class=" form-control-label">Icon</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="icon-input" name="icon_award" class="form-control-file">
+                    <input type="text" id="icon-input" name="icon_award" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -45,7 +45,7 @@
                     <label for="image-input" class=" form-control-label">Image</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="image-input" name="image_award" class="form-control-file">
+                    <input type="text" id="image-input" name="image_award" class="form-control">
                 </div>
             </div>
         

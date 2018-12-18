@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Masterworks;
 use App\Experience;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,7 +24,9 @@ class UserExperience extends Controller
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/cv/experience/experience');
+            $works = Masterworks::all();
+            $data = Experience::where('id_profile', Session::get('id'))->first();
+            return view('user/cv/experience/experience',compact('data','works'));
         }
     }
 
@@ -39,7 +42,8 @@ class UserExperience extends Controller
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/cv/education/create');
+            $works = MasterWorks::all();
+            return view('user/cv/experience/create',compact('works'));
         }
     }
 
@@ -53,6 +57,7 @@ class UserExperience extends Controller
     {
         //
         $data = new Experience();
+        $data->id_profile = Session::get('id');
         $data->uid_work = $request->uid_work;
         $data->from_experience = $request->from_experience;
         $data->date_first_experience = $request->date_first_experience;
@@ -86,6 +91,9 @@ class UserExperience extends Controller
     public function edit($id)
     {
         //
+        $works = MasterWorks::all();
+        $data = Experience::where('id_profile', Session::get('id'))->first();
+        return view('user/cv/experience/edit', compact('data','works'));
     }
 
     /**
@@ -98,6 +106,20 @@ class UserExperience extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data = Experience::where('id_profile', $id)->first();
+
+        $data->id_profile = Session::get('id');
+        $data->uid_work = $request->uid_work;
+        $data->from_experience = $request->from_experience;
+        $data->date_first_experience = $request->date_first_experience;
+        $data->date_last_experience = $request->date_last_experience;
+
+        if($data->save()){
+            return redirect('/user/cv/experience')->with('alert-success', 'Berhasil ubah data!');
+        }
+        else{
+            return redirect('/user/cv/experience')->with('alert', 'Gagal ubah data!');
+        }
     }
 
     /**

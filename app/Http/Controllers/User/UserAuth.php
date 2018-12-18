@@ -35,6 +35,7 @@ class UserAuth extends Controller
                 Session::put('id', $data->id);
                 Session::put('email', $data->email);
                 Session::put('username', $data->username);
+                Session::put('password', $data->password);
                 Session::put('login', TRUE);
                 return redirect('/user');
             }

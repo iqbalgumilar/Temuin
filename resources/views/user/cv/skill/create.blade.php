@@ -20,7 +20,12 @@
                     <label for="skills-input" class=" form-control-label">Skills</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="skills-input" name="uid_Skill" placeholder="Skills" class="form-control">
+                    <select name="uid_skill" id="" class="form-control">
+                    <option value="">-</option>
+                        @foreach($skills as $skill)
+                        <option value="{{ $skill->id }}">{{ $skill->skill }}</option>
+                        @endforeach
+                        </select>
                 </div>
             </div>
             <div class="row form-group">

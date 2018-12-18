@@ -22,7 +22,8 @@ class UserController extends Controller
             return redirect('authUser')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/user/user');
+            $data = Users::find(Session::get('id'))->first();
+            return view('user/user/user',compact('data'));
         }
     }
 
@@ -69,7 +70,7 @@ class UserController extends Controller
     public function edit($id)
     {
         //
-        $data = Users::find($id);
+        $data = Users::find(Session::get('id'))->first();
         return view('user/user/edit', compact('data'));
     }
 

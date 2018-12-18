@@ -10,7 +10,7 @@
     <meta name="keywords" content="temuin">
 
     <!-- Title Page-->
-    <title>Register | Temuin</title>
+    <title>Login | Temuin</title>
 
     <!-- Fontfaces CSS-->
     <link href="{{ url('/assets/admin/css/font-face.css') }}" rel="stylesheet" media="all">
@@ -36,7 +36,7 @@
 </head>
 
 <body class="animsition">
-<div class="page-wrapper">
+    <div class="page-wrapper">
         <div class="page-content--bge5">
             <div class="container">
                 <div class="login-wrap">
@@ -57,32 +57,14 @@
                             </div>
                         @endif
                         <div class="login-form">
-                            <form action="{{ url('user/actRegister') }}" method="post">
+                            <form action="{{ url('user/sendEmail') }}" method="post">
                                 {{ csrf_field() }}
-                                <div class="form-group">
-                                    <label>Nama</label>
-                                    <input class="au-input au-input--full" type="text" name="nama" placeholder="Nama">
-                                </div>
                                 <div class="form-group">
                                     <label>Email</label>
                                     <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
                                 </div>
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
-                                </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Send</button>
                             </form>
-                            <div class="register-link">
-                                <p>
-                                    Already have account?
-                                    <a href="{{ url('user/auth') }}">Sign In</a>
-                                </p>
-                                <p>
-                                    Didn't you receive email?
-                                    <a href="{{ url('user/emailverifikasi') }}">Send Verification Here</a>
-                                </p>
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -57,7 +57,7 @@
                             </div>
                         @endif
                         <div class="login-form">
-                            <form action="{{ url('user/login') }}" method="post">
+                            <form action="{{ url('user/actLogin') }}" method="post">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label>Username</label>
@@ -76,17 +76,16 @@
                                     </label>
                                 </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
-                                <div class="social-login-content">
-                                    <div class="social-button">
-                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">sign in with facebook</button>
-                                        <button class="au-btn au-btn--block au-btn--blue2">sign in with twitter</button>
-                                    </div>
-                                </div>
+                                
                             </form>
                             <div class="register-link">
                                 <p>
                                     Don't you have account?
                                     <a href="{{ url('user/register') }}">Sign Up Here</a>
+                                </p>
+                                <p>
+                                    Didn't you receive email?
+                                    <a href="{{ url('user/emailverifikasi') }}">Send Verification Here</a>
                                 </p>
                             </div>
                         </div>

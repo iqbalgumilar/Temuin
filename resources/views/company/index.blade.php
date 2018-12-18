@@ -46,11 +46,11 @@
                         <div class="col-lg-4">
                         </div>
                         <div class="col-md-3 col-4 sign-btn">
-                            <a href="{{ url('/login') }}">
+                            <a href="{{ url('/user/auth') }}">
                                 <i class="fas fa-lock"></i> Sign In</a>
                         </div>
                         <div class="col-md-3 col-4 sign-btn">
-                            <a href="{{ url('/register') }}">
+                            <a href="{{ url('/user/register') }}">
                                 <i class="fas fa-user"></i> Register</a>
                         </div>
                         <div class="search col-md-2 col-4">

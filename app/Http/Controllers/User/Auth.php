@@ -29,11 +29,11 @@ class Auth extends Controller
         return view('user/login');
     }
 
-    public function login(Request $request){
+    public function actLogin(Request $request){
         $username = $request->username;
         $password = $request->password;
 
-        $data = Users::where('username', $username);
+        $data = Users::where('username', $username)->orWhere('email', $username)->where('is_verification', "1");
         if(count($data->get()) > 0){
             $data = $data->first();
             if(Hash::check($password, $data->password)){
@@ -49,7 +49,7 @@ class Auth extends Controller
             }
         }
         else{
-            return redirect('user/auth')->with('alert', 'Username salah!');
+            return redirect('user/auth')->with('alert', 'Username salah atau akun belum diverifikasi!');
         }
     }
 
@@ -75,18 +75,13 @@ class Auth extends Controller
             $data2->uid_work = "1";
             $data2->alamat = "";
             if($data2->save()){
-                try{
-                    Mail::send('user/email', ['id' => $data->id, 'nama' => $request->get('nama')], function ($message) use ($request)
-                    {
-                        $message->subject('Verifikasi Akun Temuin');
-                        $message->from('donotreply@temuin.com', 'Temuin');
-                        $message->to($request->get('email'));
-                    });
-                    return view('/user/register')->with('alert-success','Berhasil daftar. Silahkan cek email untuk verifikasi.');
-                }
-                catch (Exception $e){
-                    return response (['status' => false,'errors' => $e->getMessage()]);
-                }
+                Mail::send('user/email', ['id' => $data->id, 'nama' => $request->get('nama')], function ($message) use ($request)
+                {
+                    $message->subject('Verifikasi Akun Temuin');
+                    $message->from('donotreply@temuin.com', 'Temuin');
+                    $message->to($request->get('email'));
+                });
+                return redirect('/user/register')->with('alert-success','Berhasil daftar. Silahkan cek email untuk verifikasi.');
             }
             else{
                 return redirect('/user/register')->with('alert', 'Gagal');
@@ -109,8 +104,29 @@ class Auth extends Controller
         }
     }
 
+    public function emailVerifikasi(){
+        return view('user/email_verifikasi');
+    }
+
+    public function sendEmail(Request $request){
+        $data = Users::where('email', $request->get('email'))->where('is_verification', '0');
+        if(count($data->get()) > 0){
+            $data = $data->first();
+            Mail::send('user/email', ['id' => $data->id, 'nama' => $data->username], function ($message) use ($request)
+            {
+                $message->subject('Verifikasi Akun Temuin');
+                $message->from('donotreply@temuin.com', 'Temuin');
+                $message->to($request->get('email'));
+            });
+            return redirect('/user/emailverifikasi')->with('alert-success','Silahkan cek email untuk verifikasi.');
+        }
+        else{
+            return redirect('/user/emailverifikasi')->with('alert', 'Email belum terdaftar. Atau akun sudah diverifikasi.');
+        }
+    }
+
     public function logout(){
         Session::flush();
-        return redirect('user/auth')->with('alert', 'Berhasil Logout.');
+        return redirect('user/auth')->with('alert-success', 'Berhasil Logout.');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Award;
+use App\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -22,7 +23,8 @@ class UserAwards extends Controller
             return redirect('/user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            $data = Award::where('id_profile', Session::get('id'))->first();
+            $profile = Profile::where('id_user',Session::get('id'))->first();
+            $data = Award::where('id_profile',$profile->id)->first();
 
             if($data != null){
                 return view('user/cv/awards/awards', compact('data'));
@@ -57,12 +59,14 @@ class UserAwards extends Controller
     public function store(Request $request)
     {
         //
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+
         $data = new Award();
-        $data->id_profile = Session::get('id');
-        $data->award = $request->award;
-        $data->description_award = $request->description_award;
-        $data->icon_award = $request->icon_award;
-        $data->image_award = $request->image_award;
+        $data->id_profile = $profile->id;
+        $data->award = $request->get('award');
+        $data->description_award = $request->get('description_award');
+        $data->icon_award = $request->get('icon_award');
+        $data->image_award = $request->get('image_award');
 
         if($data->save()){
             return redirect('/user/cv/awards')->with('alert-success', 'Berhasil menambahkan data!');
@@ -92,7 +96,8 @@ class UserAwards extends Controller
     public function edit($id)
     {
         //
-        $data = Award::find($id);
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+        $data = Award::where('id_profile',$profile->id)->first();
         return view('user/cv/awards/edit', compact('data'));
     }
 
@@ -106,12 +111,14 @@ class UserAwards extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data = Award::where('id', $id)->first();
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+        $data = Award::where('id_profile',$profile->id)->first();
 
-        $data->award = $request->award;
-        $data->description_award = $request->description_award;
-        $data->icon_award = $request->icon_award;
-        $data->image_award = $request->image_award;
+        $data->id_profile = $profile->id;
+        $data->award = $request->get('award');
+        $data->description_award = $request->get('description_award');
+        $data->icon_award = $request->get('icon_award');
+        $data->image_award = $request->get('image_award');
 
         if($data->save()){
             return redirect('/user/cv/awards')->with('alert-success', 'Berhasil ubah data!');
@@ -130,7 +137,8 @@ class UserAwards extends Controller
     public function destroy($id)
     {
         //
-        $data = Award::where('id', $id)->first();
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+        $data = Award::where('id_profile',$profile->id)->first();
         if($data->delete()){
             return redirect('/user/cv/awards')->with('alert-success', 'Berhasil hapus data!');
         }

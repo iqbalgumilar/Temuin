@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Masterworks;
 use App\Experience;
+use App\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -21,12 +22,17 @@ class UserExperience extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('authUser')->with('alert', 'You are not loged in!');
+            return redirect('/user/auth')->with('alert', 'You are not loged in!');
         }
         else{
             $works = Masterworks::all();
-            $data = Experience::where('id_profile', Session::get('id'))->first();
-            return view('user/cv/experience/experience',compact('data','works'));
+            $profile = Profile::where('id_user',Session::get('id'))->first();
+            $data = Experience::where('id_profile',$profile->id)->first();
+            if($data != null){
+                return view('user/cv/experience/experience', compact('data','works'));
+            }else{
+                return redirect('user/cv/experience/create');
+            }
         }
     }
 
@@ -39,7 +45,7 @@ class UserExperience extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('authUser')->with('alert', 'You are not loged in!');
+            return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
             $works = MasterWorks::all();
@@ -58,7 +64,7 @@ class UserExperience extends Controller
         //
         $data = new Experience();
         $data->id_profile = Session::get('id');
-        $data->uid_work = $request->uid_work;
+        $data->uid_work = $request->get('uid_work');
         $data->from_experience = $request->from_experience;
         $data->date_first_experience = $request->date_first_experience;
         $data->date_last_experience = $request->date_last_experience;

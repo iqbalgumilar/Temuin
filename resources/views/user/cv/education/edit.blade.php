@@ -1,15 +1,6 @@
 @extends('user.template.base')
 @section('content')
-@if(\Session::has('alert'))
-    <div class="alert alert-danger">
-        <div>{{ Session::get('alert') }}</div>
-    </div>
-@endif
-@if(\Session::has('alert-success'))
-    <div class="alert alert-success">
-        <div>{{ Session::get('alert-success') }}</div>
-    </div>
-@endif
+
 <form action="{{ route('education.update',Session::get('id')) }}" method="post" id="form-education" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header text-center">
@@ -23,7 +14,7 @@
             </span>
         </div>
     </div>
-    <div class="card-body card-block">
+    <div class="card-body card-block" id="education">
         {{ csrf_field() }}
             {{ method_field('PUT') }}
             <div class="row form-group">

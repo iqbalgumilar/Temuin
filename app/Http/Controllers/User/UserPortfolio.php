@@ -19,11 +19,16 @@ class UserPortfolio extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('authUser')->with('alert', 'You are not loged in!');
+            return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
             $data = Portofolio::where('id_profile', Session::get('id'))->first(); 
-            return view('user/portfolio/portfolio',compact('data'));
+
+            if($data != null){
+                return view('user/portfolio/portfolio', compact('data'));
+            }else{
+                return redirect('user/portfolio/create');
+            }
         }
     }
 
@@ -36,7 +41,7 @@ class UserPortfolio extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('authUser')->with('alert', 'You are not loged in!');
+            return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
             return view('user/portfolio/create');

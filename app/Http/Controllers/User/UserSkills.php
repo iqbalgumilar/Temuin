@@ -20,12 +20,17 @@ class UserSkills extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('authUser')->with('alert', 'You are not loged in!');
+            return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
             $skills = MasterSkills::all();
             $data = Skill::where('id_profile', Session::get('id'))->first();
-            return view('user/cv/skill/skill',compact('data','skills'));
+            
+            if($data != null){
+                return view('user/cv/skill/skill', compact('data','skills'));
+            }else{
+                return redirect('user/cv/skill/create');
+            }
         }
     }
 
@@ -38,7 +43,7 @@ class UserSkills extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('authUser')->with('alert', 'You are not loged in!');
+            return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
             $skills = MasterSkills::all();

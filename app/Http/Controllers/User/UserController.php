@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('authUser')->with('alert', 'You are not loged in!');
+            return redirect('/user/auth')->with('alert', 'You are not loged in!');
         }
         else{
             $data = Users::find(Session::get('id'))->first();

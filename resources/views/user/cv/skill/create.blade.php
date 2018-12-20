@@ -13,7 +13,7 @@
             </span>
         </div>
     </div>
-    <div class="card-body card-block">
+    <div class="card-body card-block" id="skill">
         {{ csrf_field() }}       
             <div class="row form-group">
                 <div class="col col-md-3">

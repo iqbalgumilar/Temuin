@@ -58,9 +58,11 @@
                     <label for="work-input" class=" form-control-label">Pekerjaan</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    @foreach($works as $work)
+
+                @foreach($works as $work)
                     <input type="text" id="work-input" value="{{ $work->work }}" placeholder="Pekerjaan" class="form-control">
-                    @endforeach
+                @endforeach
+
                 </div>
             </div>
             <div class="row form-group">

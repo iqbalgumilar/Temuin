@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Portofolio;
+use App\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -19,11 +20,17 @@ class UserPortfolio extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('authUser')->with('alert', 'You are not loged in!');
+            return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            $data = Portofolio::where('id_profile', Session::get('id'))->first(); 
-            return view('user/portfolio/portfolio',compact('data'));
+            $profile = Profile::where('id_user',Session::get('id'))->first();
+            $data = Portofolio::where('id_profile',$profile->id)->first(); 
+
+            if($data != null){
+                return view('user/portfolio/portfolio', compact('data'));
+            }else{
+                return redirect('user/portfolio/create');
+            }
         }
     }
 
@@ -36,7 +43,7 @@ class UserPortfolio extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('authUser')->with('alert', 'You are not loged in!');
+            return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
             return view('user/portfolio/create');
@@ -52,11 +59,13 @@ class UserPortfolio extends Controller
     public function store(Request $request)
     {
         //
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+
         $data = new Portofolio();
-        $data->id_profile = Session::get('id');
-        $data->portofolio = $request->portofolio;
-        $data->image_portofolio = $request->image_portofolio;
-        $data->link_portofolio = $request->link_portofolio;
+        $data->id_profile = $profile->id;
+        $data->portofolio = $request->get('portofolio');
+        $data->image_portofolio = $request->get('image_portofolio');
+        $data->link_portofolio = $request->get('link_portofolio');
 
         if($data->save()){
             return redirect('/user/portfolio')->with('alert-success', 'Berhasil menambahkan data!');
@@ -86,7 +95,8 @@ class UserPortfolio extends Controller
     public function edit($id)
     {
         //
-        $data = Portofolio::where('id_profile', Session::get('id'))->first();
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+        $data = Portofolio::where('id_profile',$profile->id)->first();
         return view('user/portfolio/edit', compact('data'));
     }
 
@@ -100,12 +110,13 @@ class UserPortfolio extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data = Portofolio::where('id_profile', $id)->first();
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+        $data = Portofolio::where('id_profile',$profile->id)->first();
 
-        $data->id_profile = Session::get('id');
-        $data->portofolio = $request->portofolio;
-        $data->image_portofolio = $request->image_portofolio;
-        $data->link_portofolio = $request->link_portofolio;
+        $data->id_profile = $profile->id;
+        $data->portofolio = $request->get('portofolio');
+        $data->image_portofolio = $request->get('image_portofolio');
+        $data->link_portofolio = $request->get('link_portofolio');
 
         if($data->save()){
             return redirect('/user/portfolio')->with('alert-success', 'Berhasil ubah data!');

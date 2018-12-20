@@ -17,14 +17,6 @@
 <div class="card">
     <div class="card-header text-center">
         <strong>AWARDS</strong>
-        <div class="float-right">
-            <span class="" style="cursor: pointer" id="tambahAwards">
-                <i class="fa fa-plus-circle text-success"></i>
-            </span>
-            <span class="" style="cursor: pointer" id="hapusAwards">
-                <i class="fa fa-minus-circle text-danger"></i>
-            </span>
-        </div>
     </div>
     <div class="card-body card-block">
    

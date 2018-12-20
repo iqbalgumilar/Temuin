@@ -5,15 +5,15 @@
     <div class="card-header text-center">
         <strong>PORTFOLIO</strong>
         <div class="float-right">
-            <span class="" style="cursor: pointer" id="tambahEducation">
+            <span class="" style="cursor: pointer" id="tambahPortfolio">
                 <i class="fa fa-plus-circle text-success"></i>
             </span>
-            <span class="" style="cursor: pointer" id="hapusEducation">
+            <span class="" style="cursor: pointer" id="hapusPortfolio">
                 <i class="fa fa-minus-circle text-danger"></i>
             </span>
         </div>
     </div>
-    <div class="card-body card-block">
+    <div class="card-body card-block" id="portfolio">
         {{ csrf_field() }}
             <div class="row form-group">
                 <div class="col col-md-3">

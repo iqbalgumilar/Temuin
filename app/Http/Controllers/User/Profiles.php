@@ -20,12 +20,16 @@ class Profiles extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('authUser')->with('alert', 'You are not loged in!');
+            return redirect('/user/auth')->with('alert', 'You are not loged in!');
         }
         else{
             $works = MasterWorks::all();
             $data = Profile::where('id_user', Session::get('id'))->first();
-            return view('user/profile/profile', compact('data','works'));
+            if($data != null){
+                return view('user/profile/profile', compact('data','works'));
+            }else{
+                return redirect('user/profile/create');
+            }
         }
     }
 
@@ -38,7 +42,7 @@ class Profiles extends Controller
     {
         //
         if(!session::get('login')){
-            return redirect('authUser')->with('alert', 'You are not loged in!');
+            return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
             $works = MasterWorks::all();

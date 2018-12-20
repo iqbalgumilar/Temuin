@@ -1,31 +1,20 @@
 @extends('user.template.base')
 @section('content')
 
-@if(\Session::has('alert'))
-    <div class="alert alert-danger">
-        <div>{{ Session::get('alert') }}</div>
-    </div>
-@endif
-@if(\Session::has('alert-success'))
-    <div class="alert alert-success">
-        <div>{{ Session::get('alert-success') }}</div>
-    </div>
-@endif
-
 <form action="{{ route('portfolio.update', Session::get('id')) }}" method="post" id="form-portfolio" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header text-center">
         <strong>PORTFOLIO</strong>
         <div class="float-right">
-            <span class="" style="cursor: pointer" id="tambahEducation">
+            <span class="" style="cursor: pointer" id="tambahPortfolio">
                 <i class="fa fa-plus-circle text-success"></i>
             </span>
-            <span class="" style="cursor: pointer" id="hapusEducation">
+            <span class="" style="cursor: pointer" id="hapusPortfolio">
                 <i class="fa fa-minus-circle text-danger"></i>
             </span>
         </div>
     </div>
-    <div class="card-body card-block">
+    <div class="card-body card-block" id="portfolio">
         {{ csrf_field() }}
         {{ method_field('PUT') }}
             <div class="row form-group">

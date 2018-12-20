@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-md-6">Master</div>
                         <div class="col-md-6 text-right">
-                            <a href={{ route('works.create') }} class="btn btn-primary btn-sm">
+                            <a href={{ route('Produk.create') }} class="btn btn-primary btn-sm">
                                 <i class="fa fa-plus"></i> Tambah
                             </a>
                         </div>
@@ -30,14 +30,17 @@
                         </div>
                     @endif
                     <div class="card-title">
-                        <h3 class="text-center title-2">Works</h3>
+                        <h3 class="text-center title-2">Produk</h3>
                     </div>
                     <hr>
                     <table id="table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Work</th>
+                                <th>Produk</th>
+                                <th>Jenis Produk</th>
+                                <th>File Produk</th>
+                                <th>Harga Produk</th>
                                 <th>Status</th>
                                 <th>#</th>
                             </tr>
@@ -48,7 +51,10 @@
                         <tfoot>
                             <tr>
                                 <th>No.</th>
-                                <th>Work</th>
+                                <th>Produk</th>
+                                <th>Jenis Produk</th>
+                                <th>File Produk</th>
+                                <th>Harga Produk</th>
                                 <th>Status</th>
                                 <th>#</th>
                             </tr>
@@ -65,16 +71,20 @@
     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript">
     $(function() {
+        var number = 1;
         var oTable = $('#table').DataTable({
             pageLength: 10,
             processing: true,
             serverSide: true,
             ajax: {
-                url: '{{ url("/admin/works/data") }}'
+                url: '{{ url("/admin/Produk/data") }}'
             },
             columns: [
             {data: 'rownum', name: 'id'},
-            {data: 'work', name: 'work'},
+            {data: 'produk', name: 'produk'},
+            {data: 'jenis_produk', name: 'jenis_produk'},
+            {data: 'file_produk', name: 'file_produk'},
+            {data: 'harga_produk', name: 'harga_produk'},
             {data: 'stat', name: 'status'},
             {data: 'action', name: 'action', orderable: false},
         ],

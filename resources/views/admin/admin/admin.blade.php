@@ -74,10 +74,10 @@
                 url: '{{ url("/admin/admin/data") }}'
             },
             columns: [
-            {data: 'id', name: 'id'},
+            {data: 'rownum', name: 'id'},
             {data: 'name', name: 'name'},
             {data: 'username', name: 'username'},
-            {data: 'level', name: 'level'},
+            {data: 'lvl', name: 'level'},
             {data: 'action', name: 'action', orderable: false},
         ],
         });

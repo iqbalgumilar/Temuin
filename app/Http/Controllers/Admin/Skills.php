@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\MasterSkills;
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -29,11 +30,14 @@ class Skills extends Controller
         }
     }
 
-    public function data()
+    public function data(Request $request)
     {
-        $skills = MasterSkills::select(['id', 'skill', 'status', 'created_at', 'updated_at']);
-        $no = 1;
-        return Datatables::of(MasterSkills::query())
+        DB::statement(DB::raw('set @rownum=0'));
+        $skills = MasterSkills::select([DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'id', 'skill', 'status', 'created_at', 'updated_at']);
+        if ($keyword = $request->get('search')['value']) {
+            $datatables->filterColumn('rownum', 'whereRaw', '@rownum  + 1 like ?', ["%{$keyword}%"]);
+        }
+        return Datatables::of($skills)
         ->addColumn('action', function ($skills) {
             return '
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
@@ -53,7 +57,14 @@ class Skills extends Controller
                 </div>
             ';
         })
-        ->addColumn('nomor', $no++)
+        ->addColumn('stat', function($skills){
+            if($skills->status=="1"){
+                return "True";
+            }
+            else{
+                return "False";
+            }
+        })
         ->make(true);
     }
 

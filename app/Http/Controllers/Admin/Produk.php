@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\MasterJenisProduk;
+use App\MasterProduk;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Yajra\Datatables\Datatables;
 
-class JenisProduk extends Controller
+class Produk extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,21 +25,22 @@ class JenisProduk extends Controller
         }
         else{
             $data = array(
-                'title' => "Jenis Produk | Temuin"
+                'title' => "Produk | Temuin"
             );
-            return view('admin/jenis_produk/jenis_produk')->with($data);
+            return view('admin/produk/produk')->with($data);
         }
     }
 
     public function data(Request $request)
     {
         DB::statement(DB::raw('set @rownum=0'));
-        $jenis_produk = MasterJenisProduk::select([DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'id', 'jenis_produk', 'status', 'created_at', 'updated_at']);
+        $produk = MasterProduk::join('master_jenis_produks', 'master_produks.id_jenis_produk', '=', 'master_jenis_produks.id')
+                    ->select([DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'master_produks.id', 'master_produks.id_jenis_produk', 'master_jenis_produks.jenis_produk', 'master_produks.produk', 'master_produks.file_produk', 'master_produks.status', 'master_produks.harga_produk', 'master_produks.created_at', 'master_produks.updated_at']);
         if ($keyword = $request->get('search')['value']) {
             $datatables->filterColumn('rownum', 'whereRaw', '@rownum  + 1 like ?', ["%{$keyword}%"]);
         }
-        return Datatables::of($jenis_produk)
-        ->addColumn('action', function ($jenis_produk) {
+        return Datatables::of($produk)
+        ->addColumn('action', function ($produk) {
             return '
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                     <button type="button" class="btn btn-secondary">Aksi</button>
@@ -46,8 +48,8 @@ class JenisProduk extends Controller
                     <div class="btn-group" role="group">
                     <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="'.url("admin/JenisProduk/").'/'.$jenis_produk->id.'/edit">Edit</a>
-                        <form action="'.route("JenisProduk.destroy", $jenis_produk->id).'" method="post">
+                        <a class="dropdown-item" href="'.url("admin/Produk/").'/'.$produk->id.'/edit">Edit</a>
+                        <form action="'.route("Produk.destroy", $produk->id).'" method="post">
                         '.csrf_field().'
                         '.method_field("DELETE").'
                         <button class="dropdown-item" type="submit" onclick="return confirm(\'Yakin ingin menghapus data?\')">Hapus</button>
@@ -57,8 +59,8 @@ class JenisProduk extends Controller
                 </div>
             ';
         })
-        ->addColumn('stat', function($jenis_produk){
-            if($jenis_produk->status=="1"){
+        ->addColumn('stat', function($produk){
+            if($produk->status=="1"){
                 return "True";
             }
             else{
@@ -81,9 +83,10 @@ class JenisProduk extends Controller
         }
         else{
             $data = array(
-                'title' => "Tambah Jenis Produk | Temuin"
+                'title' => "Tambah Produk | Temuin",
+                'jenis_produk' => MasterJenisProduk::all(),
             );
-            return view('admin/jenis_produk/create')->with($data);
+            return view('admin/produk/create')->with($data);
         }
     }
 
@@ -96,17 +99,20 @@ class JenisProduk extends Controller
     public function store(Request $request)
     {
         //
-        $data =  new MasterJenisProduk();
-        $data->jenis_produk = $request->get('jenis_produk');
+        $data =  new MasterProduk();
+        $data->id_jenis_produk = $request->get('id_jenis_produk');
+        $data->produk = $request->get('produk');
+        $data->file_produk = $request->get('file_produk');
         $data->status = $request->get('status');
+        $data->harga_produk = $request->get('harga_produk');
         $data->created_by = Session::get('id');
         $data->updated_by = Session::get('id');
 
         if($data->save()){
-            return redirect('/admin/JenisProduk')->with('alert-success', 'Berhasil menambahkan data!');
+            return redirect('/admin/Produk')->with('alert-success', 'Berhasil menambahkan data!');
         }
         else{
-            return redirect('/admin/JenisProduk')->with('alert', 'Gagal menambahkan data!');
+            return redirect('/admin/Produk')->with('alert', 'Gagal menambahkan data!');
         }
     }
 
@@ -131,10 +137,11 @@ class JenisProduk extends Controller
     {
         //
         $data = array(
-            'title' => "Edit Jenis Produk | Temuin",
-            'jenis_produk' => MasterJenisProduk::find($id),
+            'title' => "Edit Produk | Temuin",
+            'produk' => MasterProduk::find($id),
+            'jenis_produk' => MasterJenisProduk::all(),
         );
-        return view('admin/jenis_produk/edit')->with($data);
+        return view('admin/produk/edit')->with($data);
     }
 
     /**
@@ -147,16 +154,19 @@ class JenisProduk extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data =  MasterJenisProduk::where('id',$id)->first();
-        $data->jenis_produk = $request->get('jenis_produk');
+        $data =  MasterProduk::where('id',$id)->first();
+        $data->id_jenis_produk = $request->get('id_jenis_produk');
+        $data->produk = $request->get('produk');
+        $data->file_produk = $request->get('file_produk');
         $data->status = $request->get('status');
+        $data->harga_produk = $request->get('harga_produk');
         $data->updated_by = Session::get('id');
 
         if($data->save()){
-            return redirect('/admin/JenisProduk')->with('alert-success', 'Berhasil ubah data!');
+            return redirect('/admin/Produk')->with('alert-success', 'Berhasil ubah data!');
         }
         else{
-            return redirect('/admin/JenisProduk')->with('alert', 'Gagal ubah data!');
+            return redirect('/admin/Produk')->with('alert', 'Gagal ubah data!');
         }
     }
 
@@ -169,13 +179,13 @@ class JenisProduk extends Controller
     public function destroy($id)
     {
         //
-        $data =  MasterJenisProduk::where('id',$id)->first();
+        $data =  MasterProduk::where('id',$id)->first();
 
         if($data->delete()){
-            return redirect('/admin/JenisProduk')->with('alert-success', 'Berhasil hapus data!');
+            return redirect('/admin/Produk')->with('alert-success', 'Berhasil hapus data!');
         }
         else{
-            return redirect('/admin/JenisProduk')->with('alert', 'Gagal hapus data!');
+            return redirect('/admin/Produk')->with('alert', 'Gagal hapus data!');
         }
     }
 }

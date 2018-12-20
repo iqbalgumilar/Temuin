@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Admin;
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -30,11 +31,14 @@ class AdminController extends Controller
         }
     }
 
-    public function data()
+    public function data(Request $request)
     {
-        $admin = Admin::select(['id', 'name', 'username', 'password', 'level', 'created_at', 'updated_at']);
-        $no = 1;
-        return Datatables::of(Admin::query())
+        DB::statement(DB::raw('set @rownum=0'));
+        $admin = Admin::select([DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'id', 'name', 'username', 'password', 'level', 'created_at', 'updated_at']);
+        if ($keyword = $request->get('search')['value']) {
+            $datatables->filterColumn('rownum', 'whereRaw', '@rownum  + 1 like ?', ["%{$keyword}%"]);
+        }
+        return Datatables::of($admin)
         ->addColumn('action', function ($admin) {
             return '
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
@@ -54,7 +58,14 @@ class AdminController extends Controller
                 </div>
             ';
         })
-        ->addColumn('nomor', $no++)
+        ->addColumn('lvl', function($admin){
+            if($admin->level=="0"){
+                return "Superadmin";
+            }
+            else{
+                return "Admin";
+            }
+        })
         ->make(true);
     }
 

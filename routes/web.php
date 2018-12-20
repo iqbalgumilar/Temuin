@@ -30,7 +30,9 @@ Route::get('/contact', function () {
 
 
 /* Personal Blog */
-
+Route::get('/preview/pb/default', function () {
+    return view('1-pb.1-default.preview');
+})->name('pb.default');
 
 /* Curriculum Vitae */
 

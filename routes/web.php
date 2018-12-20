@@ -13,8 +13,20 @@
 
 /* Company */
 Route::get('/', function () {
-    return view('company.index');
-})->name('index');
+    return view('company.contents.main');
+})->name('main');
+Route::get('/about', function () {
+    return view('company.contents.about');
+})->name('about');
+Route::get('/features', function () {
+    return view('company.contents.features');
+})->name('features');
+Route::get('/team', function () {
+    return view('company.contents.team');
+})->name('team');
+Route::get('/contact', function () {
+    return view('company.contents.contact');
+})->name('contact');
 
 
 /* Personal Blog */

@@ -17,14 +17,6 @@
 <div class="card">
     <div class="card-header text-center">
         <strong>PORTFOLIO</strong>
-        <div class="float-right">
-            <span class="" style="cursor: pointer" id="tambahEducation">
-                <i class="fa fa-plus-circle text-success"></i>
-            </span>
-            <span class="" style="cursor: pointer" id="hapusEducation">
-                <i class="fa fa-minus-circle text-danger"></i>
-            </span>
-        </div>
     </div>
     <div class="card-body card-block">
         

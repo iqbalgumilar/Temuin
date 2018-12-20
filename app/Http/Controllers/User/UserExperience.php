@@ -100,7 +100,8 @@ class UserExperience extends Controller
     {
         //
         $works = MasterWorks::all();
-        $data = Experience::where('id_profile', Session::get('id'))->first();
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+        $data = Experience::where('id_profile', $profile->id)->first();
         return view('user/cv/experience/edit', compact('data','works'));
     }
 
@@ -114,13 +115,15 @@ class UserExperience extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data = Experience::where('id_profile', $id)->first();
+        $works = MasterWorks::all();
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+        $data = Experience::where('id_profile', $profile->id)->first();
 
-        $data->id_profile = Session::get('id');
-        $data->uid_work = $request->uid_work;
-        $data->from_experience = $request->from_experience;
-        $data->date_first_experience = $request->date_first_experience;
-        $data->date_last_experience = $request->date_last_experience;
+        $data->id_profile = $profile->id;
+        $data->uid_work = $request->get('uid_work');
+        $data->from_experience = $request->get('from_experience');
+        $data->date_first_experience = $request->get('date_first_experience');
+        $data->date_last_experience = $request->get('date_last_experience');
 
         if($data->save()){
             return redirect('/user/cv/experience')->with('alert-success', 'Berhasil ubah data!');

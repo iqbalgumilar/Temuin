@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Education;
+use App\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -22,7 +23,8 @@ class UserEducation extends Controller
             return redirect('/user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            $data = Education::where('id_profile',Session::get('id'))->first();
+            $profile = Profile::where('id_user',Session::get('id'))->first();
+            $data = Education::where('id_profile',$profile->id)->first();
             
             if($data != null){
                 return view('user/cv/education/education', compact('data'));
@@ -58,9 +60,12 @@ class UserEducation extends Controller
     {
         //
         $data = new Education();
-        $data->id_profile = Session::get('id');
-        $data->education = $request->education;
-        $data->from_education = $request->from_education;
+
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+
+        $data->id_profile = $profile->id;
+        $data->education = $request->get('education');
+        $data->from_education = $request->get('from_education');
 
         if($data->save()){
             return redirect('/user/cv/education')->with('alert-success', 'Berhasil menambahkan data!');
@@ -90,7 +95,8 @@ class UserEducation extends Controller
     public function edit($id)
     {
         //
-         $data = Education::find($id);
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+        $data = Education::where('id_profile', $profile->id)->first();
         return view('user/cv/education/edit', compact('data'));
     }
 
@@ -104,10 +110,12 @@ class UserEducation extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data = Education::where('id', $id)->first();
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+        $data = Education::where('id_profile', $profile->id)->first();
 
-        $data->education = $request->education;
-        $data->from_education = $request->from_education;
+        $data->id_profile = $profile->id;
+        $data->education = $request->get('education');
+        $data->from_education = $request->get('from_education');
 
         if($data->save()){
             return redirect('/user/cv/education')->with('alert-success', 'Berhasil ubah data!');
@@ -126,7 +134,9 @@ class UserEducation extends Controller
     public function destroy($id)
     {
         //
-        $data = Education::where('id', $id)->first();
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+        $data = Education::where('id_profile', $profile->id)->first();
+
         if($data->delete()){
             return redirect('/user/cv/education')->with('alert-success', 'Berhasil hapus data!');
         }

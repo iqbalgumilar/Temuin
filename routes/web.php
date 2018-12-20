@@ -31,12 +31,14 @@ Route::get('/contact', function () {
 
 /* Personal Blog */
 
+
 /* Curriculum Vitae */
 
-/* Kartu */
+
+/* Kartu Nama */
+
 
 /* ADMIN */
-
 Route::get('/admin/auth', 'Admin\Auth@auth');
 Route::post('/admin/login', 'Admin\Auth@login');
 Route::get('/admin/logout', 'Admin\Auth@logout');

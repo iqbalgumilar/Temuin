@@ -24,11 +24,12 @@ class UserSkills extends Controller
             return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            $skills = MasterSkills::all();
+            //$skills = MasterSkills::all();
             $profile = Profile::where('id_user',Session::get('id'))->first();
             $data = Skill::where('id_profile',$profile->id)->first();
             
             if($data != null){
+                $skills = MasterSkills::where('id', $data->uid_skill)->first();
                 return view('user/cv/skill/skill', compact('data','skills'));
             }else{
                 return redirect('user/cv/skill/create');
@@ -119,7 +120,7 @@ class UserSkills extends Controller
 
         $data->id_profile = $profile->id;
         $data->uid_skill = $request->get('uid_skill');
-        $data->persentase_skill = $request->get('persentase_skills');
+        $data->persentase_skill = $request->get('persentase_skill');
 
         if($data->save()){
             return redirect('/user/cv/skill')->with('alert-success', 'Berhasil ubah data!');
@@ -138,5 +139,16 @@ class UserSkills extends Controller
     public function destroy($id)
     {
         //
+        $skills = MasterSkills::all();
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+        $data = Skill::where('id_profile', $profile->id)->first();
+
+        if($data != null){
+            $data->delete();
+            return redirect('/user/cv/skill')->with('alert-success', 'Berhasil hapus data!');
+        }
+        else{
+            return redirect('/user/cv/skill')->with('alert', 'Gagal hapus data!');
+        }
     }
 }

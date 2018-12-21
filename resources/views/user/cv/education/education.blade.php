@@ -42,6 +42,7 @@
     <div class="card-footer">
         <a class="btn btn-info btn-sm" href="{{ route('education.edit',Session::get('id')) }}">Edit</a>
         <a class="btn btn-success btn-sm" href="{{ url('/user/cv/skill') }}">Next</a>
+        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
     </div>
 </div>
 </form>

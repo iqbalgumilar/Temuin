@@ -25,9 +25,7 @@
                     <label for="skills-input" class=" form-control-label">Skills</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    @foreach($skills as $skill)
-                    <input type="text" id="skills-input" value="{{ $skill->skill }}" placeholder="Skills" class="form-control">
-                    @endforeach
+                    <input type="text" id="skills-input" value="{{ $skills->skill }}" placeholder="Skills" class="form-control">
                 </div>
             </div>
             <div class="row form-group">
@@ -43,6 +41,7 @@
     <div class="card-footer">
         <a class="btn btn-info btn-sm" href="{{ route('skill.edit', Session::get('id')) }}">Edit</a>
         <a class="btn btn-success btn-sm" href="{{ url('/user/portfolio') }}">Next</a>
+        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
     </div>
 </div>
 </form>

@@ -56,9 +56,7 @@
     </div>
     <div class="card-footer">
         <a class="btn btn-info btn-sm" href="{{ route('awards.edit',Session::get('id')) }}">Edit</a>
-        <button type="reset" class="btn btn-danger btn-sm">
-            <i class="fa fa-ban"></i> Reset
-        </button>
+        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
     </div>
 </div>
 </form>

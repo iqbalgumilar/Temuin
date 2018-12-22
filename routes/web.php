@@ -30,7 +30,9 @@ Route::get('/contact', function () {
 
 
 /* Personal Blog */
-
+Route::get('/preview/pb/default', function () {
+    return view('1-pb.1-default.preview');
+})->name('pb.default');
 
 /* Curriculum Vitae */
 
@@ -53,6 +55,9 @@ Route::resource('admin/works', 'Admin\Works');
 
 Route::get('/admin/services/data', 'Admin\Services@data');
 Route::resource('admin/services', 'Admin\Services');
+
+Route::get('/admin/Produk/data', 'Admin\Produk@data');
+Route::resource('admin/Produk', 'Admin\Produk');
 
 Route::get('/admin/JenisProduk/data', 'Admin\JenisProduk@data');
 Route::resource('admin/JenisProduk', 'Admin\JenisProduk');

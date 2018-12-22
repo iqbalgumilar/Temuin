@@ -25,10 +25,12 @@ class UserExperience extends Controller
             return redirect('/user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            $works = Masterworks::all();
+            //$works = Masterworks::all();
             $profile = Profile::where('id_user',Session::get('id'))->first();
             $data = Experience::where('id_profile',$profile->id)->first();
+
             if($data != null){
+                $works = MasterWorks::where('id', $data->uid_work)->first();
                 return view('user/cv/experience/experience', compact('data','works'));
             }else{
                 return redirect('user/cv/experience/create');
@@ -142,5 +144,16 @@ class UserExperience extends Controller
     public function destroy($id)
     {
         //
+        $works = MasterWorks::all();
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+        $data = Experience::where('id_profile', $profile->id)->first();
+
+        if($data != null){
+            $data->delete();
+            return redirect('/user/cv/experience')->with('alert-success', 'Berhasil hapus data!');
+        }
+        else{
+            return redirect('/user/cv/experience')->with('alert', 'Gagal hapus data!');
+        }
     }
 }

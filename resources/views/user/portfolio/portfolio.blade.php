@@ -49,6 +49,7 @@
     <div class="card-footer">
         <a class="btn btn-info btn-sm" href="{{ route('portfolio.edit', Session::get('id')) }}">Edit</a>
         <a class="btn btn-success btn-sm" href="{{ url('/user/cv/awards') }}">Next</a>
+        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
     </div>
 </div>
 </form>

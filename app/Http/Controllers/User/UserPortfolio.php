@@ -135,5 +135,15 @@ class UserPortfolio extends Controller
     public function destroy($id)
     {
         //
+        $profile = Profile::where('id_user',Session::get('id'))->first();
+        $data = Portofolio::where('id_profile', $profile->id)->first();
+
+        if($data != null){
+            $data->delete();
+            return redirect('/user/portfolio')->with('alert-success', 'Berhasil hapus data!');
+        }
+        else{
+            return redirect('/user/portfolio')->with('alert', 'Gagal hapus data!');
+        }
     }
 }

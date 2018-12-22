@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\MasterJenisProduk;
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -29,11 +30,14 @@ class JenisProduk extends Controller
         }
     }
 
-    public function data()
+    public function data(Request $request)
     {
-        $jenis_produk = MasterJenisProduk::select(['id', 'jenis_produk', 'status', 'created_at', 'updated_at']);
-        $no = 1;
-        return Datatables::of(MasterJenisProduk::query())
+        DB::statement(DB::raw('set @rownum=0'));
+        $jenis_produk = MasterJenisProduk::select([DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'id', 'jenis_produk', 'status', 'created_at', 'updated_at']);
+        if ($keyword = $request->get('search')['value']) {
+            $datatables->filterColumn('rownum', 'whereRaw', '@rownum  + 1 like ?', ["%{$keyword}%"]);
+        }
+        return Datatables::of($jenis_produk)
         ->addColumn('action', function ($jenis_produk) {
             return '
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
@@ -53,7 +57,14 @@ class JenisProduk extends Controller
                 </div>
             ';
         })
-        ->addColumn('nomor', $no++)
+        ->addColumn('stat', function($jenis_produk){
+            if($jenis_produk->status=="1"){
+                return "True";
+            }
+            else{
+                return "False";
+            }
+        })
         ->make(true);
     }
 

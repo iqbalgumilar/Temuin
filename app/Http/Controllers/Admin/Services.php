@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\MasterServices;
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -29,11 +30,14 @@ class Services extends Controller
         }
     }
 
-    public function data()
+    public function data(Request $request)
     {
-        $services = MasterServices::select(['id', 'service', 'status', 'created_at', 'updated_at']);
-        $no = 1;
-        return Datatables::of(MasterServices::query())
+        DB::statement(DB::raw('set @rownum=0'));
+        $services = MasterServices::select([DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'id', 'service', 'status', 'created_at', 'updated_at']);
+        if ($keyword = $request->get('search')['value']) {
+            $datatables->filterColumn('rownum', 'whereRaw', '@rownum  + 1 like ?', ["%{$keyword}%"]);
+        }
+        return Datatables::of($services)
         ->addColumn('action', function ($services) {
             return '
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
@@ -53,7 +57,14 @@ class Services extends Controller
                 </div>
             ';
         })
-        ->addColumn('nomor', $no++)
+        ->addColumn('stat', function($services){
+            if($services->status=="1"){
+                return "True";
+            }
+            else{
+                return "False";
+            }
+        })
         ->make(true);
     }
 

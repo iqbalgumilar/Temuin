@@ -108,7 +108,8 @@ class UserController extends Controller
     {
         //
         $data = Users::where('id', $id)->first();
-        if($data->delete()){
+        if($data != null){
+            $data->delete();
             return redirect('/user/user')->with('alert-success', 'Berhasil hapus data!');
         }
         else{

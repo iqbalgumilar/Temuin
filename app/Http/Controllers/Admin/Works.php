@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\MasterWorks;
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -29,11 +30,14 @@ class Works extends Controller
         }
     }
 
-    public function data()
+    public function data(Request $request)
     {
-        $works = MasterWorks::select(['id', 'work', 'status', 'created_at', 'updated_at']);
-        $no = 1;
-        return Datatables::of(MasterWorks::query())
+        DB::statement(DB::raw('set @rownum=0'));
+        $works = MasterWorks::select([DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'id', 'work', 'status', 'created_at', 'updated_at']);
+        if ($keyword = $request->get('search')['value']) {
+            $datatables->filterColumn('rownum', 'whereRaw', '@rownum  + 1 like ?', ["%{$keyword}%"]);
+        }
+        return Datatables::of($works)
         ->addColumn('action', function ($works) {
             return '
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
@@ -53,7 +57,14 @@ class Works extends Controller
                 </div>
             ';
         })
-        ->addColumn('nomor', $no++)
+        ->addColumn('stat', function($works){
+            if($works->status=="1"){
+                return "True";
+            }
+            else{
+                return "False";
+            }
+        })
         ->make(true);
     }
 

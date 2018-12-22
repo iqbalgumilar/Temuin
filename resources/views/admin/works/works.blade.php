@@ -39,8 +39,6 @@
                                 <th>No.</th>
                                 <th>Work</th>
                                 <th>Status</th>
-                                <th>Created By</th>
-                                <th>Updated By</th>
                                 <th>#</th>
                             </tr>
                         </thead>
@@ -52,8 +50,6 @@
                                 <th>No.</th>
                                 <th>Work</th>
                                 <th>Status</th>
-                                <th>Created By</th>
-                                <th>Updated By</th>
                                 <th>#</th>
                             </tr>
                         </tfoot>
@@ -77,11 +73,9 @@
                 url: '{{ url("/admin/works/data") }}'
             },
             columns: [
-            {data: 'id', name: 'id'},
+            {data: 'rownum', name: 'id'},
             {data: 'work', name: 'work'},
-            {data: 'status', name: 'status'},
-            {data: 'created_by', name: 'created_by', orderable: false},
-            {data: 'updated_by', name: 'updated_by', orderable: false},
+            {data: 'stat', name: 'status'},
             {data: 'action', name: 'action', orderable: false},
         ],
         });

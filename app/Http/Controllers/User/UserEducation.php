@@ -137,7 +137,8 @@ class UserEducation extends Controller
         $profile = Profile::where('id_user',Session::get('id'))->first();
         $data = Education::where('id_profile', $profile->id)->first();
 
-        if($data->delete()){
+        if($data != null){
+            $data->delete();
             return redirect('/user/cv/education')->with('alert-success', 'Berhasil hapus data!');
         }
         else{

@@ -23,9 +23,11 @@ class Profiles extends Controller
             return redirect('/user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            $works = MasterWorks::all();
+            //$works = MasterWorks::all();
             $data = Profile::where('id_user', Session::get('id'))->first();
+            
             if($data != null){
+                $works = MasterWorks::where('id', $data->uid_work)->first();
                 return view('user/profile/profile', compact('data','works'));
             }else{
                 return redirect('user/profile/create');
@@ -45,7 +47,7 @@ class Profiles extends Controller
             return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            $works = MasterWorks::all();
+            $works = MasterWorks::all();      
             return view('user/profile/create',compact('works'));
         }
     }
@@ -59,6 +61,7 @@ class Profiles extends Controller
     public function store(Request $request)
     {
         //
+        
         $data = new Profile();
         $data->id_user = Session::get('id');
         $data->nama_profile = $request->name;
@@ -137,8 +140,9 @@ class Profiles extends Controller
     public function destroy($id)
     {
         //
-        $data = Profile::where('id', $id)->first();
-        if($data->delete()){
+        $data = Profile::where('id_user', $id)->first();
+        if($data != null){
+            $data->delete();
             return redirect('/user/profile')->with('alert-success', 'Berhasil hapus data!');
         }
         else{

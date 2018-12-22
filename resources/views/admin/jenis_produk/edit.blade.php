@@ -6,7 +6,7 @@
                 <div class="card-header">Master</div>
                 <div class="card-body">
                     <div class="card-title">
-                        <h3 class="text-center title-2">Edit Skill</h3>
+                        <h3 class="text-center title-2">Edit Jenis Produk</h3>
                     </div>
                     <hr>
                     <form action="{{ route('JenisProduk.update', $jenis_produk->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">

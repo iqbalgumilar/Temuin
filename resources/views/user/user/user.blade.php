@@ -46,9 +46,6 @@
     </div>
     <div class="card-footer">
         <a class="btn btn-info btn-sm" href="{{ route('user.edit',Session::get('id')) }}">Edit</a>
-        <button type="submit" class="btn btn-danger btn-sm">
-            <i class="fa fa-ban"></i> Reset
-        </button>
     </div>
 </div>
 </form>

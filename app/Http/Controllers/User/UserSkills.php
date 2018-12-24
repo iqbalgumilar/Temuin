@@ -24,13 +24,16 @@ class UserSkills extends Controller
             return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
+            $datas = array(
+                'title' => 'User - Skills | Temuin'
+            );
             //$skills = MasterSkills::all();
             $profile = Profile::where('id_user',Session::get('id'))->first();
             $data = Skill::where('id_profile',$profile->id)->first();
             
             if($data != null){
                 $skills = MasterSkills::where('id', $data->uid_skill)->first();
-                return view('user/cv/skill/skill', compact('data','skills'));
+                return view('user/cv/skill/skill', compact('data','skills'))->with($datas);
             }else{
                 return redirect('user/cv/skill/create');
             }
@@ -49,8 +52,11 @@ class UserSkills extends Controller
             return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
+            $datas = array(
+                'title' => 'User - Skills Create | Temuin'
+            );
             $skills = MasterSkills::all();
-            return view('user/cv/skill/create',compact('skills'));
+            return view('user/cv/skill/create',compact('skills'))->with($datas);
         }
     }
 
@@ -98,10 +104,13 @@ class UserSkills extends Controller
     public function edit($id)
     {
         //
+        $datas = array(
+                'title' => 'User - Skills Edit | Temuin'
+            );
         $skills = MasterSkills::all();
         $profile = Profile::where('id_user',Session::get('id'))->first();
         $data = Skill::where('id_profile', $profile->id)->first();
-        return view('user/cv/skill/edit', compact('data','skills'));
+        return view('user/cv/skill/edit', compact('data','skills'))->with($datas);
     }
 
     /**

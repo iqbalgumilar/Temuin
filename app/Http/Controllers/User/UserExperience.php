@@ -25,13 +25,16 @@ class UserExperience extends Controller
             return redirect('/user/auth')->with('alert', 'You are not loged in!');
         }
         else{
+            $datas = array(
+                'title' => 'User - Experience | Temuin'
+            );
             //$works = Masterworks::all();
             $profile = Profile::where('id_user',Session::get('id'))->first();
             $data = Experience::where('id_profile',$profile->id)->first();
 
             if($data != null){
                 $works = MasterWorks::where('id', $data->uid_work)->first();
-                return view('user/cv/experience/experience', compact('data','works'));
+                return view('user/cv/experience/experience', compact('data','works'))->with($datas);
             }else{
                 return redirect('user/cv/experience/create');
             }
@@ -50,8 +53,11 @@ class UserExperience extends Controller
             return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
+            $datas = array(
+                'title' => 'User - Experience Create | Temuin'
+            );
             $works = MasterWorks::all();
-            return view('user/cv/experience/create',compact('works'));
+            return view('user/cv/experience/create',compact('works'))->with($datas);
         }
     }
 
@@ -101,10 +107,13 @@ class UserExperience extends Controller
     public function edit($id)
     {
         //
+        $datas = array(
+                'title' => 'User - Experience Edit | Temuin'
+            );
         $works = MasterWorks::all();
         $profile = Profile::where('id_user',Session::get('id'))->first();
         $data = Experience::where('id_profile', $profile->id)->first();
-        return view('user/cv/experience/edit', compact('data','works'));
+        return view('user/cv/experience/edit', compact('data','works'))->with($datas);
     }
 
     /**

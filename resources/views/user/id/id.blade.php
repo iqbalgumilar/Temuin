@@ -39,9 +39,9 @@
                     <label for="work-input" class=" form-control-label">Pekerjaan</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    @foreach($works as $work)
-                    <input type="text" id="work-input" value="{{ $work->work }}" placeholder="Pekerjaan" class="form-control">
-                    @endforeach
+         
+                    <input type="text" id="work-input" value="{{ $works->work }}" placeholder="Pekerjaan" class="form-control">
+            
                 </div>
             </div>
             <div class="row form-group">
@@ -55,12 +55,10 @@
         </form>
     </div>
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary btn-sm">
-            <i class="fa fa-dot-circle-o"></i> Submit
+        <button type="submit" class="btn btn-success btn-sm float-right">
+            <i class="fa fa-dot-circle-o"></i> Generate
         </button>
-        <button type="reset" class="btn btn-danger btn-sm">
-            <i class="fa fa-ban"></i> Reset
-        </button>
+        <a class="btn btn-info btn-sm" href="{{ route('profile.edit',Session::get('id')) }}">Edit</a>
     </div>
 </div>
 

@@ -23,11 +23,14 @@ class UserPortfolio extends Controller
             return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
+            $datas = array(
+                'title' => 'User - Portofolio | Temuin'
+            );
             $profile = Profile::where('id_user',Session::get('id'))->first();
             $data = Portofolio::where('id_profile',$profile->id)->first(); 
 
             if($data != null){
-                return view('user/portfolio/portfolio', compact('data'));
+                return view('user/portfolio/portfolio', compact('data'))->with($datas);
             }else{
                 return redirect('user/portfolio/create');
             }
@@ -46,7 +49,10 @@ class UserPortfolio extends Controller
             return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/portfolio/create');
+            $datas = array(
+                'title' => 'User - Portofolio Create | Temuin'
+            );
+            return view('user/portfolio/create')->with($datas);
         }
     }
 
@@ -95,9 +101,12 @@ class UserPortfolio extends Controller
     public function edit($id)
     {
         //
+        $datas = array(
+                'title' => 'User - Portofolio Edit | Temuin'
+            );
         $profile = Profile::where('id_user',Session::get('id'))->first();
         $data = Portofolio::where('id_profile',$profile->id)->first();
-        return view('user/portfolio/edit', compact('data'));
+        return view('user/portfolio/edit', compact('data'))->with($datas);
     }
 
     /**

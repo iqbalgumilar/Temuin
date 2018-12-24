@@ -23,11 +23,14 @@ class UserAwards extends Controller
             return redirect('/user/auth')->with('alert', 'You are not loged in!');
         }
         else{
+            $datas = array(
+                'title' => 'User - Awards | Temuin'
+            );
             $profile = Profile::where('id_user',Session::get('id'))->first();
             $data = Award::where('id_profile',$profile->id)->first();
 
             if($data != null){
-                return view('user/cv/awards/awards', compact('data'));
+                return view('user/cv/awards/awards', compact('data'))->with($datas);
             }else{
                 return redirect('user/cv/awards/create');
             }
@@ -46,7 +49,10 @@ class UserAwards extends Controller
             return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/cv/awards/create');
+            $datas = array(
+                'title' => 'User - Awards Create | Temuin'
+            );
+            return view('user/cv/awards/create')->with($datas);
         }
     }
 
@@ -96,9 +102,12 @@ class UserAwards extends Controller
     public function edit($id)
     {
         //
+        $datas = array(
+                'title' => 'User - Awards Edit | Temuin'
+            );
         $profile = Profile::where('id_user',Session::get('id'))->first();
         $data = Award::where('id_profile',$profile->id)->first();
-        return view('user/cv/awards/edit', compact('data'));
+        return view('user/cv/awards/edit', compact('data'))->with($datas);
     }
 
     /**

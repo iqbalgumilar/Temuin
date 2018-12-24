@@ -22,8 +22,11 @@ class UserController extends Controller
             return redirect('/user/auth')->with('alert', 'You are not loged in!');
         }
         else{
+            $datas = array(
+                'title' => 'User | Temuin'
+            );
             $data = Users::find(Session::get('id'))->first();
-            return view('user/user/user',compact('data'));
+            return view('user/user/user',compact('data'))->with($datas);
         }
     }
 
@@ -47,6 +50,17 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        $data =  new Users();
+        $data->email = $request->get('email');
+        $data->username = $request->get('username');
+        $data->password = Hash::make($request->get('password'));
+
+        if($data->save()){
+            return redirect('/user/user')->with('alert-success', 'Berhasil menambahkan data!');
+        }
+        else{
+            return redirect('/user/user')->with('alert', 'Gagal menambahkan data!');
+        }
 
     }
 
@@ -70,8 +84,11 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        $datas = array(
+                'title' => 'User Edit | Temuin'
+            );
         $data = Users::find(Session::get('id'))->first();
-        return view('user/user/edit', compact('data'));
+        return view('user/user/edit', compact('data'))->with($datas);
     }
 
     /**
@@ -86,9 +103,9 @@ class UserController extends Controller
         //
         $data = Users::where('id', $id)->first();
 
-        $data->email = $request->email;
-        $data->username = $request->username;
-        $data->password = $request->password;
+        $data->email = $request->get('email');
+        $data->username = $request->get('username');
+        $data->password = Hash::make($request->get('password'));
 
         if($data->save()){
             return redirect('/user/user')->with('alert-success', 'Berhasil ubah data!');

@@ -23,9 +23,17 @@ class CardId extends Controller
             return redirect('/user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            $works = MasterWorks::all();
+            $datas = array(
+                'title' => 'User - ID Card | Temuin'
+            );
+            //$works = MasterWorks::all();
             $data = Profile::where('id_user', Session::get('id'))->first();
-            return view('user/id/id', compact('data','works'));
+            if($data != null){
+                $works = MasterWorks::where('id', $data->uid_work)->first();
+                return view('user/id/id', compact('data','works'))->with($datas);
+            }else{
+                return redirect('user/profile/create');
+            }
         }
     }
 

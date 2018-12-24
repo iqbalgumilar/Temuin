@@ -23,11 +23,14 @@ class UserEducation extends Controller
             return redirect('/user/auth')->with('alert', 'You are not loged in!');
         }
         else{
+            $datas = array(
+                'title' => 'User - Education | Temuin'
+            );
             $profile = Profile::where('id_user',Session::get('id'))->first();
             $data = Education::where('id_profile',$profile->id)->first();
             
             if($data != null){
-                return view('user/cv/education/education', compact('data'));
+                return view('user/cv/education/education', compact('data'))->with($datas);
             }else{
                 return redirect('user/cv/education/create');
             }
@@ -46,7 +49,10 @@ class UserEducation extends Controller
             return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/cv/education/create');
+            $datas = array(
+                'title' => 'User - Education Create | Temuin'
+            );
+            return view('user/cv/education/create')->with($datas);
         }
     }
 
@@ -95,9 +101,12 @@ class UserEducation extends Controller
     public function edit($id)
     {
         //
+        $datas = array(
+                'title' => 'User - Education Edit | Temuin'
+            );
         $profile = Profile::where('id_user',Session::get('id'))->first();
         $data = Education::where('id_profile', $profile->id)->first();
-        return view('user/cv/education/edit', compact('data'));
+        return view('user/cv/education/edit', compact('data'))->with($datas);
     }
 
     /**

@@ -2,7 +2,7 @@
     <nav class="navbar-sidebar2 navbar-sidebar3">
         <ul class="list-unstyled navbar__list">
             <li class="has-sub">
-                <a class="js-arrow" href="{{ url('/user/dashboard') }}">
+                <a class="js-arrow" href="{{ url('user') }}">
                     <i class="fas fa-tachometer-alt"></i>Dashboard
                 </a>
             </li>

@@ -10,7 +10,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>User</title>
+    <title><?=$title?></title>
 
     <!-- Fontfaces CSS-->
     <link href="{{ url('/assets/admin/css/font-face.css') }}" rel="stylesheet" media="all">

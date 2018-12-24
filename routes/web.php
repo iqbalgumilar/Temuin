@@ -80,18 +80,14 @@ Route::get('/user', 'User\Auth@index');
 
 Route::resource('user/user','User\UserController');
 
-Route::resource('user/profile','User\Profiles');
+Route::resource('/user/profile/profile','User\Profiles');
 
-Route::resource('user/id','User\CardId');
+Route::resource('user/profile/awards','User\UserAwards');
 
-Route::resource('user/cv/about','User\UserAbout');
+Route::resource('user/profile/education','User\UserEducation');
 
-Route::resource('user/cv/awards','User\UserAwards');
+Route::resource('user/profile/experience','User\UserExperience');
 
-Route::resource('user/cv/education','User\UserEducation');
+Route::resource('user/profile/skill','User\UserSkills');
 
-Route::resource('user/cv/experience','User\UserExperience');
-
-Route::resource('user/cv/skill','User\UserSkills');
-
-Route::resource('user/portfolio','User\UserPortfolio');
+Route::resource('user/profile/portfolio','User\UserPortfolio');

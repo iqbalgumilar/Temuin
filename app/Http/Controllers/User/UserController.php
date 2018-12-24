@@ -50,17 +50,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        $data =  new Users();
-        $data->email = $request->get('email');
-        $data->username = $request->get('username');
-        $data->password = Hash::make($request->get('password'));
-
-        if($data->save()){
-            return redirect('/user/user')->with('alert-success', 'Berhasil menambahkan data!');
-        }
-        else{
-            return redirect('/user/user')->with('alert', 'Gagal menambahkan data!');
-        }
 
     }
 
@@ -85,9 +74,10 @@ class UserController extends Controller
     {
         //
         $datas = array(
-                'title' => 'User Edit | Temuin'
+                'title' => 'User - Edit | Temuin'
             );
-        $data = Users::find(Session::get('id'))->first();
+        //$data = Users::find(Session::get('id'))->first();
+        $data = Users::find($id);
         return view('user/user/edit', compact('data'))->with($datas);
     }
 

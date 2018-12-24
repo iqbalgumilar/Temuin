@@ -13,7 +13,7 @@
                             <img src="{{ url('/assets/admin/images/icon/avatar-01.jpg') }}" alt="John Doe" />
                         </div>
                         <div class="content">
-                            <a class="js-acc-btn" href="#">john doe</a>
+                            <a class="js-acc-btn" href="#">{{ Session::get('username') }}</a>
                         </div>
                         <div class="account-dropdown js-dropdown">
                             <div class="info clearfix">
@@ -24,14 +24,14 @@
                                 </div>
                                 <div class="content">
                                     <h5 class="name">
-                                        <a href="#">john doe</a>
+                                        <a href="#">{{ Session::get('username') }}</a>
                                     </h5>
-                                    <span class="email">johndoe@example.com</span>
+                                    <span class="email">{{ Session::get('email') }}</span>
                                 </div>
                             </div>
                             <div class="account-dropdown__body">
                                 <div class="account-dropdown__item">
-                                    <a href="#">
+                                    <a href="{{ url('user/user') }}">
                                         <i class="zmdi zmdi-account"></i>Account</a>
                                 </div>
                                 <div class="account-dropdown__item">
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="account-dropdown__footer">
-                                <a href="#">
+                                <a href="{{ url('user/logout') }}">
                                     <i class="zmdi zmdi-power"></i>Logout</a>
                             </div>
                         </div>

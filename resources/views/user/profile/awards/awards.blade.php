@@ -36,22 +36,6 @@
                     <textarea id="descr" rows="3" placeholder="Content..." class="form-control">{{ $data->description_award }}</textarea>
                 </div>
             </div>
-            <div class="row form-group">
-                <div class="col col-md-3">
-                    <label for="icon-input" class=" form-control-label">Icon</label>
-                </div>
-                <div class="col-12 col-md-9">
-                    <input type="text" id="icon-input" value="{{ $data->icon_award }}" class="form-control">
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col col-md-3">
-                    <label for="image-input" class=" form-control-label">Image</label>
-                </div>
-                <div class="col-12 col-md-9">
-                    <input type="text" id="image-input" value="{{ $data->image_award }}" class="form-control">
-                </div>
-            </div>
         
     </div>
     <div class="card-footer">

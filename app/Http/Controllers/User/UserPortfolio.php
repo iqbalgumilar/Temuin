@@ -24,15 +24,15 @@ class UserPortfolio extends Controller
         }
         else{
             $datas = array(
-                'title' => 'User - Portofolio | Temuin'
+                'title' => 'Portofolio | Temuin'
             );
             $profile = Profile::where('id_user',Session::get('id'))->first();
             $data = Portofolio::where('id_profile',$profile->id)->first(); 
 
             if($data != null){
-                return view('user/portfolio/portfolio', compact('data'))->with($datas);
+                return view('user/profile/portfolio/portfolio', compact('data'))->with($datas);
             }else{
-                return redirect('user/portfolio/create');
+                return redirect('user/profile/portfolio/create');
             }
         }
     }
@@ -50,9 +50,9 @@ class UserPortfolio extends Controller
         }
         else{
             $datas = array(
-                'title' => 'User - Portofolio Create | Temuin'
+                'title' => 'Portofolio - Create | Temuin'
             );
-            return view('user/portfolio/create')->with($datas);
+            return view('user/profile/portfolio/create')->with($datas);
         }
     }
 
@@ -74,10 +74,10 @@ class UserPortfolio extends Controller
         $data->link_portofolio = $request->get('link_portofolio');
 
         if($data->save()){
-            return redirect('/user/portfolio')->with('alert-success', 'Berhasil menambahkan data!');
+            return redirect('/user/profile/portfolio')->with('alert-success', 'Berhasil menambahkan data!');
         }
         else{
-            return redirect('/user/portfolio')->with('alert', 'Gagal menambahkan data!');
+            return redirect('/user/profile/portfolio')->with('alert', 'Gagal menambahkan data!');
         }
     }
 
@@ -102,11 +102,11 @@ class UserPortfolio extends Controller
     {
         //
         $datas = array(
-                'title' => 'User - Portofolio Edit | Temuin'
+                'title' => 'Portofolio - Edit | Temuin'
             );
         $profile = Profile::where('id_user',Session::get('id'))->first();
         $data = Portofolio::where('id_profile',$profile->id)->first();
-        return view('user/portfolio/edit', compact('data'))->with($datas);
+        return view('user/profile/portfolio/edit', compact('data'))->with($datas);
     }
 
     /**
@@ -128,10 +128,10 @@ class UserPortfolio extends Controller
         $data->link_portofolio = $request->get('link_portofolio');
 
         if($data->save()){
-            return redirect('/user/portfolio')->with('alert-success', 'Berhasil ubah data!');
+            return redirect('/user/profile/portfolio')->with('alert-success', 'Berhasil ubah data!');
         }
         else{
-            return redirect('/user/portfolio')->with('alert', 'Gagal ubah data!');
+            return redirect('/user/profile/portfolio')->with('alert', 'Gagal ubah data!');
         }
     }
 
@@ -149,10 +149,10 @@ class UserPortfolio extends Controller
 
         if($data != null){
             $data->delete();
-            return redirect('/user/portfolio')->with('alert-success', 'Berhasil hapus data!');
+            return redirect('/user/profile/portfolio')->with('alert-success', 'Berhasil hapus data!');
         }
         else{
-            return redirect('/user/portfolio')->with('alert', 'Gagal hapus data!');
+            return redirect('/user/profile/portfolio')->with('alert', 'Gagal hapus data!');
         }
     }
 }

@@ -24,16 +24,16 @@ class Profiles extends Controller
         }
         else{
             $datas = array(
-                'title' => 'User - Profile | Temuin'
+                'title' => 'Profile | Temuin'
             );
             //$works = MasterWorks::all();
             $data = Profile::where('id_user', Session::get('id'))->first();
             
             if($data != null){
                 $works = MasterWorks::where('id', $data->uid_work)->first();
-                return view('user/profile/profile', compact('data','works'))->with($datas);
+                return view('user/profile/profile/profile', compact('data','works'))->with($datas);
             }else{
-                return redirect('user/profile/create');
+                return redirect('user/profile/profile/create');
             }
         }
     }
@@ -51,10 +51,10 @@ class Profiles extends Controller
         }
         else{
             $datas = array(
-                'title' => 'User - Profile Create | Temuin'
+                'title' => 'Profile - Create | Temuin'
             );
             $works = MasterWorks::all();      
-            return view('user/profile/create',compact('works'))->with($datas);
+            return view('user/profile/profile/create',compact('works'))->with($datas);
         }
     }
 
@@ -78,10 +78,10 @@ class Profiles extends Controller
         $data->alamat = $request->get('alamat');
 
         if($data->save()){
-            return redirect('/user/profile')->with('alert-success', 'Berhasil menambahkan data!');
+            return redirect('/user/profile/profile')->with('alert-success', 'Berhasil menambahkan data!');
         }
         else{
-            return redirect('/user/profile')->with('alert', 'Gagal menambahkan data!');
+            return redirect('/user/profile/profile')->with('alert', 'Gagal menambahkan data!');
         }
     }
 
@@ -106,11 +106,11 @@ class Profiles extends Controller
     {
         //
         $datas = array(
-                'title' => 'User - Profile Edit | Temuin'
+                'title' => 'Profile - Edit | Temuin'
             );
         $works = MasterWorks::all();
         $data = Profile::where('id_user', Session::get('id'))->first();
-        return view('user/profile/edit', compact('data','works'))->with($datas);
+        return view('user/profile/profile/edit', compact('data','works'))->with($datas);
     }
 
     /**
@@ -133,10 +133,10 @@ class Profiles extends Controller
         $data->alamat = $request->get('alamat');
 
         if($data->save()){
-            return redirect('/user/profile')->with('alert-success', 'Berhasil ubah data!');
+            return redirect('/user/profile/profile')->with('alert-success', 'Berhasil ubah data!');
         }
         else{
-            return redirect('/user/profie')->with('alert', 'Gagal ubah data!');
+            return redirect('/user/profile/profile')->with('alert', 'Gagal ubah data!');
         }
     }
 
@@ -152,10 +152,10 @@ class Profiles extends Controller
         $data = Profile::where('id_user', $id)->first();
         if($data != null){
             $data->delete();
-            return redirect('/user/profile')->with('alert-success', 'Berhasil hapus data!');
+            return redirect('/user/profile/profile')->with('alert-success', 'Berhasil hapus data!');
         }
         else{
-            return redirect('/user/profile')->with('alert', 'Gagal hapus data!');
+            return redirect('/user/profile/profile')->with('alert', 'Gagal hapus data!');
         }
     }
 }

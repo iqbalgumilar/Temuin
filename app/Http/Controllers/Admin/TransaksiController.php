@@ -41,23 +41,43 @@ class TransaksiController extends Controller
         }
         return Datatables::of($transaksi)
         ->addColumn('action', function ($transaksi) {
-            return '
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <button type="button" class="btn btn-secondary">Aksi</button>
-                
-                    <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="'.url("admin/transaksi/").'/'.$transaksi->id_transaksi.'/edit">Edit</a>
-                        <form action="'.route("transaksi.destroy", $transaksi->id_transaksi).'" method="post">
-                        '.csrf_field().'
-                        '.method_field("DELETE").'
-                        <button class="dropdown-item" type="submit" onclick="return confirm(\'Yakin ingin menghapus data?\')">Hapus</button>
-                        </form>
+            if($transaksi->status_transaksi == "0"){
+                return '
+                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                        <button type="button" class="btn btn-secondary">Aksi</button>
+                    
+                        <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item" href="'.url("admin/transaksi/").'/'.$transaksi->id_transaksi.'/edit">Edit</a>
+                            <form action="'.route("transaksi.destroy", $transaksi->id_transaksi).'" method="post">
+                            '.csrf_field().'
+                            '.method_field("DELETE").'
+                            <button class="dropdown-item" type="submit" onclick="return confirm(\'Yakin ingin menghapus data?\')">Hapus</button>
+                            </form>
+                        </div>
+                        </div>
                     </div>
+                ';
+            }
+            else{
+                return '
+                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                        <button type="button" class="btn btn-secondary">Aksi</button>
+                    
+                        <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <form action="'.route("transaksi.destroy", $transaksi->id_transaksi).'" method="post">
+                            '.csrf_field().'
+                            '.method_field("DELETE").'
+                            <button class="dropdown-item" type="submit" onclick="return confirm(\'Yakin ingin menghapus data?\')">Hapus</button>
+                            </form>
+                        </div>
+                        </div>
                     </div>
-                </div>
-            ';
+                ';
+            }
         })
         ->addColumn('stat', function($transaksi){
             if($transaksi->status_transaksi=="1"){

@@ -23,13 +23,16 @@ class UserAwards extends Controller
             return redirect('/user/auth')->with('alert', 'You are not loged in!');
         }
         else{
+            $datas = array(
+                'title' => 'Awards | Temuin'
+            );
             $profile = Profile::where('id_user',Session::get('id'))->first();
             $data = Award::where('id_profile',$profile->id)->first();
 
             if($data != null){
-                return view('user/cv/awards/awards', compact('data'));
+                return view('user/profile/awards/awards', compact('data'))->with($datas);
             }else{
-                return redirect('user/cv/awards/create');
+                return redirect('user/profile/awards/create');
             }
         }
     }
@@ -46,7 +49,10 @@ class UserAwards extends Controller
             return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            return view('user/cv/awards/create');
+            $datas = array(
+                'title' => 'Awards - Create | Temuin'
+            );
+            return view('user/profile/awards/create')->with($datas);
         }
     }
 
@@ -65,14 +71,12 @@ class UserAwards extends Controller
         $data->id_profile = $profile->id;
         $data->award = $request->get('award');
         $data->description_award = $request->get('description_award');
-        $data->icon_award = $request->get('icon_award');
-        $data->image_award = $request->get('image_award');
 
         if($data->save()){
-            return redirect('/user/cv/awards')->with('alert-success', 'Berhasil menambahkan data!');
+            return redirect('/user/profile/awards')->with('alert-success', 'Berhasil menambahkan data!');
         }
         else{
-            return redirect('/user/cv/awards')->with('alert', 'Gagal menambahkan data!');
+            return redirect('/user/profile/awards')->with('alert', 'Gagal menambahkan data!');
         }
     }
 
@@ -96,9 +100,12 @@ class UserAwards extends Controller
     public function edit($id)
     {
         //
+        $datas = array(
+                'title' => 'Awards - Edit | Temuin'
+            );
         $profile = Profile::where('id_user',Session::get('id'))->first();
         $data = Award::where('id_profile',$profile->id)->first();
-        return view('user/cv/awards/edit', compact('data'));
+        return view('user/profile/awards/edit', compact('data'))->with($datas);
     }
 
     /**
@@ -117,14 +124,12 @@ class UserAwards extends Controller
         $data->id_profile = $profile->id;
         $data->award = $request->get('award');
         $data->description_award = $request->get('description_award');
-        $data->icon_award = $request->get('icon_award');
-        $data->image_award = $request->get('image_award');
 
         if($data->save()){
-            return redirect('/user/cv/awards')->with('alert-success', 'Berhasil ubah data!');
+            return redirect('/user/profile/awards')->with('alert-success', 'Berhasil ubah data!');
         }
         else{
-            return redirect('/user/cv/awards')->with('alert', 'Gagal ubah data!');
+            return redirect('/user/profile/awards')->with('alert', 'Gagal ubah data!');
         }
     }
 
@@ -141,10 +146,10 @@ class UserAwards extends Controller
         $data = Award::where('id_profile',$profile->id)->first();
         if($data != null){
             $data->delete();
-            return redirect('/user/cv/awards')->with('alert-success', 'Berhasil hapus data!');
+            return redirect('/user/profile/awards')->with('alert-success', 'Berhasil hapus data!');
         }
         else{
-            return redirect('/user/cv/awards')->with('alert', 'Gagal hapus data!');
+            return redirect('/user/profile/awards')->with('alert', 'Gagal hapus data!');
         }
     }
 }

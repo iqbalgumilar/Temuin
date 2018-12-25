@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Award extends Model
+class Themes extends Model
 {
-    protected $table = 'awards';
+    protected $table = 'themes';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'id_profile',
-        'award',
-        'description_award'
+        'uid_pb',
+        'uid_cv',
+        'uin_kn'
     ];
 }

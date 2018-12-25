@@ -57,9 +57,8 @@
                             </div>
                             <div class="col-12 col-md-9">
                                 <select name="status" id="select" class="form-control" required="">
-                                    <option>--Pilih--</option>
                                     <option value="0">False</option>
-                                    <option value="1">True</option>
+                                    <option value="1" selected>True</option>
                                 </select>
                             </div>
                         </div>

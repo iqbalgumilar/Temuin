@@ -10,7 +10,7 @@
     <meta name="keywords" content="temuin">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>Login Admin | Temuin</title>
 
     <!-- Fontfaces CSS-->
     <link href="{{ url('/assets/admin/css/font-face.css') }}" rel="stylesheet" media="all">

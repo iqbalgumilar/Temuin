@@ -58,14 +58,18 @@
                             </div>
                             <div class="col-12 col-md-9">
                                 <select name="status" id="select" class="form-control" required="">
-                                    <option>--Pilih--</option>
                                     <option value="0" <?php if($produk->status=="0"){ echo 'selected'; } ?>>False</option>
                                     <option value="1" <?php if($produk->status=="1"){ echo 'selected'; } ?>>True</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 text-right">
+                            <div class="col-md-6 text-left">
+                                <a href="{{ url('admin/Produk') }}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-arrow-left"></i> Back
+                                </a>
+                            </div>
+                            <div class="col-md-6 text-right">
                                 <button type="submit" class="btn btn-primary btn-sm">
                                     <i class="fa fa-dot-circle-o"></i> Update
                                 </button>

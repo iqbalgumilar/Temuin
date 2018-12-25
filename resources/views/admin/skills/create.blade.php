@@ -32,7 +32,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 text-right">
+                            <div class="col-md-6 text-left">
+                                <a href="{{ url('admin/skills') }}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-arrow-left"></i> Back
+                                </a>
+                            </div>
+                            <div class="col-md-6 text-right">
                                 <button type="submit" class="btn btn-primary btn-sm">
                                     <i class="fa fa-dot-circle-o"></i> Submit
                                 </button>

@@ -25,7 +25,7 @@ class TransaksiController extends Controller
         }
         else{
             $data = array(
-                'title' => "Transaksi Dompet | Temuin"
+                'title' => "Transaksi | Temuin"
             );
             return view('admin/transaksi/transaksi')->with($data);
         }

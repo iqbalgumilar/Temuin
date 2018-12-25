@@ -65,9 +65,7 @@ Route::resource('admin/JenisProduk', 'Admin\JenisProduk');
 Route::get('/admin/admin/data', 'Admin\AdminController@data');
 Route::resource('admin/admin', 'Admin\AdminController');
 
-Route::get('/admin/transaksi/dataDompet', 'Admin\TransaksiController@dataDompet');
-Route::get('/admin/transaksi/dataTheme', 'Admin\TransaksiController@dataTheme');
-Route::get('/admin/transaksi/theme', 'Admin\TransaksiController@Theme');
+Route::get('/admin/transaksi/data', 'Admin\TransaksiController@data');
 Route::resource('admin/transaksi', 'Admin\TransaksiController');
 
 /* USER */

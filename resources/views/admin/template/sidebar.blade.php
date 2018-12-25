@@ -32,17 +32,8 @@
                 <li>
                     <a href="{{ url('/admin/Produk') }}"><i class="fas fa-box"></i> Produk</a>
                 </li>
-                <li class="has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fas fa-dollar"></i>Transaksi</a>
-                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li>
-                            <a href="{{ url('/admin/transaksi') }}"><i class="fas fa-credit-card"></i> Dompet</a>
-                        </li>
-                        <li>
-                            <a href="{{ url('/admin/transaksi/theme') }}"><i class="fas fa-tint"></i> Theme</a>
-                        </li>
-                    </ul>
+                <li>
+                    <a href="{{ url('/admin/transaksi') }}"><i class="fas fa-credit-card"></i> Transaksi</a>
                 </li>
                 <li>
                     <a href="{{ url('/admin/admin') }}">

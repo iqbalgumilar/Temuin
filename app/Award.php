@@ -11,8 +11,6 @@ class Award extends Model
     protected $fillable = [
         'id_profile',
         'award',
-        'description_award',
-        'icon_award',
-        'image_award'
+        'description_award'
     ];
 }

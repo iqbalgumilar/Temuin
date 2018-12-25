@@ -18,8 +18,6 @@ class CreateAwardsTable extends Migration
             $table->unsignedInteger('id_profile');
             $table->string('award');
             $table->string('description_award');
-            $table->string('icon_award');
-            $table->string('image_award');
             $table->foreign('id_profile')->references('id')->on('profiles')->onUpdate('cascade');
             $table->timestamps();
         });

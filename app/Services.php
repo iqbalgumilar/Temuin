@@ -11,7 +11,6 @@ class Services extends Model
     protected $fillable = [
         'id_profile',
         'uid_service',
-        'icon_service',
         'descripsion_service'
     ];
 }

@@ -17,7 +17,6 @@ class CreateServicesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('id_profile');
             $table->unsignedInteger('uid_service');
-            $table->string('icon_service');
             $table->string('descripsion_service');
             $table->foreign('id_profile')->references('id')->on('profiles')->onUpdate('cascade');
             $table->foreign('uid_service')->references('id')->on('master_services')->onUpdate('cascade');

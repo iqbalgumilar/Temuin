@@ -10,12 +10,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">Master</div>
-                        <div class="col-md-6 text-right">
-                            <a href={{ route('Produk.create') }} class="btn btn-primary btn-sm">
-                                <i class="fa fa-plus"></i> Tambah
-                            </a>
-                        </div>
+                        <div class="col-md-6">Transaksi</div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -30,17 +25,17 @@
                         </div>
                     @endif
                     <div class="card-title">
-                        <h3 class="text-center title-2">Produk</h3>
+                        <h3 class="text-center title-2">Transaksi</h3>
                     </div>
                     <hr>
                     <table id="table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No.</th>
+                                <th>Nama</th>
                                 <th>Produk</th>
-                                <th>Jenis Produk</th>
-                                <th>File Produk</th>
-                                <th>Harga Produk</th>
+                                <th>Total</th>
+                                <th>Bukti</th>
                                 <th>Status</th>
                                 <th>#</th>
                             </tr>
@@ -51,10 +46,10 @@
                         <tfoot>
                             <tr>
                                 <th>No.</th>
+                                <th>Nama</th>
                                 <th>Produk</th>
-                                <th>Jenis Produk</th>
-                                <th>File Produk</th>
-                                <th>Harga Produk</th>
+                                <th>Total</th>
+                                <th>Bukti</th>
                                 <th>Status</th>
                                 <th>#</th>
                             </tr>
@@ -77,15 +72,15 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: '{{ url("/admin/Produk/data") }}'
+                url: '{{ url("/admin/transaksi/data") }}'
             },
             columns: [
-            {data: 'rownum', name: 'id'},
+            {data: 'rownum', name: 'rownum'},
+            {data: 'nama_profile', name: 'nama_profile'},
             {data: 'produk', name: 'produk'},
-            {data: 'jenis_produk', name: 'jenis_produk'},
-            {data: 'file_produk', name: 'file_produk'},
-            {data: 'harga_produk', name: 'harga_produk'},
-            {data: 'stat', name: 'status'},
+            {data: 'total_transaksi', name: 'total_transaksi'},
+            {data: 'bukti', name: 'image_transaksi'},
+            {data: 'stat', name: 'status_transaksi'},
             {data: 'action', name: 'action', orderable: false},
         ],
         });

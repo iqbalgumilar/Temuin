@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAwardsTable extends Migration
+class CreateThemesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,16 @@ class CreateAwardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('awards', function (Blueprint $table) {
+        Schema::create('themes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('id_profile');
-            $table->string('award');
-            $table->string('description_award');
+            $table->unsignedInteger('uid_pb');
+            $table->unsignedInteger('uid_cv');
+            $table->unsignedInteger('uid_kn');
             $table->foreign('id_profile')->references('id')->on('profiles')->onUpdate('cascade');
+            $table->foreign('uid_pb')->references('id')->on('master_produks')->onUpdate('cascade');
+            $table->foreign('uid_cv')->references('id')->on('master_produks')->onUpdate('cascade');
+            $table->foreign('uid_kn')->references('id')->on('master_produks')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ class CreateAwardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('awards');
+        Schema::dropIfExists('themes');
     }
 }

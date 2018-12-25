@@ -21,18 +21,17 @@ class UserEducation extends Controller
         //
         if(!session::get('login')){
             return redirect('/user/auth')->with('alert', 'You are not loged in!');
-        }
-        else{
-            $datas = array(
-                'title' => 'Education | Temuin'
-            );
-            $profile = Profile::where('id_user',Session::get('id'))->first();
-            $data = Education::where('id_profile',$profile->id)->first();
-            
-            if($data != null){
-                return view('user/profile/education/education', compact('data'))->with($datas);
+        }else{
+            $profile = Profile::where('id_user',Session::get('id'));
+            if($profile->count() > 0){
+                $profile = $profile->first();
+                $data = array(
+                    'title' => 'Education | Temuin',
+                    'education' => Education::where('id_profile',$profile->id)->get()
+                );
+                return view('user/education/education')->with($data);
             }else{
-                return redirect('user/profile/education/create');
+                return redirect('user/profile/create');
             }
         }
     }
@@ -49,10 +48,17 @@ class UserEducation extends Controller
             return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            $datas = array(
-                'title' => 'Education - Create | Temuin'
+            $profile = Profile::where('id_user',Session::get('id'));
+            if($profile->count() > 0){
+                $profile = $profile->first();
+                $data = array(
+                'title' => 'Education - Create | Temuin',
+                'education' => Education::where('id_profile',$profile->id)->get()
             );
-            return view('user/profile/education/create')->with($datas);
+                return view('user/education/create')->with($data);
+            }else{
+                return redirect('user/profile/create');
+            }
         }
     }
 
@@ -74,10 +80,10 @@ class UserEducation extends Controller
         $data->from_education = $request->get('from_education');
 
         if($data->save()){
-            return redirect('/user/profile/education')->with('alert-success', 'Berhasil menambahkan data!');
+            return redirect('/user/education')->with('alert-success', 'Berhasil menambahkan data!');
         }
         else{
-            return redirect('/user/profile/education')->with('alert', 'Gagal menambahkan data!');
+            return redirect('/user/education')->with('alert', 'Gagal menambahkan data!');
         }
     }
 
@@ -101,12 +107,18 @@ class UserEducation extends Controller
     public function edit($id)
     {
         //
-        $datas = array(
-                'title' => 'Education - Edit | Temuin'
+        $profile = Profile::where('id_user',Session::get('id'));
+        if($profile->count() > 0){
+            $profile = $profile->first();
+            $data = array(
+                'title' => 'Education - Edit | Temuin',
+                //'data' => Education::where('id_profile',$profile->id)->first()
+                'education' => Education::find($id)
             );
-        $profile = Profile::where('id_user',Session::get('id'))->first();
-        $data = Education::where('id_profile', $profile->id)->first();
-        return view('user/profile/education/edit', compact('data'))->with($datas);
+            return view('user/education/edit')->with($data);
+        }else{
+            return redirect('user/profile/create');
+        }
     }
 
     /**
@@ -120,17 +132,17 @@ class UserEducation extends Controller
     {
         //
         $profile = Profile::where('id_user',Session::get('id'))->first();
-        $data = Education::where('id_profile', $profile->id)->first();
+        $data = Education::where('id', $id)->first();
 
         $data->id_profile = $profile->id;
         $data->education = $request->get('education');
         $data->from_education = $request->get('from_education');
 
         if($data->save()){
-            return redirect('/user/profile/education')->with('alert-success', 'Berhasil ubah data!');
+            return redirect('/user/education')->with('alert-success', 'Berhasil ubah data!');
         }
         else{
-            return redirect('/user/profile/education')->with('alert', 'Gagal ubah data!');
+            return redirect('/user/education')->with('alert', 'Gagal ubah data!');
         }
     }
 
@@ -144,14 +156,14 @@ class UserEducation extends Controller
     {
         //
         $profile = Profile::where('id_user',Session::get('id'))->first();
-        $data = Education::where('id_profile', $profile->id)->first();
+        $data = Education::where('id', $id)->first();
 
         if($data != null){
             $data->delete();
-            return redirect('/user/profile/education')->with('alert-success', 'Berhasil hapus data!');
+            return redirect('/user/education')->with('alert-success', 'Berhasil hapus data!');
         }
         else{
-            return redirect('/user/profile/education')->with('alert', 'Gagal hapus data!');
+            return redirect('/user/education')->with('alert', 'Gagal hapus data!');
         }
     }
 }

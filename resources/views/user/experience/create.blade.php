@@ -4,14 +4,6 @@
 <div class="card">
     <div class="card-header text-center">
         <strong>EXPERIENCES</strong>
-        <div class="float-right">
-            <span class="" style="cursor: pointer" id="tambahExperience">
-                <i class="fa fa-plus-circle text-success"></i>
-            </span>
-            <span class="" style="cursor: pointer" id="hapusExperience">
-                <i class="fa fa-minus-circle text-danger"></i>
-            </span>
-        </div>
     </div>
     <div class="card-body card-block" id="experience">
         {{ csrf_field() }}
@@ -21,10 +13,9 @@
                 </div>
                 <div class="col-12 col-md-9">
                     <select name="uid_work" id="" class="form-control">
-                    <option value="">-</option>
-                        @foreach($works as $work)
+                        <?php foreach($works as $work): ?>
                         <option value="{{ $work->id }}">{{ $work->work }}</option>
-                        @endforeach
+                        <?php endforeach; ?>
                         </select>
                 </div>
             </div>

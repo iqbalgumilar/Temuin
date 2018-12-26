@@ -25,10 +25,10 @@
                         </div>
                     @endif
                     <div class="card-title">
-                        <h3 class="text-center title-2">Transaksi Dompet</h3>
+                        <h3 class="text-center title-2">Transaksi</h3>
                     </div>
                     <hr>
-                    <table id="tableDompet" class="table table-striped table-bordered" style="width:100%">
+                    <table id="table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -67,19 +67,19 @@
     <script type="text/javascript">
     $(function() {
         var number = 1;
-        var oTable = $('#tableDompet').DataTable({
+        var oTable = $('#table').DataTable({
             pageLength: 10,
             processing: true,
             serverSide: true,
             ajax: {
-                url: '{{ url("/admin/transaksi/dataDompet") }}'
+                url: '{{ url("/admin/transaksi/data") }}'
             },
             columns: [
             {data: 'rownum', name: 'rownum'},
             {data: 'nama_profile', name: 'nama_profile'},
             {data: 'produk', name: 'produk'},
             {data: 'total_transaksi', name: 'total_transaksi'},
-            {data: 'image_transaksi', name: 'image_transaksi'},
+            {data: 'bukti', name: 'image_transaksi'},
             {data: 'stat', name: 'status_transaksi'},
             {data: 'action', name: 'action', orderable: false},
         ],

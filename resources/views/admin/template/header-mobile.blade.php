@@ -34,12 +34,15 @@
                             <a href="{{ url('/admin/services') }}">Services</a>
                         </li>
                         <li>
-                            <a href="{{ url('/admin/Produk') }}">Produk</a>
-                        </li>
-                        <li>
                             <a href="{{ url('/admin/JenisProduk') }}">Jenis Produk</a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="{{ url('/admin/Produk') }}"><i class="fas fa-box"></i> Produk</a>
+                </li>
+                <li>
+                    <a href="{{ url('/admin/transaksi') }}"><i class="fas fa-credit-card"></i> Transaksi</a>
                 </li>
                 <li>
                     <a href="{{ url('/admin/admin') }}">

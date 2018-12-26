@@ -1,31 +1,25 @@
 @extends('user.template.base')
 @section('content')
-<form action="{{ route('skill.store') }}" method="post" id="form-skill" enctype="multipart/form-data" class="form-horizontal">
+
+<form action="{{ route('skill.update', $skill->id) }}" method="post" id="form-skill" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header text-center">
         <strong>SKILLS</strong>
-        <div class="float-right">
-            <span class="" style="cursor: pointer" id="tambahSkill">
-                <i class="fa fa-plus-circle text-success"></i>
-            </span>
-            <span class="" style="cursor: pointer" id="hapusSkill">
-                <i class="fa fa-minus-circle text-danger"></i>
-            </span>
-        </div>
     </div>
     <div class="card-body card-block" id="skill">
-        {{ csrf_field() }}       
+        {{ csrf_field() }} 
+        {{ method_field('PUT') }}      
             <div class="row form-group">
                 <div class="col col-md-3">
                     <label for="skills-input" class=" form-control-label">Skills</label>
                 </div>
                 <div class="col-12 col-md-9">
                     <select name="uid_skill" id="" class="form-control">
-                    <option value="">-</option>
-                        @foreach($skills as $skill)
-                        <option value="{{ $skill->id }}">{{ $skill->skill }}</option>
-                        @endforeach
-                        </select>
+                       <?php foreach($uid_skill as $skills): ?>
+                            <option value="{{ $skills->id }}" <?php if($skills->id==$skill->uid_skill){ echo 'selected'; } ?>>{{ $skills->skill }}</option>
+                        <?php endforeach; ?>
+                    </select>
+                        
                 </div>
             </div>
             <div class="row form-group">
@@ -33,7 +27,7 @@
                     <label for="persentase-input" class=" form-control-label">Persentase</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="persentase-input" name="persentase_skill" placeholder="Persentase" class="form-control">
+                    <input type="text" id="persentase-input" name="persentase_skill" value="{{ $skill->persentase_skill }}" placeholder="Persentase" class="form-control">
                 </div>
             </div>
         

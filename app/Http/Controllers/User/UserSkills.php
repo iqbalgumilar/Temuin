@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\MasterSkills;
+use App\ViewSkills;
 use App\Skill;
 use App\Profile;
 use App\Http\Controllers\Controller;
@@ -22,20 +23,17 @@ class UserSkills extends Controller
         //
         if(!session::get('login')){
             return redirect('user/auth')->with('alert', 'You are not loged in!');
-        }
-        else{
-            $datas = array(
-                'title' => 'Skills | Temuin'
+        }else{
+            $profile = Profile::where('id_user',Session::get('id'));
+            if($profile->count() > 0){
+                $profile = $profile->first();
+                $data = array(
+                    'title' => 'Skills | Temuin',
+                    'skill' => ViewSkills::where('id_profile',$profile->id)->get(),
             );
-            //$skills = MasterSkills::all();
-            $profile = Profile::where('id_user',Session::get('id'))->first();
-            $data = Skill::where('id_profile',$profile->id)->first();
-            
-            if($data != null){
-                $skills = MasterSkills::where('id', $data->uid_skill)->first();
-                return view('user/profile/skill/skill', compact('data','skills'))->with($datas);
+                return view('user/skill/skill')->with($data);
             }else{
-                return redirect('user/profile/skill/create');
+                return redirect('user/profile/create');
             }
         }
     }
@@ -52,11 +50,18 @@ class UserSkills extends Controller
             return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            $datas = array(
-                'title' => 'Skills - Create | Temuin'
+            $profile = Profile::where('id_user',Session::get('id'));
+            if($profile->count() > 0){
+                $profile = $profile->first();
+                $data = array(
+                    'title' => 'Skills - Create | Temuin',
+                    'skill' => Skill::where('id_profile',$profile->id)->get(),
+                    'uid_skill' => MasterSkills::all(),
             );
-            $skills = MasterSkills::all();
-            return view('user/profile/skill/create',compact('skills'))->with($datas);
+                return view('user/skill/create')->with($data);
+            }else{
+                return redirect('user/profile/create');
+            }
         }
     }
 
@@ -69,18 +74,18 @@ class UserSkills extends Controller
     public function store(Request $request)
     {
         //
-        $data = new Skill();
         $profile = Profile::where('id_user',Session::get('id'))->first();
 
+        $data = new Skill();
         $data->id_profile = $profile->id;
         $data->uid_skill = $request->get('uid_skill');
         $data->persentase_skill = $request->get('persentase_skill');
 
         if($data->save()){
-            return redirect('/user/profile/skill')->with('alert-success', 'Berhasil menambahkan data!');
+            return redirect('/user/skill')->with('alert-success', 'Berhasil menambahkan data!');
         }
         else{
-            return redirect('/user/profile/skill')->with('alert', 'Gagal menambahkan data!');
+            return redirect('/user/skill')->with('alert', 'Gagal menambahkan data!');
         }
     }
 
@@ -104,13 +109,19 @@ class UserSkills extends Controller
     public function edit($id)
     {
         //
-        $datas = array(
-                'title' => 'Skills - Edit | Temuin'
-            );
-        $skills = MasterSkills::all();
-        $profile = Profile::where('id_user',Session::get('id'))->first();
-        $data = Skill::where('id_profile', $profile->id)->first();
-        return view('user/profile/skill/edit', compact('data','skills'))->with($datas);
+        $profile = Profile::where('id_user',Session::get('id'));
+            if($profile->count() > 0){
+                $profile = $profile->first();
+                $data = array(
+                    'title' => 'Skills - Edit | Temuin',
+                    //'Skill' => Skill::where('id_profile',$profile->id)->get(),
+                    'skill' => Skill::find($id),
+                    'uid_skill' => MasterSkills::all(),
+                );
+                return view('user/skill/edit')->with($data);
+            }else{
+                return redirect('user/profile/create');
+            }
     }
 
     /**
@@ -125,17 +136,17 @@ class UserSkills extends Controller
         //
         $skills = MasterSkills::all();
         $profile = Profile::where('id_user',Session::get('id'))->first();
-        $data = Skill::where('id_profile', $profile->id)->first();
+        $data = Skill::where('id', $id)->first();
 
         $data->id_profile = $profile->id;
         $data->uid_skill = $request->get('uid_skill');
         $data->persentase_skill = $request->get('persentase_skill');
 
         if($data->save()){
-            return redirect('/user/profile/skill')->with('alert-success', 'Berhasil ubah data!');
+            return redirect('/user/skill')->with('alert-success', 'Berhasil ubah data!');
         }
         else{
-            return redirect('/user/profile/skill')->with('alert', 'Gagal ubah data!');
+            return redirect('/user/skill')->with('alert', 'Gagal ubah data!');
         }
     }
 
@@ -150,14 +161,14 @@ class UserSkills extends Controller
         //
         $skills = MasterSkills::all();
         $profile = Profile::where('id_user',Session::get('id'))->first();
-        $data = Skill::where('id_profile', $profile->id)->first();
+        $data = Skill::where('id', $id)->first();
 
         if($data != null){
             $data->delete();
-            return redirect('/user/profile/skill')->with('alert-success', 'Berhasil hapus data!');
+            return redirect('/user/skill')->with('alert-success', 'Berhasil hapus data!');
         }
         else{
-            return redirect('/user/profile/skill')->with('alert', 'Gagal hapus data!');
+            return redirect('/user/skill')->with('alert', 'Gagal hapus data!');
         }
     }
 }

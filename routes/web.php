@@ -65,9 +65,7 @@ Route::resource('admin/JenisProduk', 'Admin\JenisProduk');
 Route::get('/admin/admin/data', 'Admin\AdminController@data');
 Route::resource('admin/admin', 'Admin\AdminController');
 
-Route::get('/admin/transaksi/dataDompet', 'Admin\TransaksiController@dataDompet');
-Route::get('/admin/transaksi/dataTheme', 'Admin\TransaksiController@dataTheme');
-Route::get('/admin/transaksi/theme', 'Admin\TransaksiController@Theme');
+Route::get('/admin/transaksi/data', 'Admin\TransaksiController@data');
 Route::resource('admin/transaksi', 'Admin\TransaksiController');
 
 /* USER */
@@ -85,14 +83,14 @@ Route::get('/user', 'User\Auth@index');
 
 Route::resource('user/user','User\UserController');
 
-Route::resource('/user/profile/profile','User\Profiles');
+Route::resource('/user/profile','User\Profiles');
 
-Route::resource('user/profile/awards','User\UserAwards');
+Route::resource('user/awards','User\UserAwards');
 
-Route::resource('user/profile/education','User\UserEducation');
+Route::resource('user/education','User\UserEducation');
 
-Route::resource('user/profile/experience','User\UserExperience');
+Route::resource('user/experience','User\UserExperience');
 
-Route::resource('user/profile/skill','User\UserSkills');
+Route::resource('user/skill','User\UserSkills');
 
-Route::resource('user/profile/portfolio','User\UserPortfolio');
+Route::resource('user/portfolio','User\UserPortfolio');

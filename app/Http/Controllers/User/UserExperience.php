@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Masterworks;
+use App\MasterWorks;
+use App\ViewExperiences;
 use App\Experience;
 use App\Profile;
 use Illuminate\Http\Request;
@@ -23,20 +24,17 @@ class UserExperience extends Controller
         //
         if(!session::get('login')){
             return redirect('/user/auth')->with('alert', 'You are not loged in!');
-        }
-        else{
-            $datas = array(
-                'title' => 'Experience | Temuin'
-            );
-            //$works = Masterworks::all();
-            $profile = Profile::where('id_user',Session::get('id'))->first();
-            $data = Experience::where('id_profile',$profile->id)->first();
-
-            if($data != null){
-                $works = MasterWorks::where('id', $data->uid_work)->first();
-                return view('user/profile/experience/experience', compact('data','works'))->with($datas);
+        }else{
+            $profile = Profile::where('id_user',Session::get('id'));
+            if($profile->count() > 0){
+                $profile = $profile->first();
+                $data = array(
+                    'title' => 'Experience | Temuin',
+                    'experience' => ViewExperiences::where('id_profile', $profile->id)->get()
+                ); 
+                return view('user/experience/experience')->with($data);
             }else{
-                return redirect('user/profile/experience/create');
+                return redirect('user/profile/create');
             }
         }
     }
@@ -53,11 +51,18 @@ class UserExperience extends Controller
             return redirect('user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            $datas = array(
-                'title' => 'Experience - Create | Temuin'
-            );
-            $works = MasterWorks::all();
-            return view('user/profile/experience/create',compact('works'))->with($datas);
+            $profile = Profile::where('id_user',Session::get('id'));
+            if($profile->count() > 0){
+                $profile = $profile->first();
+                $data = array(
+                    'title' => 'Experience - Create | Temuin',
+                    'experience' => Experience::where('id_profile', $profile->id)->get(),
+                    'works' => MasterWorks::all(),
+                ); 
+                return view('user/experience/create')->with($data);
+            }else{
+                return redirect('user/profile/create');
+            }
         }
     }
 
@@ -80,10 +85,10 @@ class UserExperience extends Controller
         $data->date_last_experience = $request->get('date_last_experience');
 
         if($data->save()){
-            return redirect('/user/profile/experience')->with('alert-success', 'Berhasil menambahkan data!');
+            return redirect('/user/experience')->with('alert-success', 'Berhasil menambahkan data!');
         }
         else{
-            return redirect('/user/profile/experience')->with('alert', 'Gagal menambahkan data!');
+            return redirect('/user/experience')->with('alert', 'Gagal menambahkan data!');
         }
     }
 
@@ -107,13 +112,19 @@ class UserExperience extends Controller
     public function edit($id)
     {
         //
-        $datas = array(
-                'title' => 'Experience - Edit | Temuin'
-            );
-        $works = MasterWorks::all();
-        $profile = Profile::where('id_user',Session::get('id'))->first();
-        $data = Experience::where('id_profile', $profile->id)->first();
-        return view('user/profile/experience/edit', compact('data','works'))->with($datas);
+        $profile = Profile::where('id_user',Session::get('id'));
+        if($profile->count() > 0){
+            $profile = $profile->first();
+            $data = array(
+                'title' => 'Experience - Edit | Temuin',
+                //'experience' => Experience::where('id_profile', $profile->id)->get(),
+                'experience' => Experience::find($id),
+                'works' => MasterWorks::all(),
+            ); 
+                return view('user/experience/edit')->with($data);
+        }else{
+                return redirect('user/profile/create');
+        }
     }
 
     /**
@@ -128,7 +139,7 @@ class UserExperience extends Controller
         //
         $works = MasterWorks::all();
         $profile = Profile::where('id_user',Session::get('id'))->first();
-        $data = Experience::where('id_profile', $profile->id)->first();
+        $data = Experience::where('id', $id)->first();
 
         $data->id_profile = $profile->id;
         $data->uid_work = $request->get('uid_work');
@@ -137,10 +148,10 @@ class UserExperience extends Controller
         $data->date_last_experience = $request->get('date_last_experience');
 
         if($data->save()){
-            return redirect('/user/profile/experience')->with('alert-success', 'Berhasil ubah data!');
+            return redirect('/user/experience')->with('alert-success', 'Berhasil ubah data!');
         }
         else{
-            return redirect('/user/profile/experience')->with('alert', 'Gagal ubah data!');
+            return redirect('/user/experience')->with('alert', 'Gagal ubah data!');
         }
     }
 
@@ -155,14 +166,14 @@ class UserExperience extends Controller
         //
         $works = MasterWorks::all();
         $profile = Profile::where('id_user',Session::get('id'))->first();
-        $data = Experience::where('id_profile', $profile->id)->first();
+        $data = Experience::where('id', $id)->first();
 
         if($data != null){
             $data->delete();
-            return redirect('/user/profile/experience')->with('alert-success', 'Berhasil hapus data!');
+            return redirect('/user/experience')->with('alert-success', 'Berhasil hapus data!');
         }
         else{
-            return redirect('/user/profile/experience')->with('alert', 'Gagal hapus data!');
+            return redirect('/user/experience')->with('alert', 'Gagal hapus data!');
         }
     }
 }

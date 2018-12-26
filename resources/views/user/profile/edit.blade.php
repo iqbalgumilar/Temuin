@@ -58,10 +58,9 @@
                 </div>
                 <div class="col-12 col-md-9">
                     <select name="uid_work" id="" class="form-control">
-                        <option value="">-</option>
-                        @foreach($works as $work)
-                        <option value="{{ $work->id }}">{{ $work->work }}</option>
-                        @endforeach
+                        <?php foreach($works as $work): ?>
+                            <option value="{{ $work->id }}" <?php if($work->id==$data->uid_work){ echo 'selected'; } ?>>{{ $work->work }}</option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </div>

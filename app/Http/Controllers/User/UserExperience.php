@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Masterworks;
+use App\MasterWorks;
 use App\ViewExperiences;
 use App\Experience;
 use App\Profile;
@@ -57,7 +57,7 @@ class UserExperience extends Controller
                 $data = array(
                     'title' => 'Experience - Create | Temuin',
                     'experience' => Experience::where('id_profile', $profile->id)->get(),
-                    'works' => Masterworks::all(),
+                    'works' => MasterWorks::all(),
                 ); 
                 return view('user/experience/create')->with($data);
             }else{
@@ -119,7 +119,7 @@ class UserExperience extends Controller
                 'title' => 'Experience - Edit | Temuin',
                 //'experience' => Experience::where('id_profile', $profile->id)->get(),
                 'experience' => Experience::find($id),
-                'works' => Masterworks::all(),
+                'works' => MasterWorks::all(),
             ); 
                 return view('user/experience/edit')->with($data);
         }else{

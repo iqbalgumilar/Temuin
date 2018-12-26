@@ -72,6 +72,12 @@ class UserPortfolio extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'portofolio'=>'required',
+            'image_portofolio'=> 'required',
+            'link_portofolio'=>'required',
+        ]);
+
         $profile = Profile::where('id_user',Session::get('id'))->first();
 
         $data = new Portofolio();
@@ -132,6 +138,12 @@ class UserPortfolio extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'portofolio'=>'required',
+            'image_portofolio'=> 'required',
+            'link_portofolio'=>'required',
+        ]);
+        
         $profile = Profile::where('id_user',Session::get('id'))->first();
         $data = Portofolio::where('id',$id)->first();
 

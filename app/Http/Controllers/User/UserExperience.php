@@ -75,6 +75,13 @@ class UserExperience extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'uid_work'=>'required',
+            'from_experience'=> 'required',
+            'date_first_experience'=>'required',
+            'date_last_experience'=>'required',
+        ]);
+
         $profile = Profile::where('id_user',Session::get('id'))->first();
         
         $data = new Experience();
@@ -137,6 +144,13 @@ class UserExperience extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'uid_work'=>'required',
+            'from_experience'=> 'required',
+            'date_first_experience'=>'required',
+            'date_last_experience'=>'required',
+        ]);
+        
         $works = MasterWorks::all();
         $profile = Profile::where('id_user',Session::get('id'))->first();
         $data = Experience::where('id', $id)->first();

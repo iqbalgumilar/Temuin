@@ -1,5 +1,16 @@
 @extends('user.template.base')
 @section('content')
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div><br />
+@endif
+
 <form action="{{ route('portfolio.store') }}" method="post" id="form-portfolio" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header text-center">
@@ -20,7 +31,7 @@
                     <label for="img-portfolio-input" class=" form-control-label">Image</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input type="text" id="img-portfolio-input" name="image_portofolio" placeholder="Image" class="form-control">
+                    <input type="file" id="img-portfolio-input" name="image_portofolio" placeholder="Image" class="form-control">
                 </div>
             </div>
              <div class="row form-group">
@@ -37,6 +48,9 @@
         <button type="submit" class="btn btn-primary btn-sm">
             <i class="fa fa-dot-circle-o"></i> Submit
         </button>
+        <a href="{{ url('user/portfolio') }}" class="btn btn-success btn-sm">
+            <i class="fa fa-arrow-left"></i> Back
+        </a>
     </div>
 </div>
 </form>

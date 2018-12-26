@@ -38,6 +38,9 @@ Route::get('/preview/pb/default', function () {
 
 
 /* Kartu Nama */
+Route::get('/card/id/default', function () {
+    return view('3-id.3-default.card');
+})->name('id.default');
 
 
 /* ADMIN */

@@ -73,6 +73,11 @@ class UserAwards extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'award'=>'required',
+            'description_award'=>'required',
+        ]);
+
         $profile = Profile::where('id_user',Session::get('id'))->first();
 
         $data = new Award();
@@ -132,6 +137,11 @@ class UserAwards extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'award'=>'required',
+            'description_award'=>'required',
+        ]);
+        
         $profile = Profile::where('id_user',Session::get('id'))->first();
         $data = Award::where('id',$id)->first();
 

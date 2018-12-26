@@ -1,5 +1,16 @@
 @extends('user.template.base')
 @section('content')
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div><br />
+@endif
+
 <form action="{{ route('experience.store') }}" method="post" id="form-experience" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header text-center">
@@ -49,6 +60,9 @@
         <button type="submit" class="btn btn-primary btn-sm">
             <i class="fa fa-dot-circle-o"></i> Submit
         </button>
+        <a href="{{ url('user/experience') }}" class="btn btn-success btn-sm">
+            <i class="fa fa-arrow-left"></i> Back
+        </a>
     </div>
 </div>
 </form>

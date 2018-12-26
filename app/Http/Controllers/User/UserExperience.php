@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Masterworks;
+use App\ViewExperiences;
 use App\Experience;
 use App\Profile;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class UserExperience extends Controller
                 $profile = $profile->first();
                 $data = array(
                     'title' => 'Experience | Temuin',
-                    'experience' => Experience::where('id_profile', $profile->id)->get()
+                    'experience' => ViewExperiences::where('id_profile', $profile->id)->get()
                 ); 
                 return view('user/experience/experience')->with($data);
             }else{

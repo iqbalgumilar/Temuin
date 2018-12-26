@@ -44,7 +44,7 @@
                             @foreach($skill as $item)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                               <td>{{ $item->uid_skill }}</td>
+                               <td>{{ $item->skill }}</td>
                                <td>{{ $item->persentase_skill }}</td>
                                <td>
                                    <form action="{{ route('skill.destroy',$item->id) }}" method="post">
@@ -57,14 +57,6 @@
                             </tr>
                             @endforeach
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>No.</th>
-                                <th>Skill</th>
-                                <th>Persentase</th>
-                                <th>Option</th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
             </div>

@@ -46,7 +46,7 @@
                             @foreach($experience as $item)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                               <td>{{ $item->uid_work }}</td>
+                               <td>{{ $item->work }}</td>
                                <td>{{ $item->from_experience }}</td>
                                <td>{{ $item->date_first_experience }}</td>
                                <td>{{ $item->date_last_experience }}</td> 
@@ -61,16 +61,7 @@
                             </tr>
                             @endforeach
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>No.</th>
-                                <th>Work</th>
-                                <th>From</th>
-                                <th>Date First</th>
-                                <th>Date Last</th>
-                                <th>Option</th>
-                            </tr>
-                        </tfoot>
+                
                     </table>
                 </div>
             </div>

@@ -57,14 +57,6 @@
                             </tr>
                             @endforeach
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>No.</th>
-                                <th>Awards</th>
-                                <th>Description Awards</th>
-                                <th>#</th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
             </div>

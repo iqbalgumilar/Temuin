@@ -59,15 +59,6 @@
                             </tr>
                             @endforeach
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>No.</th>
-                                <th>Portofolio</th>
-                                <th>Image</th>
-                                <th>Link</th>
-                                <th>Option</th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\MasterSkills;
+use App\ViewSkills;
 use App\Skill;
 use App\Profile;
 use App\Http\Controllers\Controller;
@@ -28,7 +29,7 @@ class UserSkills extends Controller
                 $profile = $profile->first();
                 $data = array(
                     'title' => 'Skills | Temuin',
-                    'skill' => Skill::where('id_profile',$profile->id)->get(),
+                    'skill' => ViewSkills::where('id_profile',$profile->id)->get(),
             );
                 return view('user/skill/skill')->with($data);
             }else{

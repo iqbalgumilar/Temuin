@@ -71,8 +71,12 @@ class UserEducation extends Controller
     public function store(Request $request)
     {
         //
-        $data = new Education();
+        $request->validate([
+            'education'=>'required',
+            'from_education'=> 'required',
+        ]);
 
+        $data = new Education();
         $profile = Profile::where('id_user',Session::get('id'))->first();
 
         $data->id_profile = $profile->id;

@@ -211,15 +211,21 @@ class UserTransaksi extends Controller
     public function actUpload(Request $request, $id){
         $uploadedFile = $request->file('file');        
         $path = $uploadedFile->store('public/files/bukti');
+        $format = $request->file('file')->getClientOriginalExtension();
 
         $data = Transaksi::where('id', $id)->first();
         $data->image_transaksi = $path;
 
-        if($data->save()){
-            return redirect('/user/transaksi/all/'.$id)->with('alert-success', 'Berhasil upload bukti Transaksi!');
+        if($format == "jpg" || $format == "JPG" || $format == "PNG" || $format == "png"){
+            if($data->save()){
+                return redirect('/user/transaksi/all/'.$id)->with('alert-success', 'Berhasil upload bukti Transaksi!');
+            }
+            else{
+                return redirect('/user/transaksi/all/'.$id)->with('alert', 'Gagal upload bukti Transaksi!');
+            }
         }
         else{
-            return redirect('/user/transaksi/all/'.$id)->with('alert', 'Gagal upload bukti Transaksi!');
+            return redirect('/user/transaksi/all/'.$id)->with('alert', 'Gagal upload bukti Transaksi, gunakan format jpg atau png!');
         }
     }
 

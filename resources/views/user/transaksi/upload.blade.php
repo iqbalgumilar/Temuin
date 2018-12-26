@@ -31,6 +31,7 @@
             </div>
             <div class="col-12 col-md-9">
                 <input type="file" id="username-input" name="file" placeholder="File" class="form-control">
+                <span style="color:red">*gunakan format jpg atau png.</span>
             </div>
         </div>
     </div>

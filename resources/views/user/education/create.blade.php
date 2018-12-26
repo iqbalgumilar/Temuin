@@ -1,17 +1,20 @@
 @extends('user.template.base')
 @section('content')
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div><br />
+@endif
+
 <form action="{{ route('education.store') }}" method="post" id="form-education" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header text-center">
         <strong>EDUCATION</strong>
-        <div class="float-right">
-            <span class="" style="cursor: pointer" id="tambahEducation">
-                <i class="fa fa-plus-circle text-success"></i>
-            </span>
-            <span class="" style="cursor: pointer" id="hapusEducation">
-                <i class="fa fa-minus-circle text-danger"></i>
-            </span>
-        </div>
     </div>
     <div class="card-body card-block" id="education">
         {{ csrf_field() }}
@@ -37,6 +40,9 @@
         <button type="submit" class="btn btn-primary btn-sm">
             <i class="fa fa-dot-circle-o"></i> Submit
         </button>
+        <a href="{{ url('user/education') }}" class="btn btn-success btn-sm">
+            <i class="fa fa-arrow-left"></i> Back
+        </a>
     </div>
 </div>
 </form>

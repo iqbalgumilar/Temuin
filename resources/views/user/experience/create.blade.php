@@ -1,17 +1,20 @@
 @extends('user.template.base')
 @section('content')
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div><br />
+@endif
+
 <form action="{{ route('experience.store') }}" method="post" id="form-experience" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header text-center">
         <strong>EXPERIENCES</strong>
-        <div class="float-right">
-            <span class="" style="cursor: pointer" id="tambahExperience">
-                <i class="fa fa-plus-circle text-success"></i>
-            </span>
-            <span class="" style="cursor: pointer" id="hapusExperience">
-                <i class="fa fa-minus-circle text-danger"></i>
-            </span>
-        </div>
     </div>
     <div class="card-body card-block" id="experience">
         {{ csrf_field() }}
@@ -21,10 +24,9 @@
                 </div>
                 <div class="col-12 col-md-9">
                     <select name="uid_work" id="" class="form-control">
-                    <option value="">-</option>
-                        @foreach($works as $work)
+                        <?php foreach($works as $work): ?>
                         <option value="{{ $work->id }}">{{ $work->work }}</option>
-                        @endforeach
+                        <?php endforeach; ?>
                         </select>
                 </div>
             </div>
@@ -58,6 +60,9 @@
         <button type="submit" class="btn btn-primary btn-sm">
             <i class="fa fa-dot-circle-o"></i> Submit
         </button>
+        <a href="{{ url('user/experience') }}" class="btn btn-success btn-sm">
+            <i class="fa fa-arrow-left"></i> Back
+        </a>
     </div>
 </div>
 </form>

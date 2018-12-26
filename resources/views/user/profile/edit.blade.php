@@ -1,16 +1,16 @@
 @extends('user.template.base')
 @section('content')
 
-@if(\Session::has('alert'))
+@if ($errors->any())
     <div class="alert alert-danger">
-        <div>{{ Session::get('alert') }}</div>
-    </div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div><br />
 @endif
-@if(\Session::has('alert-success'))
-    <div class="alert alert-success">
-        <div>{{ Session::get('alert-success') }}</div>
-    </div>
-@endif
+
 <form action="{{ route('profile.update',Session::get('id')) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header">
@@ -58,10 +58,9 @@
                 </div>
                 <div class="col-12 col-md-9">
                     <select name="uid_work" id="" class="form-control">
-                        <option value="">-</option>
-                        @foreach($works as $work)
-                        <option value="{{ $work->id }}">{{ $work->work }}</option>
-                        @endforeach
+                        <?php foreach($works as $work): ?>
+                            <option value="{{ $work->id }}" <?php if($work->id==$data->uid_work){ echo 'selected'; } ?>>{{ $work->work }}</option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </div>
@@ -79,6 +78,9 @@
         <button type="submit" class="btn btn-primary btn-sm">
             <i class="fa fa-dot-circle-o"></i> Submit
         </button>
+        <a href="{{ url('user/profile') }}" class="btn btn-success btn-sm">
+            <i class="fa fa-arrow-left"></i> Back
+        </a>
     </div>
 </div>
 </form>

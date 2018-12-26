@@ -8,37 +8,57 @@
             </li>
             <li class="has-sub">
                 <a href="{{ url('/user/user') }}">
-                    <i class="fas fa-user"></i>User
+                    <i class="fas fa-user-circle"></i>Account
                 </a>
             </li>
             <li class="has-sub">
-                <a href="{{ url('/user/profile/profile') }}">
+                <a href="{{ url('/user/profile') }}">
                     <i class="fas fa-user"></i>Profile
                 </a>
             </li>
             <li>
-                <a href="{{ url('/user/profile/experience') }}">
+                <a href="{{ url('/user/experience') }}">
                     <i class="fas fa-briefcase"></i>Experiences
                 </a>
             </li>
             <li>
-                <a href="{{ url('/user/profile/education') }}">
+                <a href="{{ url('/user/education') }}">
                     <i class="fas fa-university"></i>Education
                 </a>
             </li>
             <li>
-                <a href="{{ url('/user/profile/skill') }}">
+                <a href="{{ url('/user/skill') }}">
                     <i class="fas fa-code"></i> Skills
                 </a>
             </li>
             <li>
-                <a href="{{ url('/user/profile/portfolio') }}">
+                <a href="{{ url('/user/portfolio') }}">
                     <i class="fas fa-camera"></i>Portofolio
                 </a>
             </li>
             <li>
-                <a href="{{ url('/user/profile/awards') }}">
+                <a href="{{ url('/user/awards') }}">
                     <i class="fas fa-trophy"></i>Awards
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-users"></i>Themes
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-globe"></i>Web Profile
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-address-book"></i>Curriculum Vitae
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-id-card"></i>ID Card
                 </a>
             </li>
             <li>

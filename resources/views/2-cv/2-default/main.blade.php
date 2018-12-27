@@ -15,24 +15,24 @@
 <div id="cv" class="instaFade">
     <div class="mainDetails">
         <div id="headshot" class="quickFade">
-            <img src="afif.jpg" alt="Afif Sungkawa" />
+            <img src="{{ $profile->foto }}" alt="{{ $profile->nama_profile }}" />
         </div>
         
         <div id="name">
             <h1 class="quickFade delayTwo">Curriculum Vitae</h1>
-            <h2 class="quickFade delayThree">Afif Sungkawa</h2>
+            <h2 class="quickFade delayThree">{{ $profile->nama_profile }}</h2>
         </div>
         
         <div id="contactDetails" class="quickFade delayFour">
         <table>
             <tr>
-                <td>E-mail</td><td>:</td><td><a href="mailto:afifsungkawa22@gmail.com" target="_blank">afifsungkawa22@gmail.com</a></td>
+                <td>E-mail</td><td>:</td><td><a href="mailto:{{ $user->email }}" target="_blank">{{ $user->email }}</a></td>
             </tr>
-            <tr>
+            <!--<tr>
                 <td>Facebook</td><td>:</td><td> <a href="http://www.facebook.com/afif.sungkawa"> www.facebook.com/afif.sungkawa</a></td>
-            </tr>
+            </tr>-->
             <tr>
-                <td>Mobile</td><td>:</td><td> 089697131435</td>
+                <td>Mobile</td><td>:</td><td> {{ $profile->tlp_profile }}</td>
             </tr>
         </table>
         </div>
@@ -40,7 +40,7 @@
     </div>
     
     <div id="mainArea" class="quickFade delayFive">
-        <section>
+        <!--<section>
             <article>
                 <div class="sectionTitle">
                     <h1>Tujuan Karir</h1>
@@ -55,7 +55,7 @@
                 </div>
             </article>
             <div class="clear"></div>
-        </section>
+        </section>-->
         
         
         <section>

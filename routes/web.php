@@ -35,7 +35,9 @@ Route::get('/preview/pb/default', function () {
 })->name('pb.default');
 
 /* Curriculum Vitae */
-
+Route::get('/user/preview/cv/default', function () {
+    return view('2-cv.2-default.default');
+})->name('cv.default');
 
 /* Kartu Nama */
 Route::get('/card/id/default', function () {

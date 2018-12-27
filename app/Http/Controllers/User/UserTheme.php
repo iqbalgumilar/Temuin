@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\User;
 
-use App\MasterWorks;
-use App\Profile;
+use App\ViewProfiles;
+use App\Transaksi;
+use App\Themes;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
-class Profiles extends Controller
+class UserTheme extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,16 +24,22 @@ class Profiles extends Controller
             return redirect('/user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            $datas = array(
-                'title' => 'Profile | Temuin'
-            );
-            $data = Profile::where('id_user', Session::get('id'))->first();
-            
-            if($data != null){
-                $works = MasterWorks::where('id', $data->uid_work)->first();
-                return view('user/profile/profile', compact('data','works'))->with($datas);
-            }else{
-                return redirect('user/profile/create');
+            $profile = ViewProfiles::where('id', Session::get('id'))->first();
+            $transaksi = Transaksi::select('transaksis.id as id_transaksi', 'transaksis.id_user', 'transaksis.uid_produk', 'view_master_produk.produk', 'view_master_produk.id_jenis_produk', 'transaksis.harga_transaksi', 'transaksis.diskon_transaksi', 'transaksis.total_transaksi', 'transaksis.status_transaksi', 'transaksis.image_transaksi', 'transaksis.created_at', 'transaksis.updated_at')
+                                    ->join('view_master_produk', 'transaksis.uid_produk', '=', 'view_master_produk.id')
+                                    ->where('id_user', Session::get('id'))
+                                    ->where('status_transaksi', "1")->get();
+            if($transaksi == NULL){
+                return redirect('/user/auth')->with('alert', 'Tema kosong, silahkan beli!');
+            }
+            else{
+                $data = array(
+                    'title' => 'Themes | Temuin',
+                    'theme' => Themes::where('id_profile', $profile->id)->first(),
+                    'transaksi' => $transaksi,
+                    'profile' => $profile,
+                );
+                return view('user/theme/theme')->with($data);
             }
         }
     }
@@ -65,39 +72,36 @@ class Profiles extends Controller
      */
     public function store(Request $request)
     {
-        
-        $request->validate([
-            'name' => 'required',
-            'tempatlhr' => 'required',
-            'datelhr' => 'required',
-            'tlp' => 'required',
-            'uid_work' => 'required',
-            'alamat' => 'required',
-            //'foto' => 'required',
-        ]);
-        
-        $data = new Profile();
-        $data->id_user = Session::get('id');
-        $data->nama_profile = $request->get('name');
-        $data->tempat_lhr_profile = $request->get('tempatlhr');
-        $data->tgl_lhr_profile = $request->get('datelhr');
-        $data->tlp_profile = $request->get('tlp');
-        $data->uid_work = $request->get('uid_work');
-        $data->alamat = $request->get('alamat');
-
-        if ($request->file('foto') != null) {
-            $file = $request->file('foto')->store('public/files/profile');  
-            $format = $request->file('foto')->getClientOriginalExtension();
-            $data->foto = $file;
-        }
-
-
-        if($data->save()){
-            return redirect('/user/profile')->with('alert-success', 'Berhasil menambahkan data!');
+        $theme = Themes::where('id_profile', $request->get('id_profile'))->first();
+        if($theme == NULL){
+            $data = new Themes();
+            $data->id_profile = $request->get('id_profile');
+            $data->uid_pb = $request->get('uid_pb');
+            $data->uid_cv = $request->get('uid_cv');
+            $data->uid_kn = $request->get('uid_kn');
+    
+            if($data->save()){
+                return redirect('/user/profile')->with('alert-success', 'Berhasil menerapkan tema!');
+            }
+            else{
+                return redirect('/user/profile')->with('alert', 'Gagal menerapkan tema!');
+            }
         }
         else{
-            return redirect('/user/profile')->with('alert', 'Gagal menambahkan data!');
+            $data = Themes::where('id', $request->get('id_theme'))->first();
+            $data->id_profile = $request->get('id_profile');
+            $data->uid_pb = $request->get('uid_pb');
+            $data->uid_cv = $request->get('uid_cv');
+            $data->uid_kn = $request->get('uid_kn');
+    
+            if($data->save()){
+                return redirect('/user/theme')->with('alert-success', 'Berhasil menerapkan tema!');
+            }
+            else{
+                return redirect('/user/theme')->with('alert', 'Gagal menerapkan tema!');
+            }
         }
+        
     }
 
     /**
@@ -145,7 +149,6 @@ class Profiles extends Controller
             'tlp' => 'required',
             'uid_work' => 'required',
             'alamat' => 'required',
-            //'foto' => 'reqiured',
         ]);
         
         $data = Profile::where('id_user', $id)->first();
@@ -156,16 +159,6 @@ class Profiles extends Controller
         $data->tlp_profile = $request->get('tlp');
         $data->uid_work = $request->get('uid_work');
         $data->alamat = $request->get('alamat');
-
-        /*$uploadedFile = $request->file('foto');        
-        $path = $uploadedFile->store('public/files/profile');
-        $format = $request->file('foto')->getClientOriginalExtension();
-        $data->foto = $path;*/
-        if ($request->file('foto') != null) {
-            $file = $request->file('foto')->store('public/files/profile');  
-            $format = $request->file('foto')->getClientOriginalExtension();
-            $data->foto = $file;
-        }
 
         if($data->save()){
             return redirect('/user/profile')->with('alert-success', 'Berhasil ubah data!');

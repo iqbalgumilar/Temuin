@@ -7,6 +7,7 @@
                 </a>
             </div>
             <div class="header__tool">
+
                 <div class="account-wrap">
                     <div class="account-item account-item--style2 clearfix js-item-menu">
                         <div class="image">

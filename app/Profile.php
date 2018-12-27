@@ -15,6 +15,7 @@ class Profile extends Model
         'tgl_lhr_profile',
         'tlp_profile',
         'uid_work',
-        'alamat'
+        'alamat',
+        'foto'
     ];
 }

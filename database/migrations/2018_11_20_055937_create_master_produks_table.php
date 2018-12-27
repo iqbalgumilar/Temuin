@@ -20,6 +20,7 @@ class CreateMasterProduksTable extends Migration
             $table->string('file_produk');
             $table->enum('status',['0','1']);
             $table->double('harga_produk', 10, 4);
+            $table->decimal('diskon');
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by');
             $table->foreign('id_jenis_produk')->references('id')->on('master_jenis_produks')->onUpdate('cascade');

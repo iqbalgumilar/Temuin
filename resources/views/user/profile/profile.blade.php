@@ -20,6 +20,15 @@
                             <div>{{ Session::get('alert-success') }}</div>
                         </div>
                     @endif
+                    <div class="row">
+                    <div class="col-md-4">
+                        @if($data->foto == 'default.png')
+                            <img src="{{ url('images/default.png') }}" alt="Profile" class="img-thumbnail">
+                        @else
+                            <img src="{{ Storage::url($data->foto) }}" alt="Profile" class="img-thumbnail">
+                        @endif
+                    </div>
+                    <div class="col-md-8">
                     <table id="table" class="table table-bordered" style="width:100%">
                         <thead>
                             
@@ -54,6 +63,8 @@
                             
                         </tfoot>
                     </table>
+                    </div>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <form action="{{ route('profile.destroy',Session::get('id')) }}" method="post">

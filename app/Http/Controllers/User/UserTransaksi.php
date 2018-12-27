@@ -38,7 +38,8 @@ class UserTransaksi extends Controller
     {
         DB::statement(DB::raw('set @rownum=0'));
         $transaksi = Transaksi::join('view_profiles', 'transaksis.id_user', '=', 'view_profiles.id_user')->join('view_master_produk', 'transaksis.uid_produk', '=', 'view_master_produk.id')
-                        ->select([DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'transaksis.id as id_transaksi', 'transaksis.id_user', 'view_profiles.nama_profile', 'transaksis.uid_produk', 'view_master_produk.produk', 'view_master_produk.id_jenis_produk', 'transaksis.harga_transaksi', 'transaksis.diskon_transaksi', 'transaksis.total_transaksi', 'transaksis.status_transaksi', 'transaksis.image_transaksi', 'transaksis.created_at', 'transaksis.updated_at']);
+                        ->select([DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'transaksis.id as id_transaksi', 'transaksis.id_user', 'view_profiles.nama_profile', 'transaksis.uid_produk', 'view_master_produk.produk', 'view_master_produk.id_jenis_produk', 'transaksis.harga_transaksi', 'transaksis.diskon_transaksi', 'transaksis.total_transaksi', 'transaksis.status_transaksi', 'transaksis.image_transaksi', 'transaksis.created_at', 'transaksis.updated_at'])
+                        ->where('transaksis.id_user', Session::get('id'));
         if ($keyword = $request->get('search')['value']) {
             $datatables->filterColumn('rownum', 'whereRaw', '@rownum  + 1 like ?', ["%{$keyword}%"]);
         }
@@ -149,7 +150,7 @@ class UserTransaksi extends Controller
             }
         }
         else{
-            if($total >= $user->saldo){
+            if(($user->saldo-$total) < 0){
                 return redirect('/user/transaksi')->with('alert', 'Saldo tidak mencukupi, silahkan isi dompet!');
             }
             else{
@@ -158,7 +159,7 @@ class UserTransaksi extends Controller
                 $data->harga_transaksi = $vMasterProduk->harga_produk;
                 $data->diskon_transaksi = $vMasterProduk->diskon;
                 $data->total_transaksi = $total;
-                $data->status_transaksi = "0";
+                $data->status_transaksi = "1";
                 $data->image_transaksi = "#";
 
                 if($data->save()){

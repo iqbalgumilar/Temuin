@@ -103,3 +103,5 @@ Route::get('/user/transaksi/upload/{id}', 'User\UserTransaksi@Upload');
 Route::post('/user/transaksi/actUpload/{id}', 'User\UserTransaksi@actUpload');
 Route::get('/user/transaksi/data', 'User\UserTransaksi@data');
 Route::resource('user/transaksi','User\UserTransaksi');
+
+Route::resource('user/theme','User\UserTheme');

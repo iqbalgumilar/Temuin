@@ -98,15 +98,11 @@
             
             <div class="sectionContent">
                 <table width=500px>
-                <tr>
-                    <td>HTML</td><td>Software</td><td>Microsoft Office</td>
-                </tr>
-                <tr>
-                    <td>PHP</td><td>Network Configuration</td><td>Hardware Repairing</td>
-                </tr>
-                <tr>
-                    <td>LAN</td><td>Basic Database</td><td>Photoshop</td>
-                </tr>
+                <?php foreach($skills as $data): ?>
+                    <tr>
+                        <td>{{ $data->skill }}</td>
+                    </tr>
+                <?php endforeach; ?>
                 </table><br>
             </div>
             <div class="clear"></div>
@@ -119,26 +115,13 @@
             </div>
             
             <div class="sectionContent">
-                <article>
-                    <h2>Formal</h2><br>
-                    <h4>SDN Babakan Ciparay 12</h4>
-                    <p class="subDetails">2004-2010<p>
-                    
-                </article>
-                
-                <article>
-                    <h4>SMP Negeri 36 Bandung</h4>
-                    <p class="subDetails">2010-2013</p>
-                    
-                </article>
-                <article>
-                    <h4>SMK "Terpadu" Ad-Dimyati - Teknik Informatika</h4>
-                    <p class="subDetails">2013-2016</p>
-                </article><br>
-                <article>
-                    <h2>Non-Formal</h2><br>
-                    <h4>Praktek Kerja Lapangan di Prima Parahyangan Computer,sebagai Teknisi</h4>
-                    <p class="subDetails">Awal Januari-Akhir Februari 2015</p>
+                <?php foreach($education as $data): ?>
+                    <article>
+                        <h2>{{ $data->education }}</h2><br>
+                        <h4>{{ $data->from_education }}</h4>
+                    </article>
+                    <br>
+                <?php endforeach; ?>
             </div>
             <div class="clear"></div>
         </section><br><br>
@@ -146,7 +129,7 @@
             <div>
             <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;Demikian Curriculum Vitae ini saya buat dengan Sebenar benarnya,Untuk dapat dipergunakan sebagai mana mestinya.</p>
             <br><br><br><br><br><br>
-            <p align="right">Hormat Saya,<br><br><br>Afif Sungkawa</p>
+            <p align="right">Hormat Saya,<br><br><br>{{ $profile->nama_profile }}</p>
         </section>
         
     </div>

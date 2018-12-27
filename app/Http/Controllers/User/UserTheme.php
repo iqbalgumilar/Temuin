@@ -81,10 +81,10 @@ class UserTheme extends Controller
             $data->uid_kn = $request->get('uid_kn');
     
             if($data->save()){
-                return redirect('/user/profile')->with('alert-success', 'Berhasil menerapkan tema!');
+                return redirect('/user/theme')->with('alert-success', 'Berhasil menerapkan tema!');
             }
             else{
-                return redirect('/user/profile')->with('alert', 'Gagal menerapkan tema!');
+                return redirect('/user/theme')->with('alert', 'Gagal menerapkan tema!');
             }
         }
         else{

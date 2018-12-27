@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Transaksi;
 use App\Users;
 use DB;
+use Storage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -89,7 +90,19 @@ class TransaksiController extends Controller
         })
         ->addColumn('bukti', function($transaksi){
             if($transaksi->id_jenis_produk=="1"){
-                return '<img src="'.$transaksi->image_transaksi.'">';
+                if($transaksi->image_transaksi == "#"){
+                    return '#';
+                }
+                else{
+                    return 
+                    '<a href="#img1'.$transaksi->id_transaksi.'">
+                        <img src="'.Storage::url($transaksi->image_transaksi).'" class="thumbnail">
+                    </a>
+                    <a href="#_" class="lightbox" id="img1'.$transaksi->id_transaksi.'">
+                            <img src="'.Storage::url($transaksi->image_transaksi).'">
+                        </a>
+                    ';
+                }
             }
             else{
                 return "#";

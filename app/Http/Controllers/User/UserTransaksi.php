@@ -158,7 +158,7 @@ class UserTransaksi extends Controller
                 $data->harga_transaksi = $vMasterProduk->harga_produk;
                 $data->diskon_transaksi = $vMasterProduk->diskon;
                 $data->total_transaksi = $total;
-                $data->status_transaksi = "0";
+                $data->status_transaksi = "1";
                 $data->image_transaksi = "#";
 
                 if($data->save()){

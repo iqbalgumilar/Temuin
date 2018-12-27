@@ -9,7 +9,7 @@
                         <h3 class="text-center title-2">Edit Transaksi</h3>
                     </div>
                     <hr>
-                    <form action="{{ route('transaksi.update', $transaksi->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <form action="{{ url('admin/transaksi', $transaksi->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="row form-group">

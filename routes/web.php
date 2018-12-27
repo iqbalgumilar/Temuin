@@ -30,16 +30,24 @@ Route::get('/contact', function () {
 
 
 /* Personal Blog */
+Route::get('/pb/{id}', 'User\Generate@pb');
+
 Route::get('/preview/pb/default', function () {
     return view('1-pb.1-default.preview');
 })->name('pb.default');
 
+
+
 /* Curriculum Vitae */
+Route::get('/cv/{id}', 'User\Generate@cv');
+
 Route::get('/user/preview/cv/default', function () {
     return view('2-cv.2-default.default');
 })->name('cv.default');
 
 /* Kartu Nama */
+Route::get('/id/{id}', 'User\Generate@idCard');
+
 Route::get('/card/id/default', function () {
     return view('3-id.3-default.card');
 })->name('id.default');

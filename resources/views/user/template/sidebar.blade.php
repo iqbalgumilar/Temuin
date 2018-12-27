@@ -62,6 +62,11 @@
                 </a>
             </li>
             <li>
+                <a href="{{ url('/user/transaksi') }}">
+                    <i class="fas fa-dollar"></i>Transaksi
+                </a>
+            </li>
+            <li>
                 <a href="{{ url('user/logout') }}">
                     <i class="fas fa-power-off"></i>Logout
                 </a>

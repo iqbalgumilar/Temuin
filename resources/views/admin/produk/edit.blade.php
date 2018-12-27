@@ -39,7 +39,7 @@
                                 <label for="text-input" class=" form-control-label">File Produk</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="text" id="text-input" name="file_produk" placeholder="File Produk" class="form-control">
+                                <input type="text" id="text-input" name="file_produk" placeholder="File Produk" value="{{ $produk->file_produk }}" class="form-control">
                                 <small class="form-text text-muted">This is a help text</small>
                             </div>
                         </div>

@@ -72,6 +72,14 @@
                     <textarea name="alamat" id="alamat" rows="5" placeholder="Masukkan Alamat" class="form-control">{{ $data->alamat }}</textarea>
                 </div>
             </div>
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    <label for="foto" class=" form-control-label">Foto</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <input type="file" id="foto" name="foto" placeholder="Enter Photo" class="form-control">
+                </div>
+            </div>
         
     </div>
     <div class="card-footer">

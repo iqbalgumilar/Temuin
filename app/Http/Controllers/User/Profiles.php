@@ -73,6 +73,7 @@ class Profiles extends Controller
             'tlp' => 'required',
             'uid_work' => 'required',
             'alamat' => 'required',
+            //'foto' => 'required',
         ]);
         
         $data = new Profile();
@@ -83,6 +84,13 @@ class Profiles extends Controller
         $data->tlp_profile = $request->get('tlp');
         $data->uid_work = $request->get('uid_work');
         $data->alamat = $request->get('alamat');
+
+        if ($request->file('foto') != null) {
+            $file = $request->file('foto')->store('public/files/profile');  
+            $format = $request->file('foto')->getClientOriginalExtension();
+            $data->foto = $file;
+        }
+
 
         if($data->save()){
             return redirect('/user/profile')->with('alert-success', 'Berhasil menambahkan data!');
@@ -137,6 +145,7 @@ class Profiles extends Controller
             'tlp' => 'required',
             'uid_work' => 'required',
             'alamat' => 'required',
+            //'foto' => 'reqiured',
         ]);
         
         $data = Profile::where('id_user', $id)->first();
@@ -147,6 +156,16 @@ class Profiles extends Controller
         $data->tlp_profile = $request->get('tlp');
         $data->uid_work = $request->get('uid_work');
         $data->alamat = $request->get('alamat');
+
+        /*$uploadedFile = $request->file('foto');        
+        $path = $uploadedFile->store('public/files/profile');
+        $format = $request->file('foto')->getClientOriginalExtension();
+        $data->foto = $path;*/
+        if ($request->file('foto') != null) {
+            $file = $request->file('foto')->store('public/files/profile');  
+            $format = $request->file('foto')->getClientOriginalExtension();
+            $data->foto = $file;
+        }
 
         if($data->save()){
             return redirect('/user/profile')->with('alert-success', 'Berhasil ubah data!');

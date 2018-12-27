@@ -66,14 +66,14 @@ class Profiles extends Controller
     public function store(Request $request)
     {
         
-        /*$request->validate([
-            'nama_profile' => 'required',
+        $request->validate([
+            'name' => 'required',
             'tempatlhr' => 'required',
             'datelhr' => 'required',
             'tlp' => 'required',
             'uid_work' => 'required',
             'alamat' => 'required',
-        ]);*/
+        ]);
         
         $data = new Profile();
         $data->id_user = Session::get('id');
@@ -130,14 +130,14 @@ class Profiles extends Controller
     public function update(Request $request, $id)
     {
         //
-        /*$request->validate([
-            'nama_profile' => 'required',
+        $request->validate([
+            'name' => 'required',
             'tempatlhr' => 'required',
             'datelhr' => 'required',
             'tlp' => 'required',
             'uid_work' => 'required',
             'alamat' => 'required',
-        ]);*/
+        ]);
         
         $data = Profile::where('id_user', $id)->first();
 

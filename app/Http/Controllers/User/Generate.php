@@ -40,6 +40,7 @@ class Generate extends Controller
 
         $data = array(
             'profile' => $vProfile,
+            'user' => $user,
         );
         return view($mProduk->file_produk)->with($data);
     }

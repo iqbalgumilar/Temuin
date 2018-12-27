@@ -24,7 +24,7 @@ class UserTheme extends Controller
             return redirect('/user/auth')->with('alert', 'You are not loged in!');
         }
         else{
-            $profile = ViewProfiles::where('id', Session::get('id'))->first();
+            $profile = ViewProfiles::where('id_user', Session::get('id'))->first();
             $transaksi = Transaksi::select('transaksis.id as id_transaksi', 'transaksis.id_user', 'transaksis.uid_produk', 'view_master_produk.produk', 'view_master_produk.id_jenis_produk', 'transaksis.harga_transaksi', 'transaksis.diskon_transaksi', 'transaksis.total_transaksi', 'transaksis.status_transaksi', 'transaksis.image_transaksi', 'transaksis.created_at', 'transaksis.updated_at')
                                     ->join('view_master_produk', 'transaksis.uid_produk', '=', 'view_master_produk.id')
                                     ->where('id_user', Session::get('id'))
@@ -72,7 +72,7 @@ class UserTheme extends Controller
      */
     public function store(Request $request)
     {
-        $theme = Themes::where('id_profile', $request->get('id_profile'))->first();
+        $theme = Themes::where('id_profile', $request->get('id_profile'))->get();
         if($theme == NULL){
             $data = new Themes();
             $data->id_profile = $request->get('id_profile');

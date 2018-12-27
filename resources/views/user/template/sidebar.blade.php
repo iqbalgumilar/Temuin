@@ -52,17 +52,17 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ url('/pb', Session::get('username')) }}" target="_blank">
                     <i class="fas fa-globe"></i>Web Profile
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ url('/cv', Session::get('username')) }}" target="_blank">
                     <i class="fas fa-address-book"></i>Curriculum Vitae
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ url('/id', Session::get('username')) }}" target="_blank">
                     <i class="fas fa-id-card"></i>ID Card
                 </a>
             </li>

@@ -7,6 +7,8 @@ use App\MasterProduk;
 use App\Profiles;
 use App\Users;
 use App\ViewProfiles;
+use App\ViewSkills;
+use App\Education;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -39,10 +41,13 @@ class Generate extends Controller
         $vProfile = ViewProfiles::where('id_user', $user->id)->first();
         $theme = Themes::where('id_profile', $vProfile->id)->first();
         $mProduk = MasterProduk::where('id', $theme->uid_cv)->first();
-
+        $skills = ViewSkills::where('id_profile', $vProfile->id)->get();
+        $education = Education::where('id_profile', $vProfile->id)->get();
         $data = array(
             'profile' => $vProfile,
             'user' => $user,
+            'skills' => $skills,
+            'education' => $education
         );
         return view($mProduk->file_produk)->with($data);
     }

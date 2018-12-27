@@ -22,13 +22,11 @@
                     @endif
                     <div class="row">
                     <div class="col-md-4">
-                        @if($data->foto!=null)
-                        <img src="{{ Storage::url($data->foto) }}" alt="">
+                        @if($data->foto == 'default.png')
+                            <img src="{{ url('images/default.png') }}" alt="Profile" class="img-thumbnail">
                         @else
-                        <img src="{{ asset('default.png') }}" alt="">
+                            <img src="{{ Storage::url($data->foto) }}" alt="Profile" class="img-thumbnail">
                         @endif
-                        <!-- <img src="{{ $data->foto!=null?Storage::url($data->foto):asset('/image/default.png') }}" class="img-thumbnail" alt=""> -->
-                        <!-- <img src="{{ $data->foto!=null?Storage::url('files/profile/'.$data->foto):asset('image/default.png') }}" class="img-thumbnail" alt=""> -->
                     </div>
                     <div class="col-md-8">
                     <table id="table" class="table table-bordered" style="width:100%">

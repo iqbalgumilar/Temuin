@@ -42,6 +42,11 @@
                 </a>
             </li>
             <li>
+                <a href="{{ url('/user/transaksi') }}">
+                    <i class="fas fa-dollar"></i>Transaksi
+                </a>
+            </li>
+            <li>
                 <a href="#">
                     <i class="fas fa-users"></i>Themes
                 </a>
@@ -59,11 +64,6 @@
             <li>
                 <a href="#">
                     <i class="fas fa-id-card"></i>ID Card
-                </a>
-            </li>
-            <li>
-                <a href="{{ url('/user/transaksi') }}">
-                    <i class="fas fa-dollar"></i>Transaksi
                 </a>
             </li>
             <li>

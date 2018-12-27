@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">User</div>
+                        <div class="col-md-6">Awards</div>
                         <div class="col-md-6 text-right">
                             <a href="{{ route('awards.create') }}" class="btn btn-primary btn-sm">
                                 <i class="fa fa-plus"></i> Tambah
@@ -24,10 +24,6 @@
                             <div>{{ Session::get('alert-success') }}</div>
                         </div>
                     @endif
-                    <div class="card-title">
-                        <h3 class="text-center title-2">Awards</h3>
-                    </div>
-                    <hr>
                     <table id="table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>

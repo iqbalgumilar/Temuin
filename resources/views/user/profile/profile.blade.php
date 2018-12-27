@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">User</div>
+                        <div class="col-md-6">Profile</div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -20,10 +20,6 @@
                             <div>{{ Session::get('alert-success') }}</div>
                         </div>
                     @endif
-                    <div class="card-title">
-                        <h3 class="text-center title-2">Profile</h3>
-                    </div>
-                    <hr>
                     <table id="table" class="table table-bordered" style="width:100%">
                         <thead>
                             

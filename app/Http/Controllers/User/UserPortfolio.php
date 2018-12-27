@@ -74,7 +74,7 @@ class UserPortfolio extends Controller
         //
         $request->validate([
             'portofolio'=>'required',
-            'image_portofolio'=> 'required',
+            'image_portofolio'=> 'required|file|max:3000',
             'link_portofolio'=>'required',
         ]);
 
@@ -83,8 +83,15 @@ class UserPortfolio extends Controller
         $data = new Portofolio();
         $data->id_profile = $profile->id;
         $data->portofolio = $request->get('portofolio');
-        $data->image_portofolio = $request->get('image_portofolio');
+        //$data->image_portofolio = $request->get('image_portofolio');
         $data->link_portofolio = $request->get('link_portofolio');
+
+        // Disini proses mendapatkan judul dan memindahkan letak gambar ke folder image
+        $file       = $request->file('image_portofolio');
+        $fileName   = $file->getClientOriginalName();
+        $request->file('image_portofolio')->store('public/files/portofolio');//move("image/", $fileName);
+
+        $data->image_portofolio = $fileName;
 
         if($data->save()){
             return redirect('/user/portfolio')->with('alert-success', 'Berhasil menambahkan data!');
@@ -140,7 +147,7 @@ class UserPortfolio extends Controller
         //
         $request->validate([
             'portofolio'=>'required',
-            'image_portofolio'=> 'required',
+            'image_portofolio'=> 'required|file|max:3000',
             'link_portofolio'=>'required',
         ]);
         
@@ -149,8 +156,15 @@ class UserPortfolio extends Controller
 
         $data->id_profile = $profile->id;
         $data->portofolio = $request->get('portofolio');
-        $data->image_portofolio = $request->get('image_portofolio');
+        //$data->image_portofolio = $request->get('image_portofolio');
         $data->link_portofolio = $request->get('link_portofolio');
+
+        // Disini proses mendapatkan judul dan memindahkan letak gambar ke folder image
+        $file       = $request->file('image_portofolio');
+        $fileName   = $file->getClientOriginalName();
+        $request->file('image_portofolio')->move("image/", $fileName);
+
+        $data->image_portofolio = $fileName;
 
         if($data->save()){
             return redirect('/user/portfolio')->with('alert-success', 'Berhasil ubah data!');

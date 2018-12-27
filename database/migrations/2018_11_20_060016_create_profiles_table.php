@@ -22,6 +22,7 @@ class CreateProfilesTable extends Migration
             $table->string('tlp_profile');
             $table->unsignedInteger('uid_work');
             $table->text('alamat');
+            $table->string('foto')->default('default.png');
             $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade');
             $table->foreign('uid_work')->references('id')->on('master_works')->onUpdate('cascade');
             $table->timestamps();

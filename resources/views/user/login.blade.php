@@ -71,9 +71,9 @@
                                     <label>
                                         <input type="checkbox" name="remember">Remember Me
                                     </label>
-                                    <label>
+                                    <!--<label>
                                         <a href="#">Forgotten Password?</a>
-                                    </label>
+                                    </label>-->
                                 </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
                                 

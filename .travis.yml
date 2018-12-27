@@ -28,6 +28,7 @@ before_install:
   - composer install --no-interaction
   - cp .env.travis .env
   - php artisan key:generate
+  - php artisan storage:link
 
 # Precompile
 before_script:

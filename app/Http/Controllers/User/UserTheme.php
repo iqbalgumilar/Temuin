@@ -73,7 +73,7 @@ class UserTheme extends Controller
     public function store(Request $request)
     {
         $theme = Themes::where('id_profile', $request->get('id_profile'))->get();
-        if($theme == NULL){
+        if(empty($request->get('id_theme'))){
             $data = new Themes();
             $data->id_profile = $request->get('id_profile');
             $data->uid_pb = $request->get('uid_pb');

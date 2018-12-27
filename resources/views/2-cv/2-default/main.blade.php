@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Afif Sungkawa - Curriculum Vitae</title>
+<title>{{ $profile->nama_profile }} - Curriculum Vitae</title>
 
 <meta name="viewport" content="width=device-width"/>
 <meta name="description" content="The Curriculum Vitae of Joe Bloggs."/>
@@ -15,7 +15,11 @@
 <div id="cv" class="instaFade">
     <div class="mainDetails">
         <div id="headshot" class="quickFade">
-            <img src="{{ $profile->foto }}" alt="{{ $profile->nama_profile }}" />
+            <?php if($profile->foto == "default.png"): ?>
+                <img src="{{ url('/images/default.png') }}" alt="{{ $profile->nama_profile }}" />
+            <?php else: ?>
+                <img src="{{ Storage::url($profile->foto) }}" alt="{{ $profile->nama_profile }}" />
+            <?php endif; ?>
         </div>
         
         <div id="name">
@@ -66,22 +70,19 @@
             <div class="sectionContent">
                 <table>
                 <tr>
-                    <td>Nama</td><td>: Afif Sungkawa</td>
+                    <td>Nama</td><td>: {{ $profile->nama_profile }}</td>
                 </tr>
                 <tr>
-                    <td>Tempat, Tanggal Lahir</td><td>: Bandung, 22 Maret 1998</td>
-                </tr>
-                <tr>
-                    <td>Agama</td><td>: Islam</td>
+                    <td>Tempat, Tanggal Lahir</td><td>: {{ $profile->tempat_lhr_profile }}, {{ $profile->tgl_lhr_profile }}</td>
                 </tr>
                 <tr>
                     <td>Warga Negara</td><td>: Indonesia</td>
                 </tr>
                 <tr>
-                    <td>Alamat</td><td>: -</td>
+                    <td>Alamat</td><td>: {{ $profile->alamat }}-</td>
                 </tr>
                 <tr>
-                    <td>E-mail</td><td>: afifsungkawa22@gmail.com</td>
+                    <td>E-mail</td><td>: {{ $user->email }}</td>
                 </tr>
                 </table>
                 

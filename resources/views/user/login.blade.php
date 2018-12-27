@@ -60,7 +60,7 @@
                             <form action="{{ url('user/actLogin') }}" method="post">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label>Username</label>
+                                    <label>Username / Email</label>
                                     <input class="au-input au-input--full" type="text" name="username" placeholder="Username">
                                 </div>
                                 <div class="form-group">

@@ -47,7 +47,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ url('/user/theme') }}">
                     <i class="fas fa-users"></i>Themes
                 </a>
             </li>

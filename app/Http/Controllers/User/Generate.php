@@ -27,7 +27,9 @@ class Generate extends Controller
         $mProduk = MasterProduk::where('id', $theme->uid_pb)->first();
 
         $data = array(
-            'profile' => $vProfile,
+            'title'     => "$vProfile->nama_profile - Personal Blog",
+            'user'      => $user,
+            'profile'   => $vProfile,
         );
         return view($mProduk->file_produk)->with($data);
     }

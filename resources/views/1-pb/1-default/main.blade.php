@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Resume - Start Bootstrap Theme</title>
+    <title>{{ $title }}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ url('/1-pb/1-default/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">

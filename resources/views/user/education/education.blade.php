@@ -24,16 +24,6 @@
                             <div>{{ Session::get('alert-success') }}</div>
                         </div>
                     @endif
-
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div><br />
-                    @endif
                     <div class="card-title">
                         <h3 class="text-center title-2">Education</h3>
                     </div>

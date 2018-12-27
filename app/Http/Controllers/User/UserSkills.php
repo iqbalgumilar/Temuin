@@ -74,6 +74,11 @@ class UserSkills extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'uid_skill'=>'required',
+            'persentase_skill'=> 'required',
+        ]);
+
         $profile = Profile::where('id_user',Session::get('id'))->first();
 
         $data = new Skill();
@@ -134,6 +139,11 @@ class UserSkills extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'uid_skill'=>'required',
+            'persentase_skill'=> 'required',
+        ]);
+        
         $skills = MasterSkills::all();
         $profile = Profile::where('id_user',Session::get('id'))->first();
         $data = Skill::where('id', $id)->first();

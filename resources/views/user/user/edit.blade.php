@@ -15,7 +15,7 @@
 <form action="{{ route('user.update', Session::get('id')) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
 <div class="card">
     <div class="card-header">
-        <strong>Saldo</strong> Rp. ____ <button class="btn btn-primary">Tambah</button>
+        <strong>User Account</strong>
     </div>
     <div class="card-body card-block">
         
@@ -51,6 +51,9 @@
         <button type="submit" class="btn btn-primary btn-sm">
             <i class="fa fa-dot-circle-o"></i> Submit
         </button>
+        <a href="{{ url('user/user') }}" class="btn btn-success btn-sm">
+            <i class="fa fa-arrow-left"></i> Back
+        </a>
     </div>
 </div>
 </form>

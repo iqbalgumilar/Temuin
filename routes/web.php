@@ -38,6 +38,9 @@ Route::get('/preview/pb/default', function () {
 
 
 /* Kartu Nama */
+Route::get('/card/id/default', function () {
+    return view('3-id.3-default.card');
+})->name('id.default');
 
 
 /* ADMIN */
@@ -94,3 +97,9 @@ Route::resource('user/experience','User\UserExperience');
 Route::resource('user/skill','User\UserSkills');
 
 Route::resource('user/portfolio','User\UserPortfolio');
+
+Route::get('/user/transaksi/all/{id}', 'User\UserTransaksi@All');
+Route::get('/user/transaksi/upload/{id}', 'User\UserTransaksi@Upload');
+Route::post('/user/transaksi/actUpload/{id}', 'User\UserTransaksi@actUpload');
+Route::get('/user/transaksi/data', 'User\UserTransaksi@data');
+Route::resource('user/transaksi','User\UserTransaksi');

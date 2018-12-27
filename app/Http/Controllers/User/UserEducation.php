@@ -135,6 +135,11 @@ class UserEducation extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'education'=>'required',
+            'from_education'=> 'required',
+        ]);
+        
         $profile = Profile::where('id_user',Session::get('id'))->first();
         $data = Education::where('id', $id)->first();
 

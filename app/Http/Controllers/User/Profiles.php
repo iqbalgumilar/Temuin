@@ -26,7 +26,6 @@ class Profiles extends Controller
             $datas = array(
                 'title' => 'Profile | Temuin'
             );
-            //$works = MasterWorks::all();
             $data = Profile::where('id_user', Session::get('id'))->first();
             
             if($data != null){
@@ -66,16 +65,15 @@ class Profiles extends Controller
      */
     public function store(Request $request)
     {
-        /*
-        $validation = $request->validate([
-            'nama_profile' => ['required','string','max:255'],
-            'tempatlhr' => ['required'],
-            'datelhr' => ['required'],
-            'tlp' => ['required'],
-            'uid_work' => ['required'],
-            'alamat' => ['required'],
-
-        ]);*/
+        
+        $request->validate([
+            'name' => 'required',
+            'tempatlhr' => 'required',
+            'datelhr' => 'required',
+            'tlp' => 'required',
+            'uid_work' => 'required',
+            'alamat' => 'required',
+        ]);
         
         $data = new Profile();
         $data->id_user = Session::get('id');
@@ -132,6 +130,15 @@ class Profiles extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'tempatlhr' => 'required',
+            'datelhr' => 'required',
+            'tlp' => 'required',
+            'uid_work' => 'required',
+            'alamat' => 'required',
+        ]);
+        
         $data = Profile::where('id_user', $id)->first();
 
         $data->nama_profile = $request->get('name');

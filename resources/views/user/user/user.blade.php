@@ -16,7 +16,7 @@
     {{ method_field('DELETE') }}
 <div class="card">
     <div class="card-header">
-        <strong>Saldo</strong> Rp. ____ <button class="btn btn-primary">Tambah</button>
+        <strong>User Account</strong>
     </div>
     <div class="card-body card-block">    
             <div class="row form-group">

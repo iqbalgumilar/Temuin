@@ -72,13 +72,26 @@ class UserPortfolio extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'portofolio'=>'required',
+            'image_portofolio'=> 'required|file|max:3000',
+            'link_portofolio'=>'required',
+        ]);
+
         $profile = Profile::where('id_user',Session::get('id'))->first();
 
         $data = new Portofolio();
         $data->id_profile = $profile->id;
         $data->portofolio = $request->get('portofolio');
-        $data->image_portofolio = $request->get('image_portofolio');
+        //$data->image_portofolio = $request->get('image_portofolio');
         $data->link_portofolio = $request->get('link_portofolio');
+
+        // Disini proses mendapatkan judul dan memindahkan letak gambar ke folder image
+        $file       = $request->file('image_portofolio');
+        $fileName   = $file->getClientOriginalName();
+        $request->file('image_portofolio')->store('public/files/portofolio');//move("image/", $fileName);
+
+        $data->image_portofolio = $fileName;
 
         if($data->save()){
             return redirect('/user/portfolio')->with('alert-success', 'Berhasil menambahkan data!');
@@ -132,13 +145,26 @@ class UserPortfolio extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'portofolio'=>'required',
+            'image_portofolio'=> 'required|file|max:3000',
+            'link_portofolio'=>'required',
+        ]);
+        
         $profile = Profile::where('id_user',Session::get('id'))->first();
         $data = Portofolio::where('id',$id)->first();
 
         $data->id_profile = $profile->id;
         $data->portofolio = $request->get('portofolio');
-        $data->image_portofolio = $request->get('image_portofolio');
+        //$data->image_portofolio = $request->get('image_portofolio');
         $data->link_portofolio = $request->get('link_portofolio');
+
+        // Disini proses mendapatkan judul dan memindahkan letak gambar ke folder image
+        $file       = $request->file('image_portofolio');
+        $fileName   = $file->getClientOriginalName();
+        $request->file('image_portofolio')->move("image/", $fileName);
+
+        $data->image_portofolio = $fileName;
 
         if($data->save()){
             return redirect('/user/portfolio')->with('alert-success', 'Berhasil ubah data!');

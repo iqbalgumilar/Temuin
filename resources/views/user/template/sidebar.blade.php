@@ -8,7 +8,7 @@
             </li>
             <li class="has-sub">
                 <a href="{{ url('/user/user') }}">
-                    <i class="fas fa-user"></i>Account
+                    <i class="fas fa-user-circle"></i>Account
                 </a>
             </li>
             <li class="has-sub">
@@ -53,12 +53,17 @@
             </li>
             <li>
                 <a href="#">
-                    <i class="fas fa-user-circle"></i>Curriculum Vitae
+                    <i class="fas fa-address-book"></i>Curriculum Vitae
                 </a>
             </li>
             <li>
                 <a href="#">
                     <i class="fas fa-id-card"></i>ID Card
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('/user/transaksi') }}">
+                    <i class="fas fa-dollar"></i>Transaksi
                 </a>
             </li>
             <li>
